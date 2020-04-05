@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-04 Sat 20:12 -->
+<!-- 2020-04-04 Sat 22:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Acoustics Report TODO: Go back and add defs</title>
@@ -260,16 +260,16 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org861a673">Section 1: Simulating Strings</a></li>
-<li><a href="#orgc880609">Section 2: Coming Soon</a></li>
-<li><a href="#org30703f1">Unsorted</a></li>
+<li><a href="#org28861a2">Section 1: Simulating Strings</a></li>
+<li><a href="#org2228958">Section 2: Coming Soon</a></li>
+<li><a href="#org9b8ee2d">Unsorted</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org861a673" class="outline-2">
-<h2 id="org861a673">Section 1: Simulating Strings</h2>
-<div class="outline-text-2" id="text-org861a673">
+<div id="outline-container-org28861a2" class="outline-2">
+<h2 id="org28861a2">Section 1: Simulating Strings</h2>
+<div class="outline-text-2" id="text-org28861a2">
 <p>
 My intent is to attempt to simulate a guitar using purely math.
 </p>
@@ -280,13 +280,13 @@ environment for mathematical modeling, based off of <a href="https://www.mathwor
 </p>
 
 <p>
-Octave has an audioplayer function (<i>See Listing <a href="#orgbfaa340">1</a></i>). If
+Octave has an audioplayer function (<i>See Listing <a href="#orge793387">1</a></i>). If
 I provide it with a vector of floating point numbers between -1 and 1,
 it will treat them as a waveform and play them back for me.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>The octave <i>audioplayer</i> function</label><pre class="src src-octave" id="orgbfaa340">player <span style="color: #006FE0;">=</span> audioplayer (vector<span style="color: #006FE0;">,</span> bit_rate<span style="color: #006FE0;">,</span> bit_depth)
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>The octave <i>audioplayer</i> function</label><pre class="src src-octave" id="orge793387">player <span style="color: #006FE0;">=</span> audioplayer (vector<span style="color: #006FE0;">,</span> bit_rate<span style="color: #006FE0;">,</span> bit_depth)
 </pre>
 </div>
 
@@ -308,25 +308,25 @@ precision of the floating point numbers themselves.
 <p>
 I will try to simulate a vibrating string by building it up as a sum
 of partials. To start, I tried to make the fundamental frequency using
-octave's <code>sinewave</code> function <i>(See Listing <a href="#org1fd087f">2</a>)</i>. I can
+octave's <code>sinewave</code> function <i>(See Listing <a href="#org9d191fd">2</a>)</i>. I can
 provide it a vector size and a period, and it will return a set of
 values between -1 and 1 in the form of a sine wave with a period that
 I specify.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>Octave provides a convenient sinewave function, which asks for a vector size and a period</label><pre class="src src-octave" id="org1fd087f">f1 <span style="color: #006FE0;">=</span> sinewave(BIT_RATE <span style="color: #006FE0;">*</span> 4<span style="color: #006FE0;">,</span> BIT_RATE <span style="color: #006FE0;">/</span> 440)
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>Octave provides a convenient sinewave function, which asks for a vector size and a period</label><pre class="src src-octave" id="org9d191fd">f1 <span style="color: #006FE0;">=</span> sinewave(BIT_RATE <span style="color: #006FE0;">*</span> 4<span style="color: #006FE0;">,</span> BIT_RATE <span style="color: #006FE0;">/</span> 440)
 </pre>
 </div>
 
 <p>
 I defined my own convenience function <code>puretone</code> which would take the
 bit rate, duration, and frequency and return the corresponding sine
-wave <i>(See Listing <a href="#org702f7a3">3</a>)</i>.
+wave <i>(See Listing <a href="#org80ab04b">3</a>)</i>.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 3: </span>I defined my own <code>puretone</code> function which allows me to think in terms of frequency instead of period</label><pre class="src src-octave" id="org702f7a3"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">puretone</span>(BIT_RATE<span style="color: #006FE0;">,</span> seconds<span style="color: #006FE0;">,</span> frequency<span style="color: #006FE0;">,</span> phase_shift<span style="color: #006FE0;">=</span>0)
+<label class="org-src-name"><span class="listing-number">Listing 3: </span>I defined my own <code>puretone</code> function which allows me to think in terms of frequency instead of period</label><pre class="src src-octave" id="org80ab04b"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">puretone</span>(BIT_RATE<span style="color: #006FE0;">,</span> seconds<span style="color: #006FE0;">,</span> frequency<span style="color: #006FE0;">,</span> phase_shift<span style="color: #006FE0;">=</span>0)
   y <span style="color: #006FE0;">=</span> sinewave(BIT_RATE <span style="color: #006FE0;">*</span> seconds<span style="color: #006FE0;">,</span> BIT_RATE<span style="color: #006FE0;">/</span>frequency<span style="color: #006FE0;">,</span> phase_shift)<span style="color: #006FE0;">;</span>
 <span style="color: #0000FF;">endfunction</span>
 </pre>
@@ -338,13 +338,13 @@ harmonics. A harmonic is a partial whose frequency is an <i>integer</i>
 <i>multiple of the fundamental</i>. We usually only care about the first
 six harmonics or so, because after that they start to get to very high
 frequencies. Let's define a <code>createharmonics</code> function that returns a
-sum of six harmonics <i>(See Listing <a href="#org6343157">4</a>)</i>. Notice that
+sum of six harmonics <i>(See Listing <a href="#org24e9497">4</a>)</i>. Notice that
 the returned vector must be divided by six to preserve the range of
 values to be between -1 and 1.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 4: </span><code>createharmonics</code> generates the first six harmonics and adds them together</label><pre class="src src-octave" id="org6343157"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">createharmonics</span>(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental)
+<label class="org-src-name"><span class="listing-number">Listing 4: </span><code>createharmonics</code> generates the first six harmonics and adds them together</label><pre class="src src-octave" id="org24e9497"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">createharmonics</span>(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental)
   f1 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental)<span style="color: #006FE0;">;</span>
   f2 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
   f3 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 3)<span style="color: #006FE0;">;</span>
@@ -388,7 +388,7 @@ You can hear the result here:
 </p>
 
 <p>
-<audio controls src="output.wav"></audio>
+<audio controls src="audio/output.wav"></audio>
 </p>
 
 <p>
@@ -405,9 +405,9 @@ affecting the output of the instrument.<sup><a id="fnr.4" class="footref" href="
 </p>
 </div>
 
-<div id="outline-container-org1cad691" class="outline-3">
-<h3 id="org1cad691">Relative amplitudes of Harmonics</h3>
-<div class="outline-text-3" id="text-org1cad691">
+<div id="outline-container-orge01605e" class="outline-3">
+<h3 id="orge01605e">Relative amplitudes of Harmonics</h3>
+<div class="outline-text-3" id="text-orge01605e">
 <p>
 First off, the fundamental frequency of a plucked string will
 always be the most prevalent harmonic.<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> The
@@ -448,18 +448,18 @@ and \(L\) be the length of the string.
 
 
 
-<div id="outline-container-org793515b" class="outline-3">
-<h3 id="org793515b">Damping</h3>
+<div id="outline-container-org256dfba" class="outline-3">
+<h3 id="org256dfba">Damping</h3>
 </div>
 
-<div id="outline-container-orgae55511" class="outline-3">
-<h3 id="orgae55511">Soundboard</h3>
+<div id="outline-container-orgbd34615" class="outline-3">
+<h3 id="orgbd34615">Soundboard</h3>
 </div>
 </div>
 
-<div id="outline-container-orgc880609" class="outline-2">
-<h2 id="orgc880609">Section 2: Coming Soon</h2>
-<div class="outline-text-2" id="text-orgc880609">
+<div id="outline-container-org2228958" class="outline-2">
+<h2 id="org2228958">Section 2: Coming Soon</h2>
+<div class="outline-text-2" id="text-org2228958">
 <p>
 This has not yet been assigned
 </p>
@@ -467,9 +467,9 @@ This has not yet been assigned
 </div>
 
 
-<div id="outline-container-org30703f1" class="outline-2">
-<h2 id="org30703f1">Unsorted</h2>
-<div class="outline-text-2" id="text-org30703f1">
+<div id="outline-container-org9b8ee2d" class="outline-2">
+<h2 id="org9b8ee2d">Unsorted</h2>
+<div class="outline-text-2" id="text-org9b8ee2d">
 <p>
 The fundamental frequency of a string is \({\sqrt {\frac T \mu}} *
   {\frac 1 2L}\).

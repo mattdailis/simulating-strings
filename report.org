@@ -107,7 +107,7 @@ I created a sample song using this function
 
 You can hear the result here:
 
-[[audio:output.wav]]
+[[audio:audio/output.wav]]
 
 While this is recognizably music, it sounds nothing like a guitar!
 What are we missing?
