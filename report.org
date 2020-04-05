@@ -1,0 +1,173 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/><style>.org-src-container{border:0;box-shadow: none} .INPROGRESS{background-color:blue} pre.src{max-height:800px;overflow:scroll} .subtitle{font-weight: lighter; font-size:0.5em}</style>
+#+OPTIONS: html-postamble:nil
+#+OPTIONS: num:nil
+#+OPTIONS: ^:nil
+#+OPTIONS: toc:1
+#+SUBTITLE: Matt Dailis, Northeastern University MUSC2350, Spring 2020
+#+TITLE: Acoustics Report TODO: Go back and add defs
+
+* Section 1: Simulating Strings
+
+My intent is to attempt to simulate a guitar using purely math.
+
+I am using /[[https://www.gnu.org/software/octave/][GNU Octave]]/, an open source programming language and
+environment for mathematical modeling, based off of [[https://www.mathworks.com/products/matlab.html][MATLAB]].
+
+Octave has an audioplayer function (/See Listing [[fig:audioplayer]]/). If
+I provide it with a vector of floating point numbers between -1 and 1,
+it will treat them as a waveform and play them back for me.
+
+#+CAPTION: The octave /audioplayer/ function
+#+LABEL: fig:audioplayer
+#+BEGIN_SRC octave
+  player = audioplayer (vector, bit_rate, bit_depth)
+#+END_SRC
+
+
+A /sample/ is a discrete measurement of /sound pressure level/ (SPL).
+
+=bit_rate= is the number of samples to play per second. I will set
+this to be *44100*[fn::44100 is a common sampling frequency because
+of the Sony CD standard: [[https://en.wikipedia.org/wiki/44,100_Hz]]].
+
+I'm not sure what =bit_depth= means - it seems to have to do with the
+precision of the floating point numbers themselves.
+
+I will try to simulate a vibrating string by building it up as a sum
+of partials. To start, I tried to make the fundamental frequency using
+octave's =sinewave= function /(See Listing [[fig:sinewave]])/. I can
+provide it a vector size and a period, and it will return a set of
+values between -1 and 1 in the form of a sine wave with a period that
+I specify.
+
+#+CAPTION: Octave provides a convenient sinewave function, which asks for a vector size and a period
+#+LABEL: fig:sinewave
+#+BEGIN_SRC octave
+  f1 = sinewave(BIT_RATE * 4, BIT_RATE / 440)
+#+END_SRC
+
+I defined my own convenience function =puretone= which would take the
+bit rate, duration, and frequency and return the corresponding sine
+wave /(See Listing [[fig:puretone]])/.
+
+#+CAPTION: I defined my own =puretone= function which allows me to think in terms of frequency instead of period
+#+LABEL: fig:puretone
+#+BEGIN_SRC octave
+  function y = puretone(BIT_RATE, seconds, frequency, phase_shift=0)
+    y = sinewave(BIT_RATE * seconds, BIT_RATE/frequency, phase_shift);
+  endfunction
+#+END_SRC
+
+Okay, now I have the ability to make pure tones, but I want
+harmonics. A harmonic is a partial whose frequency is an /integer/
+/multiple of the fundamental/. We usually only care about the first
+six harmonics or so, because after that they start to get to very high
+frequencies. Let's define a =createharmonics= function that returns a
+sum of six harmonics /(See Listing [[fig:createharmonics]])/. Notice that
+the returned vector must be divided by six to preserve the range of
+values to be between -1 and 1.
+
+#+CAPTION: =createharmonics= generates the first six harmonics and adds them together
+#+LABEL: fig:createharmonics
+#+BEGIN_SRC octave
+  function y = createharmonics(BIT_RATE, DURATION, fundamental)
+    f1 = puretone(BIT_RATE, DURATION, fundamental);
+    f2 = puretone(BIT_RATE, DURATION, fundamental * 2);
+    f3 = puretone(BIT_RATE, DURATION, fundamental * 3);
+    f4 = puretone(BIT_RATE, DURATION, fundamental * 4);
+    f5 = puretone(BIT_RATE, DURATION, fundamental * 5);
+    f6 = puretone(BIT_RATE, DURATION, fundamental * 6);
+    y = (f1 + f2 + f3 + f4 + f5 + f6) / 6;
+  endfunction
+#+END_SRC
+
+I created a sample song using this function
+
+#+BEGIN_SRC octave
+    A3 = createharmonics(BIT_RATE, 0.5, 220);
+    A4 = createharmonics(BIT_RATE, 0.5, 440);
+    A5 = createharmonics(BIT_RATE, 0.5, 880);
+    B4 = createharmonics(BIT_RATE, 0.5, 495);
+    C4 = createharmonics(BIT_RATE, 0.5, 523.26);
+    D3 = createharmonics(BIT_RATE, 0.5, 293.33);
+    D4 = createharmonics(BIT_RATE, 0.5, 293.33 * 2);
+    D5 = createharmonics(BIT_RATE, 0.5, 293.33 * 4);
+    E3 = createharmonics(BIT_RATE, 0.5, 330);
+    E4 = createharmonics(BIT_RATE, 0.5, 660);
+    F5 = createharmonics(BIT_RATE, 0.5, 348.84 * 2);
+    GS4 = createharmonics(BIT_RATE, 0.5, 415.305);
+
+    aMinor = [A4, (C4 + E4) / 2, E3, (C4 + E4) / 2];
+    eMajor = [B4, (E4 + GS4) / 2, E3, (D4 + GS4) / 2];
+    dMinor = [A4, (D4 + F5) / 2, D3, (D4 + F5) / 2];
+
+    song = [aMinor, eMajor, aMinor, eMajor, dMinor, aMinor, eMajor, A4, E3, A3];
+    playSound(song, BIT_RATE)
+#+END_SRC
+
+You can hear the result here:
+
+[[audio:output.wav]]
+
+While this is recognizably music, it sounds nothing like a guitar!
+What are we missing?
+
+First off, in a string, the relative amplitudes of the harmonics are
+not all the same.[fn::footnote me] Secondly, for a plucked instrument, the amplitudes
+of all of the harmonics change over time, eventually diminishing to
+silence.[fn::footnote me] Lastly, the soundboard of the instrument will act as a filter
+affecting the output of the instrument.[fn::footnote me] Let's tackle these one by one.
+
+** Relative amplitudes of Harmonics
+   First off, the fundamental frequency of a plucked string will
+   always be the most prevalent harmonic.[fn::TODO why...?] The
+   relative amplitudes of harmonics of a plucked string depend on the
+   pluck location.
+   
+   We model a pluck as a "kink" in the string. [fn::TODO source] This
+   initial location of this kink determines the relative amplitudes of
+   the harmonics.[fn::I said this already] 
+
+   #+BEGIN_COMMENT
+   The prevalence of each harmonic depends on whether the initial kink
+   location is at one of that harmonic's nodes or antinodes. Put
+   another way, it depends on the /similarity/ of the string shape at
+   the moment of the pluck to the shape of the resonant mode.
+
+   Similarity, in linear algebra, is defined as the dot product
+   between two vectors. The more "aligned" those two vectors are, the
+   higher their dot product.
+   #+END_COMMENT
+   
+   If we take the /fourier transform of the string/, we should get an
+   idea for which frequencies are represented. Let's first define the
+   shape of our string.
+
+   Let's define a kink in terms of a piecewise function.
+   
+   Let $k$ be the kink location whose value is between $0$ and $1$,
+   and $L$ be the length of the string.
+
+   $$y_1={\frac x Lk}$$
+
+   $$y_2 = {\frac {1 - {\frac x L}} {1 - k}}$$
+
+   
+
+** Damping
+
+** Soundboard
+
+* Section 2: Coming Soon
+  This has not yet been assigned
+
+
+* Unsorted
+
+  The fundamental frequency of a string is ${\sqrt {\frac T \mu}} *
+  {\frac 1 2L}$.
+
+  TODO: Define tone
+  TODO: Define note
+  TODO: Define timbre
+  TODO: Refer to [[http://www.falstad.com/loadedstring/]]
