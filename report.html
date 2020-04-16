@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-04-04 Sat 22:30 -->
+<!-- 2020-04-16 Thu 16:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Acoustics Report TODO: Go back and add defs</title>
@@ -260,16 +260,23 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org28861a2">Section 1: Simulating Strings</a></li>
-<li><a href="#org2228958">Section 2: Coming Soon</a></li>
-<li><a href="#org9b8ee2d">Unsorted</a></li>
+<li><a href="#org510e28a">1. Section 1: Simulating Strings</a>
+<ul>
+<li><a href="#orgd42dc47">1.1. Pure tones and equal-amplitude harmonics</a></li>
+<li><a href="#org07fe5e5">1.2. Relative amplitudes of harmonics</a></li>
+<li><a href="#org013dc6b">1.3. Damping</a></li>
+<li><a href="#org20d4a84">1.4. Soundboard</a></li>
+<li><a href="#org92536e9">1.5. Excitation</a></li>
+</ul>
+</li>
+<li><a href="#org8e721a8">2. Section 2: Edgetones and Wind Instruments</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org28861a2" class="outline-2">
-<h2 id="org28861a2">Section 1: Simulating Strings</h2>
-<div class="outline-text-2" id="text-org28861a2">
+<div id="outline-container-org510e28a" class="outline-2">
+<h2 id="org510e28a"><span class="section-number-2">1</span> Section 1: Simulating Strings</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 My intent is to attempt to simulate a guitar using purely math.
 </p>
@@ -280,13 +287,13 @@ environment for mathematical modeling, based off of <a href="https://www.mathwor
 </p>
 
 <p>
-Octave has an audioplayer function (<i>See Listing <a href="#orge793387">1</a></i>). If
+Octave has an audioplayer function. If
 I provide it with a vector of floating point numbers between -1 and 1,
 it will treat them as a waveform and play them back for me.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 1: </span>The octave <i>audioplayer</i> function</label><pre class="src src-octave" id="orge793387">player <span style="color: #006FE0;">=</span> audioplayer (vector<span style="color: #006FE0;">,</span> bit_rate<span style="color: #006FE0;">,</span> bit_depth)
+<pre class="src src-octave" id="org442d746">audioplayer (vector<span style="color: #006FE0;">,</span> bit_rate<span style="color: #006FE0;">,</span> bit_depth)
 </pre>
 </div>
 
@@ -308,26 +315,30 @@ precision of the floating point numbers themselves.
 <p>
 I will try to simulate a vibrating string by building it up as a sum
 of partials. To start, I tried to make the fundamental frequency using
-octave's <code>sinewave</code> function <i>(See Listing <a href="#org9d191fd">2</a>)</i>. I can
+octave's <code>sinewave</code> function <i>(See Listing <a href="#org7566d78">1</a>)</i>. I can
 provide it a vector size and a period, and it will return a set of
 values between -1 and 1 in the form of a sine wave with a period that
 I specify.
 </p>
-
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 2: </span>Octave provides a convenient sinewave function, which asks for a vector size and a period</label><pre class="src src-octave" id="org9d191fd">f1 <span style="color: #006FE0;">=</span> sinewave(BIT_RATE <span style="color: #006FE0;">*</span> 4<span style="color: #006FE0;">,</span> BIT_RATE <span style="color: #006FE0;">/</span> 440)
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Octave provides a convenient sinewave function, which asks for a vector size and a period</label><pre class="src src-octave" id="org7566d78">f1 <span style="color: #006FE0;">=</span> sinewave(bitRate <span style="color: #006FE0;">*</span> 4<span style="color: #006FE0;">,</span> bitRate <span style="color: #006FE0;">/</span> 440)
 </pre>
 </div>
+</div>
 
+<div id="outline-container-orgd42dc47" class="outline-3">
+<h3 id="orgd42dc47"><span class="section-number-3">1.1</span> Pure tones and equal-amplitude harmonics</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 I defined my own convenience function <code>puretone</code> which would take the
 bit rate, duration, and frequency and return the corresponding sine
-wave <i>(See Listing <a href="#org80ab04b">3</a>)</i>.
+wave <i>(See Listing <a href="#orgba6d704">2</a>)</i>.
 </p>
 
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 3: </span>I defined my own <code>puretone</code> function which allows me to think in terms of frequency instead of period</label><pre class="src src-octave" id="org80ab04b"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">puretone</span>(BIT_RATE<span style="color: #006FE0;">,</span> seconds<span style="color: #006FE0;">,</span> frequency<span style="color: #006FE0;">,</span> phase_shift<span style="color: #006FE0;">=</span>0)
-  y <span style="color: #006FE0;">=</span> sinewave(BIT_RATE <span style="color: #006FE0;">*</span> seconds<span style="color: #006FE0;">,</span> BIT_RATE<span style="color: #006FE0;">/</span>frequency<span style="color: #006FE0;">,</span> phase_shift)<span style="color: #006FE0;">;</span>
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>I defined my own <code>puretone</code> function which allows me to think in terms of frequency instead of period</label><pre class="src src-octave" id="orgba6d704"><span style="color: #0000FF;">function</span> <span style="color: #006699;">puretone</span>(seconds<span style="color: #006FE0;">,</span> frequency)
+  sinewave(bitRate <span style="color: #006FE0;">*</span> seconds<span style="color: #006FE0;">,</span>
+           bitRate<span style="color: #006FE0;">/</span>frequency)<span style="color: #006FE0;">;</span>
 <span style="color: #0000FF;">endfunction</span>
 </pre>
 </div>
@@ -338,21 +349,20 @@ harmonics. A harmonic is a partial whose frequency is an <i>integer</i>
 <i>multiple of the fundamental</i>. We usually only care about the first
 six harmonics or so, because after that they start to get to very high
 frequencies. Let's define a <code>createharmonics</code> function that returns a
-sum of six harmonics <i>(See Listing <a href="#org24e9497">4</a>)</i>. Notice that
+sum of six harmonics <i>(See Listing <a href="#org59e52ac">3</a>)</i>. Notice that
 the returned vector must be divided by six to preserve the range of
 values to be between -1 and 1.
 </p>
-
 <div class="org-src-container">
-<label class="org-src-name"><span class="listing-number">Listing 4: </span><code>createharmonics</code> generates the first six harmonics and adds them together</label><pre class="src src-octave" id="org24e9497"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">createharmonics</span>(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental)
-  f1 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental)<span style="color: #006FE0;">;</span>
-  f2 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
-  f3 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 3)<span style="color: #006FE0;">;</span>
-  f4 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 4)<span style="color: #006FE0;">;</span>
-  f5 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 5)<span style="color: #006FE0;">;</span>
-  f6 <span style="color: #006FE0;">=</span> puretone(BIT_RATE<span style="color: #006FE0;">,</span> DURATION<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 6)<span style="color: #006FE0;">;</span>
-  y <span style="color: #006FE0;">=</span> (f1 <span style="color: #006FE0;">+</span> f2 <span style="color: #006FE0;">+</span> f3 <span style="color: #006FE0;">+</span> f4 <span style="color: #006FE0;">+</span> f5 <span style="color: #006FE0;">+</span> f6) <span style="color: #006FE0;">/</span> 6<span style="color: #006FE0;">;</span>
-<span style="color: #0000FF;">endfunction</span>
+<label class="org-src-name"><span class="listing-number">Listing 3: </span><code>createharmonics</code> generates the first six harmonics and adds them together</label><pre class="src src-octave" id="org59e52ac">createharmonics(duration<span style="color: #006FE0;">,</span> fundamental)<span style="color: #006FE0;">:</span>
+  f1 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental)<span style="color: #006FE0;">;</span>
+  f2 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
+  f3 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 3)<span style="color: #006FE0;">;</span>
+  f4 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 4)<span style="color: #006FE0;">;</span>
+  f5 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 5)<span style="color: #006FE0;">;</span>
+  f6 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 6)<span style="color: #006FE0;">;</span>
+
+  <span style="color: #0000FF;">return</span> (f1 <span style="color: #006FE0;">+</span> f2 <span style="color: #006FE0;">+</span> f3 <span style="color: #006FE0;">+</span> f4 <span style="color: #006FE0;">+</span> f5 <span style="color: #006FE0;">+</span> f6) <span style="color: #006FE0;">/</span> 6<span style="color: #006FE0;">;</span>
 </pre>
 </div>
 
@@ -361,25 +371,30 @@ I created a sample song using this function
 </p>
 
 <div class="org-src-container">
-<pre class="src src-octave">A3 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 220)<span style="color: #006FE0;">;</span>
-A4 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 440)<span style="color: #006FE0;">;</span>
-A5 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 880)<span style="color: #006FE0;">;</span>
-B4 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 495)<span style="color: #006FE0;">;</span>
-C4 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 523.26)<span style="color: #006FE0;">;</span>
-D3 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 293.33)<span style="color: #006FE0;">;</span>
-D4 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 293.33 <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
-D5 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 293.33 <span style="color: #006FE0;">*</span> 4)<span style="color: #006FE0;">;</span>
-E3 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 330)<span style="color: #006FE0;">;</span>
-E4 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 660)<span style="color: #006FE0;">;</span>
-F5 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 348.84 <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
-GS4 <span style="color: #006FE0;">=</span> createharmonics(BIT_RATE<span style="color: #006FE0;">,</span> 0.5<span style="color: #006FE0;">,</span> 415.305)<span style="color: #006FE0;">;</span>
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>A sample song using the functions created so far - it sort of sounds like music!</label><pre class="src src-octave" id="orgf7e2863">A3 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 220)<span style="color: #006FE0;">;</span>
+A4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 440)<span style="color: #006FE0;">;</span>
+A5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 880)<span style="color: #006FE0;">;</span>
+B4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 495)<span style="color: #006FE0;">;</span>
+C4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 523.26)<span style="color: #006FE0;">;</span>
+D3 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 293.33)<span style="color: #006FE0;">;</span>
+D4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 293.33 <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
+D5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 293.33 <span style="color: #006FE0;">*</span> 4)<span style="color: #006FE0;">;</span>
+E3 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 330)<span style="color: #006FE0;">;</span>
+E4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 660)<span style="color: #006FE0;">;</span>
+F5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 348.84 <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
+GS4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 415.305)<span style="color: #006FE0;">;</span>
 
-aMinor <span style="color: #006FE0;">=</span> [A4<span style="color: #006FE0;">,</span> (C4 <span style="color: #006FE0;">+</span> E4) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span> E3<span style="color: #006FE0;">,</span> (C4 <span style="color: #006FE0;">+</span> E4) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
-eMajor <span style="color: #006FE0;">=</span> [B4<span style="color: #006FE0;">,</span> (E4 <span style="color: #006FE0;">+</span> GS4) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span> E3<span style="color: #006FE0;">,</span> (D4 <span style="color: #006FE0;">+</span> GS4) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
-dMinor <span style="color: #006FE0;">=</span> [A4<span style="color: #006FE0;">,</span> (D4 <span style="color: #006FE0;">+</span> F5) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span> D3<span style="color: #006FE0;">,</span> (D4 <span style="color: #006FE0;">+</span> F5) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
+aMinor <span style="color: #006FE0;">=</span> [A4<span style="color: #006FE0;">,</span> (C4 <span style="color: #006FE0;">+</span> E4) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span>
+          E3<span style="color: #006FE0;">,</span> (C4 <span style="color: #006FE0;">+</span> E4) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
+eMajor <span style="color: #006FE0;">=</span> [B4<span style="color: #006FE0;">,</span> (E4 <span style="color: #006FE0;">+</span> GS4) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span>
+          E3<span style="color: #006FE0;">,</span> (D4 <span style="color: #006FE0;">+</span> GS4) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
+dMinor <span style="color: #006FE0;">=</span> [A4<span style="color: #006FE0;">,</span> (D4 <span style="color: #006FE0;">+</span> F5) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span>
+          D3<span style="color: #006FE0;">,</span> (D4 <span style="color: #006FE0;">+</span> F5) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
 
-song <span style="color: #006FE0;">=</span> [aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span> aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span> dMinor<span style="color: #006FE0;">,</span> aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span> A4<span style="color: #006FE0;">,</span> E3<span style="color: #006FE0;">,</span> A3]<span style="color: #006FE0;">;</span>
-playSound(song<span style="color: #006FE0;">,</span> BIT_RATE)
+song <span style="color: #006FE0;">=</span> [aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span> aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span>
+        dMinor<span style="color: #006FE0;">,</span> aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span>
+        A4<span style="color: #006FE0;">,</span> E3<span style="color: #006FE0;">,</span> A3]<span style="color: #006FE0;">;</span>
+playSound(song<span style="color: #006FE0;">,</span> bitRate)
 </pre>
 </div>
 
@@ -398,16 +413,18 @@ What are we missing?
 
 <p>
 First off, in a string, the relative amplitudes of the harmonics are
-not all the same.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> Secondly, for a plucked instrument, the amplitudes
-of all of the harmonics change over time, eventually diminishing to
-silence.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> Lastly, the soundboard of the instrument will act as a filter
-affecting the output of the instrument.<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> Let's tackle these one by one.
+not all the same.<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> Secondly, for a plucked instrument,
+the amplitudes of all of the harmonics change over time, eventually
+diminishing to silence.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> Lastly, the soundboard of the
+instrument will act as a filter affecting the output of the
+instrument.<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> Let's tackle these one by one.
 </p>
 </div>
+</div>
 
-<div id="outline-container-orge01605e" class="outline-3">
-<h3 id="orge01605e">Relative amplitudes of Harmonics</h3>
-<div class="outline-text-3" id="text-orge01605e">
+<div id="outline-container-org07fe5e5" class="outline-3">
+<h3 id="org07fe5e5"><span class="section-number-3">1.2</span> Relative amplitudes of harmonics</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
 First off, the fundamental frequency of a plucked string will
 always be the most prevalent harmonic.<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> The
@@ -416,7 +433,7 @@ pluck location.
 </p>
 
 <p>
-We model a pluck as a "kink" in the string. <sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup> This
+We model a pluck as a "kink" in the string.<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup> This
 initial location of this kink determines the relative amplitudes of
 the harmonics.<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup> 
 </p>
@@ -443,45 +460,162 @@ and \(L\) be the length of the string.
 <p>
 \[y_2 = {\frac {1 - {\frac x L}} {1 - k}}\]
 </p>
-</div>
-</div>
 
-
-
-<div id="outline-container-org256dfba" class="outline-3">
-<h3 id="org256dfba">Damping</h3>
-</div>
-
-<div id="outline-container-orgbd34615" class="outline-3">
-<h3 id="orgbd34615">Soundboard</h3>
-</div>
-</div>
-
-<div id="outline-container-org2228958" class="outline-2">
-<h2 id="org2228958">Section 2: Coming Soon</h2>
-<div class="outline-text-2" id="text-org2228958">
 <p>
-This has not yet been assigned
+The following pairs of graphs show the kink function on the left,
+and its FFT on the right. The only axis worth looking at is the x
+axis of the FFTs - each number corresponds to the harmonic index.
+</p>
+
+<p>
+These images were generated using <i>octave-online</i> with the following call:
+</p>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>This line of code generated the graphs below</label><pre class="src src-octave" id="org993e38e">v <span style="color: #006FE0;">=</span> kink(1000<span style="color: #006FE0;">,</span> 0.1)
+bar(abs(fft(v<span style="color: #006FE0;">-</span>mean(v)))(1<span style="color: #006FE0;">:</span>10)(2<span style="color: #006FE0;">:</span>end))
+</pre>
+</div>
+
+
+<div id="orga29df75" class="figure">
+<p><img src="./images/kinkfft50.png" alt="kinkfft50.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span><code>kink(0.5)</code> and its FFT</p>
+</div>
+
+<p>
+Notice that the fundamental is always the most prominent, but the
+behavior of the rest of the harmonics varies. Observe <i>Figure
+<a href="#orga29df75">1</a></i> - the pluck location is in the center of the string,
+which emphasizes odd harmonics, and has no even harmonics because
+all even harmonics have a node in the center.
+</p>
+
+<div id="orgabf9c92" class="figure">
+<p><img src="./images/kinkfft25.png" alt="kinkfft25.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span><code>kink(0.25)</code> and its FFT</p>
+</div>
+
+<p>
+Moving the pluck location to the quarter point of the string (<i>Figure <a href="#orgabf9c92">2</a></i>), we
+see more harmonics pop up, but the fourth and eighth (and all multiples
+of four) are still silent, because the kink location is at the node
+of the fourth harmonic.
+</p>
+
+<div id="orgffdf8b7" class="figure">
+<p><img src="./images/kinkfft10.png" alt="kinkfft10.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span><code>kink(0.1)</code> and its FFT</p>
+</div>
+
+<p>
+In <i>Figure <a href="#orgffdf8b7">3</a></i>, all nine of the first harmonics are
+present. The tenth is not pictured, but it would be zero, because
+it has a node at the pluck location.
+</p>
+
+<p>
+This is the result of scaling the harmonics using the weights from the FFT:
+</p>
+
+<p>
+<audio controls src="audio/output2.wav"></audio>
+</p>
+
+<p>
+It sounds a little better - the fundamental is more prominent than
+before. It still does not sound like a physical string though.
 </p>
 </div>
 </div>
 
-
-<div id="outline-container-org9b8ee2d" class="outline-2">
-<h2 id="org9b8ee2d">Unsorted</h2>
-<div class="outline-text-2" id="text-org9b8ee2d">
+<div id="outline-container-org013dc6b" class="outline-3">
+<h3 id="org013dc6b"><span class="section-number-3">1.3</span> Damping</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
-The fundamental frequency of a string is \({\sqrt {\frac T \mu}} *
-  {\frac 1 2L}\).
+When one plucks a string, it does not sustain the sound for very
+long. Immediately, it starts to lose energy to friction at the
+imperfect boundaries of the string, as well as friction with the
+fluid (air) in which it is
+vibrating.<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup> I hope that adding
+damping will at least make it sound plausible that the strings are
+being plucked.
 </p>
 
 <p>
-TODO: Define tone
-TODO: Define note
-TODO: Define timbre
-TODO: Refer to <a href="http://www.falstad.com/loadedstring/">http://www.falstad.com/loadedstring/</a>
+Let's start with the energy lost to the bridge, since that is more
+significant than the energy lost to the
+air.<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup> The way we take into
+account the bridge motion is by modeling it as an impedance
+mismatch, similar to how we would model a tube open on one
+end. This results in an exponential decay.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>I found that a decay halflife of about 0.3 seconds sounded good to me</label><pre class="src src-octave"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">damping</span>(x<span style="color: #006FE0;">,</span> dampingTime<span style="color: #006FE0;">,</span> bitRate)
+  y <span style="color: #006FE0;">=</span> 0.5 <span style="color: #006FE0;">^</span> (x <span style="color: #006FE0;">/</span> (dampingTime <span style="color: #006FE0;">*</span> bitRate))<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+</pre>
+</div>
+
+<p>
+In this model, all of the frequencies decay at the same rate - but
+they started at different amplitudes.
 </p>
 </div>
+</div>
+
+<div id="outline-container-org20d4a84" class="outline-3">
+<h3 id="org20d4a84"><span class="section-number-3">1.4</span> Soundboard</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Okay, we've now made a generic plucked string instrument, but what
+makes a guitar a guitar? One of the aspects that has the biggest
+contribution to the timbre of a stringed instrument is its
+<i>soundboard</i>. A soundboard is a resonance chamber that takes the
+input vibration from a string and transforms its frequency
+spectrum, behaving as an acoustic filter. In a guitar, the string
+transfers its vibration through the bridge and into the top of the
+guitar. The top of the guitar is an <i>idiophone</i><sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup> that creates a pressure wave inside the body as it
+vibrates. It is the modes of this piece of wood plus the sound
+propagation inside of the body that together create this acoustic
+filter.
+</p>
+
+<p>
+"Richardson et al. [4] and Siminoff [5] have shown that the
+soundboard is the single most important component affect- ing the
+sound pressure level of the classical
+guitar."<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup>
+</p>
+
+<p>
+"The energy contained in a vibrating string is limited and the
+amplitudes of vibrations of relatively light guitar soundboards are
+relatively high in general, which is a desired
+feature"<sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup>
+</p>
+
+
+<div class="figure">
+<p><img src="./images/soundboard-frf.png" alt="soundboard-frf.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>This diagram was taken from "Frequency Response Function Of A Guitar - A Significant Peak" By Samo Šali</p>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org92536e9" class="outline-3">
+<h3 id="org92536e9"><span class="section-number-3">1.5</span> Excitation</h3>
+</div>
+</div>
+
+<div id="outline-container-org8e721a8" class="outline-2">
+<h2 id="org8e721a8"><span class="section-number-2">2</span> Section 2: Edgetones and Wind Instruments</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -501,6 +635,18 @@ of the Sony CD standard: <a href="https://en.wikipedia.org/wiki/44,100_Hz">https
 <div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara">TODO source</div></div>
 
 <div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara">I said this already</div></div>
+
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara">physics_of_vibrating_strings.pdf</div></div>
+
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara">physics_of_vibrating_strings.pdf</div></div>
+
+<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10">10</a></sup> <div class="footpara">at first I
+thought it was a membranophone, but I suppose there is no tension
+involved</div></div>
+
+<div class="footdef"><sup><a id="fn.11" class="footnum" href="#fnr.11">11</a></sup> <div class="footpara">soundboard-review</div></div>
+
+<div class="footdef"><sup><a id="fn.12" class="footnum" href="#fnr.12">12</a></sup> <div class="footpara">significant peak</div></div>
 
 
 </div>

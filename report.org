@@ -1,8 +1,15 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/><style>.org-src-container{border:0;box-shadow: none} .INPROGRESS{background-color:blue} pre.src{max-height:800px;overflow:scroll} .subtitle{font-weight: lighter; font-size:0.5em}</style>
 #+OPTIONS: html-postamble:nil
-#+OPTIONS: num:nil
+#+LATEX_CLASS_OPTIONS: [twocolumn]
+#+LATEX: \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+# #+LATEX: \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true,xleftmargin=.2\textwidth}
+
+#+LATEX_CLASS: article
+#+latex_header: \hypersetup{colorlinks=true,linkcolor=blue} \usepackage[font={small,it}]{caption}
 #+OPTIONS: ^:nil
-#+OPTIONS: toc:1
+#+OPTIONS: toc:2
+
+
 #+SUBTITLE: Matt Dailis, Northeastern University MUSC2350, Spring 2020
 #+TITLE: Acoustics Report TODO: Go back and add defs
 
@@ -13,15 +20,15 @@ My intent is to attempt to simulate a guitar using purely math.
 I am using /[[https://www.gnu.org/software/octave/][GNU Octave]]/, an open source programming language and
 environment for mathematical modeling, based off of [[https://www.mathworks.com/products/matlab.html][MATLAB]].
 
-Octave has an audioplayer function (/See Listing [[fig:audioplayer]]/). If
+Octave has an audioplayer function. If
 I provide it with a vector of floating point numbers between -1 and 1,
 it will treat them as a waveform and play them back for me.
 
-#+CAPTION: The octave /audioplayer/ function
 #+LABEL: fig:audioplayer
 #+BEGIN_SRC octave
-  player = audioplayer (vector, bit_rate, bit_depth)
+  audioplayer (vector, bit_rate, bit_depth)
 #+END_SRC
+# #+LATEX: \vspace{5mm}
 
 
 A /sample/ is a discrete measurement of /sound pressure level/ (SPL).
@@ -39,92 +46,105 @@ octave's =sinewave= function /(See Listing [[fig:sinewave]])/. I can
 provide it a vector size and a period, and it will return a set of
 values between -1 and 1 in the form of a sine wave with a period that
 I specify.
-
 #+CAPTION: Octave provides a convenient sinewave function, which asks for a vector size and a period
 #+LABEL: fig:sinewave
 #+BEGIN_SRC octave
-  f1 = sinewave(BIT_RATE * 4, BIT_RATE / 440)
+  f1 = sinewave(bitRate * 4, bitRate / 440)
 #+END_SRC
+# #+LATEX: \vspace{5mm}
 
-I defined my own convenience function =puretone= which would take the
-bit rate, duration, and frequency and return the corresponding sine
-wave /(See Listing [[fig:puretone]])/.
+** Pure tones and equal-amplitude harmonics
+ I defined my own convenience function =puretone= which would take the
+ bit rate, duration, and frequency and return the corresponding sine
+ wave /(See Listing [[fig:puretone]])/.
 
-#+CAPTION: I defined my own =puretone= function which allows me to think in terms of frequency instead of period
-#+LABEL: fig:puretone
-#+BEGIN_SRC octave
-  function y = puretone(BIT_RATE, seconds, frequency, phase_shift=0)
-    y = sinewave(BIT_RATE * seconds, BIT_RATE/frequency, phase_shift);
-  endfunction
-#+END_SRC
+ #+CAPTION: I defined my own =puretone= function which allows me to think in terms of frequency instead of period
+ #+LABEL: fig:puretone
+ #+BEGIN_SRC octave
+   function puretone(seconds, frequency)
+     sinewave(bitRate * seconds,
+	      bitRate/frequency);
+   endfunction
+ #+END_SRC
+# #+LATEX: \vspace{5mm}
 
-Okay, now I have the ability to make pure tones, but I want
-harmonics. A harmonic is a partial whose frequency is an /integer/
-/multiple of the fundamental/. We usually only care about the first
-six harmonics or so, because after that they start to get to very high
-frequencies. Let's define a =createharmonics= function that returns a
-sum of six harmonics /(See Listing [[fig:createharmonics]])/. Notice that
-the returned vector must be divided by six to preserve the range of
-values to be between -1 and 1.
+ Okay, now I have the ability to make pure tones, but I want
+ harmonics. A harmonic is a partial whose frequency is an /integer/
+ /multiple of the fundamental/. We usually only care about the first
+ six harmonics or so, because after that they start to get to very high
+ frequencies. Let's define a =createharmonics= function that returns a
+ sum of six harmonics /(See Listing [[fig:createharmonics]])/. Notice that
+ the returned vector must be divided by six to preserve the range of
+ values to be between -1 and 1.
+ #+CAPTION: =createharmonics= generates the first six harmonics and adds them together
+ #+LABEL: fig:createharmonics
+ #+BEGIN_SRC octave
+   createharmonics(duration, fundamental):
+     f1 = puretone(duration, fundamental);
+     f2 = puretone(duration, fundamental * 2);
+     f3 = puretone(duration, fundamental * 3);
+     f4 = puretone(duration, fundamental * 4);
+     f5 = puretone(duration, fundamental * 5);
+     f6 = puretone(duration, fundamental * 6);
 
-#+CAPTION: =createharmonics= generates the first six harmonics and adds them together
-#+LABEL: fig:createharmonics
-#+BEGIN_SRC octave
-  function y = createharmonics(BIT_RATE, DURATION, fundamental)
-    f1 = puretone(BIT_RATE, DURATION, fundamental);
-    f2 = puretone(BIT_RATE, DURATION, fundamental * 2);
-    f3 = puretone(BIT_RATE, DURATION, fundamental * 3);
-    f4 = puretone(BIT_RATE, DURATION, fundamental * 4);
-    f5 = puretone(BIT_RATE, DURATION, fundamental * 5);
-    f6 = puretone(BIT_RATE, DURATION, fundamental * 6);
-    y = (f1 + f2 + f3 + f4 + f5 + f6) / 6;
-  endfunction
-#+END_SRC
+     return (f1 + f2 + f3 + f4 + f5 + f6) / 6;
+ #+END_SRC
 
-I created a sample song using this function
+# #+LATEX: \vspace{5mm}
 
-#+BEGIN_SRC octave
-    A3 = createharmonics(BIT_RATE, 0.5, 220);
-    A4 = createharmonics(BIT_RATE, 0.5, 440);
-    A5 = createharmonics(BIT_RATE, 0.5, 880);
-    B4 = createharmonics(BIT_RATE, 0.5, 495);
-    C4 = createharmonics(BIT_RATE, 0.5, 523.26);
-    D3 = createharmonics(BIT_RATE, 0.5, 293.33);
-    D4 = createharmonics(BIT_RATE, 0.5, 293.33 * 2);
-    D5 = createharmonics(BIT_RATE, 0.5, 293.33 * 4);
-    E3 = createharmonics(BIT_RATE, 0.5, 330);
-    E4 = createharmonics(BIT_RATE, 0.5, 660);
-    F5 = createharmonics(BIT_RATE, 0.5, 348.84 * 2);
-    GS4 = createharmonics(BIT_RATE, 0.5, 415.305);
+ I created a sample song using this function
 
-    aMinor = [A4, (C4 + E4) / 2, E3, (C4 + E4) / 2];
-    eMajor = [B4, (E4 + GS4) / 2, E3, (D4 + GS4) / 2];
-    dMinor = [A4, (D4 + F5) / 2, D3, (D4 + F5) / 2];
+ #+CAPTION: A sample song using the functions created so far - it sort of sounds like music!
+ #+LABEL: fig:samplesong
+ #+BEGIN_SRC octave
+        A3 = createharmonics(0.5, 220);
+        A4 = createharmonics(0.5, 440);
+        A5 = createharmonics(0.5, 880);
+        B4 = createharmonics(0.5, 495);
+        C4 = createharmonics(0.5, 523.26);
+        D3 = createharmonics(0.5, 293.33);
+        D4 = createharmonics(0.5, 293.33 * 2);
+        D5 = createharmonics(0.5, 293.33 * 4);
+        E3 = createharmonics(0.5, 330);
+        E4 = createharmonics(0.5, 660);
+        F5 = createharmonics(0.5, 348.84 * 2);
+        GS4 = createharmonics(0.5, 415.305);
 
-    song = [aMinor, eMajor, aMinor, eMajor, dMinor, aMinor, eMajor, A4, E3, A3];
-    playSound(song, BIT_RATE)
-#+END_SRC
+        aMinor = [A4, (C4 + E4) / 2,
+                  E3, (C4 + E4) / 2];
+        eMajor = [B4, (E4 + GS4) / 2,
+                  E3, (D4 + GS4) / 2];
+        dMinor = [A4, (D4 + F5) / 2,
+                  D3, (D4 + F5) / 2];
 
-You can hear the result here:
+        song = [aMinor, eMajor, aMinor, eMajor,
+                dMinor, aMinor, eMajor,
+                A4, E3, A3];
+        playSound(song, bitRate)
+ #+END_SRC
+# #+LATEX: \vspace{5mm}
 
-[[audio:audio/output.wav]]
+ You can hear the result here:
 
-While this is recognizably music, it sounds nothing like a guitar!
-What are we missing?
+ [[audio:audio/output.wav]]
 
-First off, in a string, the relative amplitudes of the harmonics are
-not all the same.[fn::footnote me] Secondly, for a plucked instrument, the amplitudes
-of all of the harmonics change over time, eventually diminishing to
-silence.[fn::footnote me] Lastly, the soundboard of the instrument will act as a filter
-affecting the output of the instrument.[fn::footnote me] Let's tackle these one by one.
+ While this is recognizably music, it sounds nothing like a guitar!
+ What are we missing?
 
-** Relative amplitudes of Harmonics
+ First off, in a string, the relative amplitudes of the harmonics are
+ not all the same.[fn::footnote me] Secondly, for a plucked instrument,
+ the amplitudes of all of the harmonics change over time, eventually
+ diminishing to silence.[fn::footnote me] Lastly, the soundboard of the
+ instrument will act as a filter affecting the output of the
+ instrument.[fn::footnote me] Let's tackle these one by one.
+
+** Relative amplitudes of harmonics
    First off, the fundamental frequency of a plucked string will
    always be the most prevalent harmonic.[fn::TODO why...?] The
    relative amplitudes of harmonics of a plucked string depend on the
    pluck location.
    
-   We model a pluck as a "kink" in the string. [fn::TODO source] This
+   We model a pluck as a "kink" in the string.[fn::TODO source] This
    initial location of this kink determines the relative amplitudes of
    the harmonics.[fn::I said this already] 
 
@@ -152,22 +172,142 @@ affecting the output of the instrument.[fn::footnote me] Let's tackle these one 
 
    $$y_2 = {\frac {1 - {\frac x L}} {1 - k}}$$
 
+   The following pairs of graphs show the kink function on the left,
+   and its FFT on the right. The only axis worth looking at is the x
+   axis of the FFTs - each number corresponds to the harmonic index.
+
+   These images were generated using /octave-online/ with the following call:
+   #+CAPTION: This line of code generated the graphs below
+   #+LABEL: fig:createharmonics
+   #+BEGIN_SRC octave
+      v = kink(1000, 0.1)
+      bar(abs(fft(v-mean(v)))(1:10)(2:end))
+   #+END_SRC
+#  #+LATEX: \vspace{5mm}
+
+#   #+LATEX: \vspace{5mm}
    
+    #+CAPTION: =kink(0.5)= and its FFT
+    #+NAME:    fig:kink50
+    [[./images/kinkfft50.png]]
+
+    Notice that the fundamental is always the most prominent, but the
+    behavior of the rest of the harmonics varies. Observe /Figure
+    [[fig:kink50]]/ - the pluck location is in the center of the string,
+    which emphasizes odd harmonics, and has no even harmonics because
+    all even harmonics have a node in the center.
+    #+CAPTION: =kink(0.25)= and its FFT
+    #+NAME:    fig:kink25
+    [[./images/kinkfft25.png]]
+
+    Moving the pluck location to the quarter point of the string (/Figure [[fig:kink25]]/), we
+    see more harmonics pop up, but the fourth and eighth (and all multiples
+    of four) are still silent, because the kink location is at the node
+    of the fourth harmonic.
+    #+CAPTION: =kink(0.1)= and its FFT
+    #+NAME:    fig:kink10
+    [[./images/kinkfft10.png]]
+
+    In /Figure [[fig:kink10]]/, all nine of the first harmonics are
+    present. The tenth is not pictured, but it would be zero, because
+    it has a node at the pluck location.
+
+    This is the result of scaling the harmonics using the weights from the FFT:
+
+    [[audio:audio/output2.wav]]
+
+    It sounds a little better - the fundamental is more prominent than
+    before. It still does not sound like a physical string though.
 
 ** Damping
+   When one plucks a string, it does not sustain the sound for very
+   long. Immediately, it starts to lose energy to friction at the
+   imperfect boundaries of the string, as well as friction with the
+   fluid (air) in which it is
+   vibrating.[fn::physics_of_vibrating_strings.pdf] I hope that adding
+   damping will at least make it sound plausible that the strings are
+   being plucked.
 
+   Let's start with the energy lost to the bridge, since that is more
+   significant than the energy lost to the
+   air.[fn::physics_of_vibrating_strings.pdf] The way we take into
+   account the bridge motion is by modeling it as an impedance
+   mismatch, similar to how we would model a tube open on one
+   end. This results in an exponential decay.
+
+   #+CAPTION: I found that a decay halflife of about 0.3 seconds sounded good to me
+   #+BEGIN_SRC octave
+     function y = damping(x, dampingTime, bitRate)
+       y = 0.5 ^ (x / (dampingTime * bitRate));
+     endfunction
+   #+END_SRC
+
+   In this model, all of the frequencies decay at the same rate - but
+   they started at different amplitudes.
+   
 ** Soundboard
+   Okay, we've now made a generic plucked string instrument, but what
+   makes a guitar a guitar? One of the aspects that has the biggest
+   contribution to the timbre of a stringed instrument is its
+   /soundboard/. A soundboard is a resonance chamber that takes the
+   input vibration from a string and transforms its frequency
+   spectrum, behaving as an acoustic filter. In a guitar, the string
+   transfers its vibration through the bridge and into the top of the
+   guitar. The top of the guitar is an /idiophone/[fn::at first I
+   thought it was a membranophone, but I suppose there is no tension
+   involved] that creates a pressure wave inside the body as it
+   vibrates. It is the modes of this piece of wood plus the sound
+   propagation inside of the body that together create this acoustic
+   filter.
 
-* Section 2: Coming Soon
-  This has not yet been assigned
+   "Richardson et al. [4] and Siminoff [5] have shown that the
+   soundboard is the single most important component affect- ing the
+   sound pressure level of the classical
+   guitar."[fn::soundboard-review]
+
+   "The energy contained in a vibrating string is limited and the
+   amplitudes of vibrations of relatively light guitar soundboards are
+   relatively high in general, which is a desired
+   feature"[fn::significant peak]
+
+   #+CAPTION: This diagram was taken from "Frequency Response Function Of A Guitar - A Significant Peak" By Samo Šali
+   [[./images/soundboard-frf.png]]
+   
+
+   
+** Excitation
+   
+
+** Program listing
+
+   The following is the source code for the octave program I wrote:
+
+   #+INCLUDE: "./src/abc.m" src octave
+* Section 2: Edgetones and Wind Instruments
+
+** COMMENT Assignment description
+   Section 2 will consist of a short document (2 pages max) that
+   discusses in detail a topic of Acoustics and Psychoacoustics that I
+   will assign to you. It will be very specific and it will come
+   directly from what we discussed in class (slides and book). Again,
+   you are welcome to include details that extend the course material
+   and/or that rely on your personal experience.
 
 
-* Unsorted
+
+* COMMENT Unsorted
 
   The fundamental frequency of a string is ${\sqrt {\frac T \mu}} *
   {\frac 1 2L}$.
 
-  TODO: Define tone
-  TODO: Define note
-  TODO: Define timbre
-  TODO: Refer to [[http://www.falstad.com/loadedstring/]]
+**** TODO Define tone
+**** TODO Define note
+**** TODO Define timbre
+**** TODO Refer to [[http://www.falstad.com/loadedstring/]]
+**** TODO Mention zero amplitude pattern
+**** TODO Take a look at Max MSP, used for generating bird sounds
+**** TODO 
+**** Take a look at: Vistisen.pdf
+**** https://designofaclassicalguitar.com/soundboard
+**** https://www.mathworks.com/help/signal/examples/generating-guitar-chords-using-the-karplus-strong-algorithm.html
+     This looks very promising
