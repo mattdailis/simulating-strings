@@ -13,7 +13,27 @@
 #+SUBTITLE: Matt Dailis, Northeastern University MUSC2350, Spring 2020
 #+TITLE: Acoustics Report TODO: Go back and add defs
 
-* Section 1: Simulating Strings
+* COMMENT Preface
+  :PROPERTIES:
+  :UNNUMBERED: t
+  :END:
+
+  This is Matt Dailis's work for /Acoustics and Psychoacoustics of
+  Music/ taught by Victor Zappi at Northeastern University, 
+  Spring 2020.
+
+  In Section 1, I will describe my attempt at using additive synthesis
+  to simulate the sound of a guitar. I jumped right into this without
+  examining much prior work, so my approach was a little naive and
+  primitive. I do explain concepts along the way, and I reference some
+  alternative approaches at the end.
+
+  In Section 2, I will give a more concise description of edgetones and
+  wind instruments, based largely on what we covered in class.
+
+
+  
+* COMMENT Simulating Strings
 
 My intent is to attempt to simulate a guitar using purely math.
 
@@ -260,18 +280,23 @@ I specify.
    propagation inside of the body that together create this acoustic
    filter.
 
-   "Richardson et al. [4] and Siminoff [5] have shown that the
-   soundboard is the single most important component affect- ing the
-   sound pressure level of the classical
-   guitar."[fn::soundboard-review]
+   To implement a filter in octave, I will use the =signal= library.
 
-   "The energy contained in a vibrating string is limited and the
-   amplitudes of vibrations of relatively light guitar soundboards are
-   relatively high in general, which is a desired
-   feature"[fn::significant peak]
+    #+CAPTION: This diagram was taken from "Frequency Response Function Of A Guitar - A Significant Peak" By Samo Šali
+    [[./images/soundboard-frf.png]]
 
-   #+CAPTION: This diagram was taken from "Frequency Response Function Of A Guitar - A Significant Peak" By Samo Šali
-   [[./images/soundboard-frf.png]]
+*** COMMENT Quotes
+
+    "Richardson et al. [4] and Siminoff [5] have shown that the
+    soundboard is the single most important component affect- ing the
+    sound pressure level of the classical
+    guitar."[fn::soundboard-review]
+
+    "The energy contained in a vibrating string is limited and the
+    amplitudes of vibrations of relatively light guitar soundboards are
+    relatively high in general, which is a desired
+    feature"[fn::significant peak]
+
    
 
    
@@ -279,13 +304,69 @@ I specify.
    
 
 
+   
 
-** Program listing
+* Edgetones and Wind Instruments
 
-   The following is the source code for the octave program I wrote:
+  A /wind instrument/ is similar to a stringed instrument in that it
+  has a /sound source/ and a /sound modifier/. However, instead of
+  having a vibrating soundboard, wind instruments typically have a
+  tube that contains a one-dimensional air column through which sound
+  propagates as a /longitudinal wave/.
 
-   #+INCLUDE: "./src/abc.m" src octave
-* Section 2: Edgetones and Wind Instruments
+
+
+** Sound Source
+  The sound source is responsible for generating a stream of vibrating
+  air. We can categorize this generation into three phenomena: /free
+  edge oscillation/, /reeds/, and /vibrating lips/.
+
+*** Free edge oscillation
+    In /free edge oscillation/, a steady flow of air needs to hit a
+    sharp object head-on (see Figure [[fig:airwayedge]]).
+
+    #+CAPTION: A narrow stream of air passes through an *airway* and hits a sharp *edge* head-on
+    #+LABEL: fig:airwayedge
+    [[./images/airwayedge.png]]
+
+    When we talk about a "steady flow of air," we are talking about
+    /laminar flow/. Laminar flow is when a fluid moves in smooth
+    layers (laminae) and each layer is moving in the same direction as
+    the whole fluid, meaning there are no cross-currents or
+    eddies.[fn::https://en.wikipedia.org/wiki/Laminar_flow] This flow
+    is laminar inside of the airway, but at some distance from the
+    airway it becomes /turbulent flow/. Turbulent flow is when the
+    motion of a fluid is chaotic and changing. The laminar flow gets a
+    certain distance into the unconstrained air and loses its
+    structure, and becomes turbulent.
+
+    If we place a sharp edge at approximately the distance from the
+    airway at which the flow naturally becomes turbulent, we force the
+    flow to pick one side of the edge. The eddies will increase in
+    intensity on that side and cause the flow to flip to the other
+    side (see Figure [[fig:airwayflip]]). This phenomenon will repeat in a
+    periodic fashion.
+
+    We can describe the frequency of this periodic fluctuation as a
+    ratio between the the velocity of the air flow, $v$, and the
+    distance between the airway and the edge, $d$: $f \propto {\frac v
+    d}$.
+
+    This equation, however, is not 100% correct - the frequency is not
+    continuous.[fn::http://www.organstops.org/h/HarmonicFlute.html] 
+
+*** Reeds
+
+*** Vibrating lips
+
+** Sound Modifier
+
+*** Edgetones
+    /Edgetones/ are
+
+   #+CAPTION: Edgetone illustration from textbook
+   #+LABEL: fig:airwayflip
+   [[./images/edgetone.png]]
 
 ** COMMENT Assignment description
    Section 2 will consist of a short document (2 pages max) that
@@ -294,8 +375,14 @@ I specify.
    directly from what we discussed in class (slides and book). Again,
    you are welcome to include details that extend the course material
    and/or that rely on your personal experience.
+* COMMENT Bibliography
 
+* COMMENT Appendix
+** Program listing
 
+   The following is the source code for the octave program I wrote:
+
+   #+INCLUDE: "./src/abc.m" src octave
 
 * COMMENT Unsorted
 
@@ -313,3 +400,7 @@ I specify.
 **** https://designofaclassicalguitar.com/soundboard
 **** https://www.mathworks.com/help/signal/examples/generating-guitar-chords-using-the-karplus-strong-algorithm.html
      This looks very promising
+**** https://en.wikipedia.org/wiki/Additive_synthesis
+**** Moore, F. Richard (1995). Foundations of Computer Music.
+**** http://120years.net/bell-labs-hal-alles-synthesiser-hall-alles-usa-1977/
+**** https://en.wikipedia.org/wiki/Bell_Labs_Digital_Synthesizer
