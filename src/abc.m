@@ -1,4 +1,6 @@
-disp("Running abc.m...");
+disp("Started abc.m");
+
+pkg load signal
 
 function y = damping(x, dampingTime, bitRate)
   y = 0.5 ^ (x / (dampingTime * bitRate));
@@ -38,30 +40,6 @@ function y = createharmonics(bitRate, duration, fundamental, weights)
   S = sum(M);
   
   y = S / max(S);
-endfunction
-
-function m = maxfft(bitRate, X, checkFreq)
-  L = length(X);
-  Y = fft(X);
-  P2 = abs(Y / L);
-  P1 = P2(1:(L / 2) + 1);
-  ## P1(2:end-1) = 2 * pi * P1(2:end-1);
-
-  [maxVal, maxIndex] = max(P1);
-
-  ## maxFreq = maxIndex * bitRate / length(X);
-
-  maxVal
-  maxIndex
-
-  P1(maxIndex) = 0;
-
-  [maxVal2, maxIndex2] = max(P1);
-
-  maxVal2
-  maxIndex2
-  
-  m = maxIndex; # maxFreq;
 endfunction
 
 function v = ffttest(bitRate, X, checkFreq)
@@ -105,41 +83,15 @@ function main()
   
   A3 = createharmonics(bitRate, duration, 220, weights);
 
-  ## A4 = createharmonics(bitRate, duration, 440, weights);
   C3 = createharmonics(bitRate, duration, 523.26 / 2, weights);
-  ## C4 = createharmonics(bitRate, duration, 523.26, weights);
-  ## E4 = createharmonics(bitRate, duration, 660, weights);
   E3 = createharmonics(bitRate, duration, 330, weights);
   E2 = createharmonics(bitRate, duration, 330 / 2, weights);
-
-  ## B4 = createharmonics(bitRate, duration, 495, weights);
-  ## D3 = createharmonics(bitRate, duration, 293.33, weights);
-  ## D4 = createharmonics(bitRate, duration, 293.33 * 2, weights);
-  ## GS4 = createharmonics(bitRate, duration, 415.305, weights);
-
-  ## F5 = createharmonics(bitRate, duration, 348.84 * 2, weights);
-  ## D5 = createharmonics(bitRate, duration, 293.33 * 4, weights);
-  ## A5 = createharmonics(bitRate, duration, 880, weights);
-
   aMinor = [A3, (C3 + E3) / 2, E2, (C3 + E3) / 2];
-  ## eMajor = [B4, (E4 + GS4) / 2, E3, (D4 + GS4) / 2];
-  ## dMinor = [A4, (D4 + F5) / 2, D3, (D4 + F5) / 2];
 
-  ## v = ffttest(bitRate, A3, 220)
-
-  ## ffttest(100, v, 10)
-
-  ## disp("A4");
-  ## ffttest(bitRate, A4);
-
-  ## disp("E3");
-  ## ffttest(bitRate, E3);
-
-  ## disp("E4");
-  ## ffttest(bitRate, E4);
-
-  song = [aMinor]; #, eMajor, aMinor, eMajor, dMinor, aMinor, eMajor, A4, E3, A3];
+  song = [aMinor];
   playSound(song, bitRate)
+
+  ## Uncomment the next line to save the audio to a file
   ## audiowrite("with_damping.wav", song, bitRate);
 endfunction
 
