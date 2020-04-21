@@ -1,5 +1,4 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/><style>.org-src-container{border:0;box-shadow: none} .INPROGRESS{background-color:blue} pre.src{max-height:800px;overflow:scroll} .subtitle{font-weight: lighter; font-size:0.5em}</style>
-# #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css"/><style>.org-src-container{border:0;box-shadow: none} .INPROGRESS{background-color:blue} pre.src{max-height:800px;overflow:scroll} .subtitle{font-weight: lighter; font-size:0.5em}</style>
 #+OPTIONS: html-postamble:nil
 #+LATEX_CLASS_OPTIONS: [twocolumn]
 #+LATEX: \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
@@ -12,16 +11,17 @@
 
 
 #+SUBTITLE: Matt Dailis, Northeastern University MUSC2350, Spring 2020
-#+TITLE: Acoustics Report TODO: Go back and add defs
+#+TITLE: Acoustics Report
 
 * Preface
   :PROPERTIES:
   :UNNUMBERED: t
   :END:
 
-  This is Matt Dailis's work for /Acoustics and Psychoacoustics of
-  Music/ taught by Victor Zappi[fn::https://toomuchidle.com/] at
-  Northeastern University, Spring 2020.
+  This is Matt Dailis's[fn::https://mattdailis.github.io] work for
+  /Acoustics and Psychoacoustics of Music/ taught by Victor
+  Zappi[fn::https://toomuchidle.com/] at Northeastern University,
+  Spring 2020.
 
   In Section 1, I will describe my attempt at using additive synthesis
   to simulate the sound of a guitar. I jumped right into this without
@@ -32,11 +32,17 @@
   In Section 2, I will give a more concise description of edgetones and
   wind instruments, based largely on what we covered in class.
 
-
+  The appendix contains a full program listing of my octave
+  program. It can also be found at
+  [[https://github.com/mattdailis/simulating-strings]].
   
 * Simulating Strings
 
-My intent is to attempt to simulate a guitar using purely math.
+  My intent is to attempt to simulate a guitar using purely math. I
+  wanted to know how big the gap is between the theory I learned in
+  class and the true complexity of a real musical instrument. I pulled
+  out my notes from class, fired up my laptop, and decided to give it
+  a try!
 
 ** Getting set up with Octave
 For this project, I used /[[https://www.gnu.org/software/octave/][GNU Octave]]/, an open source programming
@@ -64,10 +70,10 @@ themselves.
 ** Pure tones and equal-amplitude harmonics
 
    My approach to simulating strings was to use /additive
-synthesis/[fn::footnote about additive synthesis]. This means that I
-attempted to simulate a vibrating string by building it up as a sum of
-partials. To start, I generated a waveform for the the fundamental
-frequency using octave's =sinewave= function /(See Listing
+synthesis/[fn::https://en.wikipedia.org/wiki/Additive_synthesis]. This
+means that I attempted to simulate a vibrating string by building it
+up as a sum of partials. To start, I generated a waveform for the the
+fundamental frequency using octave's =sinewave= function /(See Listing
 [[fig:sinewave]])/. Given a vector size and a period, it returns a set of
 values between -1 and 1 in the form of a sine wave with the specified
 period.
@@ -93,13 +99,13 @@ period.
 
  Now I had the ability to make pure tones, but I wanted /harmonics/. A
  harmonic is a partial whose frequency is an /integer multiple of the
- fundamental/.[fn::definition of harmonic] We usually only care about
- the first six harmonics or so, because after that they start to get
- to very high frequencies near the edge of human hearing. I defined a
- =createharmonics= function that returns a sum of six harmonics /(See
- Listing [[fig:createharmonics]])/. Notice that the returned vector must
- be divided by six to make sure the whole range of values is between
- $-1$ and $1$.
+ fundamental/.[fn::https://en.wikipedia.org/wiki/Harmonic] We usually
+ only care about the first six harmonics or so, because after that
+ they start to get to very high frequencies near the edge of human
+ hearing. I defined a =createharmonics= function that returns a sum of
+ six harmonics /(See Listing [[fig:createharmonics]])/. Notice that the
+ returned vector must be divided by six to make sure the whole range
+ of values is between $-1$ and $1$.
  #+CAPTION: =createharmonics= generates the first six harmonics and adds them together
  #+LABEL: fig:createharmonics
  #+BEGIN_SRC octave
@@ -149,18 +155,20 @@ pitches that I wanted that I created a sample song using this function.
 
  You can hear the result here:
 
- [[audio:https://mattdailis.github.io/strings/audio/string-simulation-0.wav]]
+ [[audio:audio/string-simulation-0.wav]]
 
  After listening to the result, I could recognize this as music, but
  it sounded nothing like a guitar. What's missing?
 
  First off, in a string, the relative amplitudes of the harmonics are
- not all the same.[fn::footnote me] Secondly, for a plucked
- instrument, the amplitudes of all of the harmonics change over time,
- eventually diminishing to silence.[fn::footnote me] Lastly, the
- soundboard of the instrument will act as a filter affecting the
- output of the instrument.[fn::footnote me] Let's tackle these issues
- one by one.
+ not all the same.[fn::I found this out by plucking a string on my
+ guitar and looking at the spectrum in the [[https://play.google.com/store/apps/details?id=com.ntrack.tuner][n-Track Tuner]] mobile app]
+ Secondly, for a plucked instrument, the amplitudes of all of the
+ harmonics change over time, eventually diminishing to
+ silence. Lastly, the soundboard of the instrument will act as a
+ filter affecting the output of the instrument.[fn::Mathematical
+ Modelling and Acoustical Analysis of Classical Guitars and Their
+ Soundboards] Let's tackle these issues one by one.
 
 ** Relative amplitudes of harmonics
    First off, the fundamental frequency of a plucked string will
@@ -234,7 +242,8 @@ pitches that I wanted that I created a sample song using this function.
     it has a node at the pluck location.
 
     This is the result of scaling the harmonics using the weights from the FFT:
-    [[audio:https://mattdailis.github.io/strings/audio/string-simulation-1.wav]]
+
+    [[audio:audio/string-simulation-1.wav]]
 
     After listening to this result, I found that it sounded a little
     better - the fundamental was more prominent than before. It still
@@ -245,13 +254,13 @@ pitches that I wanted that I created a sample song using this function.
    long. Immediately, it starts to lose energy to friction at the
    imperfect boundaries of the string, as well as friction with the
    fluid (air) in which it is
-   vibrating.[fn::physics_of_vibrating_strings.pdf] I hope that adding
-   damping will at least make it sound plausible that the strings are
-   being plucked.
+   vibrating.[fn::The physics of vibrating strings - Giordano, Gould, Tobochnik] I hoped that
+   adding damping will at least make it sound plausible that the
+   strings are being plucked.
 
    Let's focus on the kinetic energy lost due to the motion of the
    bridge, since that is more significant than the energy lost to the
-   air.[fn::physics_of_vibrating_strings.pdf] The way we take into
+   air.[fn::The physics of vibrating strings - Giordano, Gould, Tobochnik] The way we take into
    account the bridge motion is by modeling it as an impedance
    mismatch, similar to how we would model a tube open on one
    end. This results in an exponential decay.
@@ -268,7 +277,7 @@ pitches that I wanted that I created a sample song using this function.
    plucking my guitar string[fn::obtained using the [[https://play.google.com/store/apps/details?id=com.ntrack.tuner][n-Track Tuner]]
    mobile app] I think this is close enough to the truth.
 
-   [[audio:https://mattdailis.github.io/strings/audio/string-simulation-2.wav]]
+   [[audio:audio/string-simulation-2.wav]]
    
 ** Soundboard
    Okay, we've now made a generic plucked string instrument, but what
@@ -285,15 +294,31 @@ pitches that I wanted that I created a sample song using this function.
    propagation inside of the body that together create this acoustic
    filter.[fn::https://newt.phys.unsw.edu.au/music/guitar/guitarchladni.html]
 
-   To implement a filter in octave, I will use the =signal= library.
+   To implement a filter in octave, I intended to use the =signal=
+   library. While I did eventually manage to install it, I did not
+   have enough time to implement this part before the project
+   deadline. However, I read some papers about soundboard
+   design. Luthiers install /braces/, which are strips of wood glued
+   to the soundboard to create areas of greater stiffness, which
+   encourages modes that have nodes in those locations.[fn::"Frequency
+   Response Function Of A Guitar - A Significant Peak" By Samo Šali]
 
     #+CAPTION: This diagram was taken from "Frequency Response Function Of A Guitar - A Significant Peak" By Samo Šali
     [[./images/soundboard-frf.png]]
 
-    More stuff on
-    soundboards[fn::https://newt.phys.unsw.edu.au/music/guitar/guitarchladni.html]
-    
-    Guitar modes[fn::https://newt.phys.unsw.edu.au/music/guitar/patterns.html]
+    When I got this far in the project, for the first time I actually
+    searched for "synthesizing guitar sound" on the internet.[fn::I
+    should have started with this! Although the process of discovery
+    was also very instructive] I found that the most commonly used
+    algorithm for generating guitar sounds does /not/ use additive
+    synthesis! Instead, it uses subtractive synthesis.
+
+** The Karplus-Strong Algorithm
+   The Karplus-Strong algorithm[fn::karplus-strong.pdf] is a way of
+   cheaply synthesizing guitar-like sounds using one or two sine wave
+   oscillators.
+
+
 *** COMMENT Quotes
 
     "Richardson et al. [4] and Siminoff [5] have shown that the
@@ -310,12 +335,13 @@ pitches that I wanted that I created a sample song using this function.
 
    
 ** Excitation
-   
 
+#+LATEX: \pagebreak   
 
-   
+* Woodwinds: Edgetones
 
-* Edgetones and Wind Instruments
+  This section will give a shallow overview of wind instruments, with
+  a deep dive in the middle on /edgetones/.
 
   A /wind instrument/ is similar to a stringed instrument in that it
   has a /sound source/ and a /sound modifier/. However, instead of
@@ -324,10 +350,12 @@ pitches that I wanted that I created a sample song using this function.
   propagates as a /longitudinal wave/.[fn::A /longitudinal wave/
   oscillates in the same axis as it propagates.]
 
-** Sound Source
-  The sound source is responsible for generating a stream of vibrating
-  air. We can categorize this generation into three phenomena: /free
-  edge oscillation/, /reeds/, and /vibrating lips/.
+** Sound source
+   The sound source is responsible for generating a stream of
+   vibrating air. We can categorize this generation into three
+   phenomena: /free edge oscillation/, /reeds/, and /vibrating
+   lips/. Here, we will only focus on /free edge oscillation/, since
+   this is most relevant to the concept of edgetones.
 
 *** Free edge oscillation
     In /free edge oscillation/, a steady flow of air needs to hit a
@@ -355,31 +383,85 @@ pitches that I wanted that I created a sample song using this function.
     side (see Figure [[fig:airwayflip]]). This phenomenon will repeat in a
     periodic fashion.
 
+    #+CAPTION: Edgetone illustration from textbook
+    #+LABEL: fig:airwayflip
+    [[./images/edgetone.png]]
+
     We can describe the frequency of this periodic fluctuation as a
     ratio between the the velocity of the air flow, $v$, and the
-    distance between the airway and the edge, $d$: $f \propto {\frac v
-    d}$.
+    distance between the airway and the edge, $d$. 
+
+    $$f \propto {\frac v d}$$
 
     This equation, however, is not 100% correct - the frequency is not
     continuous. As velocity increases, at a certain point, frequency
-    will have a jump discontinuity (See Figure [[fig:stepwisepitch]]).
+    will have a jump discontinuity (See Figure [[fig:stepwisepitch]]). I
+    do not fully understand why this happens, but it is commonly used
+    by musicians to acheive higher frequencies.[fn::musicians call
+    this technique /overblowing/] Notice the slope of the lines - this
+    is not very convenient for musicians, since it is hard to control
+    your air velocity so precisely. We will see a solution to this in
+    the *edgetones* section.
 
-    #+CAPTION: Frequency increases stepwise
+    #+CAPTION: Frequency increases stepwise. 
     #+LABEL: fig:stepwisepitch
     [[./images/stepwisepitch.png]]
 
-*** Reeds
+** Sound modifier
+   Many wind instruments have a long tube called the /bore/ that
+   houses the air column. The air column vibrates at resonant modes
+   that depend on the length[fn::assuming no holes], $L$, of the bore.
+   $c$ is the speed of sound in air.
 
-*** Vibrating lips
-
-** Sound Modifier
+   $$f_n = {\frac {nc} {2L}}$$
 
 *** Edgetones
-    /Edgetones/ are
+    In a /woodwind/ instrument, whose sound source is an airway
+    followed by an edge, the gap between the airway and edge is one of
+    the two open ends of the tube. We learned that tubes with open ends
+    allow resonant modes with antinodes at the ends. This means that
+    after the initial "transient" part of the sound, the vibration of
+    the air column will /induce/ a vibration at the edge. This is
+    called an *edgetone*.
 
-   #+CAPTION: Edgetone illustration from textbook
-   #+LABEL: fig:airwayflip
-   [[./images/edgetone.png]]
+    An edgetone is a form of coupling, like sympathetic vibrations in
+    strings. It forms a feedback loop, and most interestingly, it
+    causes the source to vibrate at the resonant mode of the
+    bore. This is significant, because if you remember from Figure
+    [[fig:stepwisepitch]] and the corresponding equation, the frequency of
+    the source depended on air velocity and distance, which are /not/
+    properties of the bore! The vibration of the air column has a high
+    enough amplitude to overcome the eddies of the turbulent flow at
+    the edge and force the flow to oscillate at a frequency dictated
+    by the properties of the bore.
+
+    Does this mean that the air velocity and edge distance have no
+    effect on the output frequency of the instrument? Not quite. While
+    it is true that for small changes in velocity, the frequency
+    remains constant (dictated by the resonant mode of the bore), the
+    jump discontinuities will have an effect on the output
+    frequency. The steps in frequency at the edge will help /select/
+    which resonant mode of the bore will have the highest
+    amplitude. Examine Figure [[fig:stepwisepitchedgetone]]. There are now
+    /ranges/ of values of ${\frac v d}$ that result in the same
+    frequency.[fn::This is very convenient for musicians, because it
+    reduces a continuum of frequencies to a discrete set. Frets on a
+    guitar perform a somewhat analogous function.]
+
+    #+CAPTION: The edgetones flatten pitch change locally, but still react to the jump discontinuities
+    #+LABEL: fig:stepwisepitchedgetone
+    [[./images/stepwisepitchedgetone.png]]
+
+    
+** Modifying the modifier
+
+   Unlike an acoustic guitar, which typically leaves the soundboard
+   the same and changes the sound source, woodwinds usually come with
+   the ability to dynamically modify the acoustic properties of the
+   bore. The way they do this is with /holes/. Holes in the bore force
+   nodes at those locations because they fix the pressure at the hole
+   location to be approximately equal to the atmospheric pressure
+   outside of the bore.
 
 ** COMMENT Assignment description
    Section 2 will consist of a short document (2 pages max) that
@@ -388,14 +470,25 @@ pitches that I wanted that I created a sample song using this function.
    directly from what we discussed in class (slides and book). Again,
    you are welcome to include details that extend the course material
    and/or that rely on your personal experience.
-* COMMENT Bibliography
-
-* COMMENT Appendix
+* Bibliography
+  - [[http://mattdailis.github.io/simulating-strings/resources/physics_of_vibrating_strings.pdf][The physics of vibrating strings - Giordano, Gould, Tobochnik]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/karplus-strong.pdf][Digital Synthesis of Plucked-String and Drum Timbres, Karplus and Strong]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/karplus-strong][Response Variation in a Group of Acoustic Guitars Mark French]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/Vitsten.pdf][Simple model for low-frequency guitar function]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/significant_peak.pdf][Frequency Response Function Of A Guitar: A Significant Peak - Samo Sali]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/soundboard-review.pdf][Mathematical Modelling and Acoustical Analysis of Classical Guitars and Their Soundboards]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/loadedstring/StringWave.java][Loaded String simulation source code]]
+* Appendix
+** Further reading
+   More stuff on
+   soundboards[fn::https://newt.phys.unsw.edu.au/music/guitar/guitarchladni.html]
+    
+   Guitar modes[fn::https://newt.phys.unsw.edu.au/music/guitar/patterns.html]
 ** Program listing
 
    The following is the source code for the octave program I wrote:
 
-   #+INCLUDE: "./src/abc.m" src octave
+   #+INCLUDE: "./src/simulatingstrings.m" src octave
 
 * COMMENT Unsorted
 
