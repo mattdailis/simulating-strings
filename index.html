@@ -1,0 +1,1119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-04-20 Mon 22:32 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Acoustics Final Report</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Matt Dailis" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/><style>.org-src-container{border:0;box-shadow: none} .INPROGRESS{background-color:blue} pre.src{max-height:800px;overflow:scroll} .subtitle{font-weight: lighter; font-size:0.5em}</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Acoustics Final Report
+<br />
+<span class="subtitle">Northeastern University MUSC2350, Spring 2020</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org74d2593">Preface</a></li>
+<li><a href="#org8468a5f">1. Simulating Strings</a>
+<ul>
+<li><a href="#org741323d">1.1. Getting set up with Octave</a></li>
+<li><a href="#orgbb936e9">1.2. Pure tones and equal-amplitude harmonics</a></li>
+<li><a href="#org0fba2db">1.3. Relative amplitudes of harmonics</a></li>
+<li><a href="#orgb918584">1.4. Damping</a></li>
+<li><a href="#org60491ab">1.5. Soundboard</a></li>
+<li><a href="#orgd070ee4">1.6. Subtractive synthesis</a></li>
+</ul>
+</li>
+<li><a href="#org37804e5">2. Woodwinds: Edgetones</a>
+<ul>
+<li><a href="#orgbfd0ef2">2.1. Sound source</a></li>
+<li><a href="#orgd2174a3">2.2. Sound modifier</a></li>
+<li><a href="#org18aa0d3">2.3. Modifying the modifier</a></li>
+</ul>
+</li>
+<li><a href="#orgae6cce0">3. Bibliography</a></li>
+<li><a href="#orga882c5f">4. Appendix</a>
+<ul>
+<li><a href="#org947f5a1">4.1. Program listing</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+You can find the pdf version of this report <a href="./matt-dailis-acoustics-report.pdf">here</a>.
+</p>
+
+<div id="outline-container-org74d2593" class="outline-2">
+<h2 id="org74d2593">Preface</h2>
+<div class="outline-text-2" id="text-org74d2593">
+<p>
+This is Matt Dailis's<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> work for
+<i>Acoustics and Psychoacoustics of Music</i> taught by Victor
+Zappi<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup> at Northeastern University,
+Spring 2020.
+</p>
+
+<p>
+In Section 1, I will describe my attempt at using additive synthesis
+to simulate the sound of a guitar. I jumped right into this without
+examining much prior work, so my approach was a little naive and
+primitive. I do explain concepts along the way, and I reference some
+alternative approaches at the end.
+</p>
+
+<p>
+In Section 2, I will give a more concise description of edgetones and
+wind instruments, based largely on what we covered in class.
+</p>
+
+<p>
+The appendix contains a full program listing of my octave
+program. It can also be found at
+<a href="https://github.com/mattdailis/simulating-strings">https://github.com/mattdailis/simulating-strings</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8468a5f" class="outline-2">
+<h2 id="org8468a5f"><span class="section-number-2">1</span> Simulating Strings</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+My intent is to attempt to simulate a guitar using purely math. I
+wanted to know how big the gap is between the theory I learned in
+class and the true complexity of a real musical instrument. I pulled
+out my notes from class, fired up my laptop, and decided to give it
+a try!
+</p>
+</div>
+
+<div id="outline-container-org741323d" class="outline-3">
+<h3 id="org741323d"><span class="section-number-3">1.1</span> Getting set up with Octave</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+For this project, I used <i><a href="https://www.gnu.org/software/octave/">GNU Octave</a></i>, an open source programming
+language and environment for mathematical modeling, based off of
+<a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>.
+</p>
+
+<p>
+Octave has an <code>audioplayer</code> function, which when provided with a
+vector of floating point numbers between \(-1\) and \(1\), treats them as
+a waveform and plays them back.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-octave" id="org5995aad">audioplayer (vector<span style="color: #006FE0;">,</span> bit_rate<span style="color: #006FE0;">,</span> bit_depth)
+</pre>
+</div>
+
+<p>
+A <i>sample</i> is a discrete measurement of <i>sound pressure level</i> (SPL)
+averaged over a predefined duration of time. The <code>bit_rate</code> variable
+represents the number of samples to play per second. I chose to set
+this to be \(44100\), which is a standard bit rate used for
+CDs.<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup> The <code>bit_depth</code>
+variable has to do with the precision of the floating point numbers
+themselves.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbb936e9" class="outline-3">
+<h3 id="orgbb936e9"><span class="section-number-3">1.2</span> Pure tones and equal-amplitude harmonics</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+   My approach to simulating strings was to use <i>additive
+synthesis</i><sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>. This
+means that I attempted to simulate a vibrating string by building it
+up as a sum of partials. To start, I generated a waveform for the the
+fundamental frequency using octave's <code>sinewave</code> function <i>(See Listing
+<a href="#orga3802c7">1</a>)</i>. Given a vector size and a period, it returns a set of
+values between -1 and 1 in the form of a sine wave with the specified
+period.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 1: </span>Octave provides a convenient sinewave function, which asks for a vector size and a period measured in number of samples</label><pre class="src src-octave" id="orga3802c7">f1 <span style="color: #006FE0;">=</span> sinewave(bitRate <span style="color: #006FE0;">*</span> 4<span style="color: #006FE0;">,</span> bitRate <span style="color: #006FE0;">/</span> 440)
+</pre>
+</div>
+
+<p>
+I defined my own convenience function <code>puretone</code> which would take the
+bit rate, duration, and frequency and return the corresponding sine
+wave <i>(See Listing <a href="#org20dd99f">2</a>)</i>.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 2: </span>I defined my own <code>puretone</code> function which allows me to think in terms of frequency instead of period</label><pre class="src src-octave" id="org20dd99f"><span style="color: #0000FF;">function</span> <span style="color: #006699;">puretone</span>(seconds<span style="color: #006FE0;">,</span> frequency)
+  sinewave(bitRate <span style="color: #006FE0;">*</span> seconds<span style="color: #006FE0;">,</span>
+           bitRate<span style="color: #006FE0;">/</span>frequency)<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+</pre>
+</div>
+
+<p>
+Now I had the ability to make pure tones, but I wanted <i>harmonics</i>. A
+harmonic is a partial whose frequency is an <i>integer multiple of the
+fundamental</i>.<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup> We usually
+only care about the first six harmonics or so, because after that
+they start to get to very high frequencies near the edge of human
+hearing. I defined a <code>createharmonics</code> function that returns a sum of
+six harmonics <i>(See Listing <a href="#org0e04cd6">3</a>)</i>. Notice that the
+returned vector must be divided by six to make sure the whole range
+of values is between \(-1\) and \(1\).
+</p>
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 3: </span><code>createharmonics</code> generates the first six harmonics and adds them together</label><pre class="src src-octave" id="org0e04cd6">createharmonics(duration<span style="color: #006FE0;">,</span> fundamental)<span style="color: #006FE0;">:</span>
+  f1 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental)<span style="color: #006FE0;">;</span>
+  f2 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
+  f3 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 3)<span style="color: #006FE0;">;</span>
+  f4 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 4)<span style="color: #006FE0;">;</span>
+  f5 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 5)<span style="color: #006FE0;">;</span>
+  f6 <span style="color: #006FE0;">=</span> puretone(duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> 6)<span style="color: #006FE0;">;</span>
+
+  <span style="color: #0000FF;">return</span> (f1 <span style="color: #006FE0;">+</span> f2 <span style="color: #006FE0;">+</span> f3 <span style="color: #006FE0;">+</span> f4 <span style="color: #006FE0;">+</span> f5 <span style="color: #006FE0;">+</span> f6) <span style="color: #006FE0;">/</span> 6<span style="color: #006FE0;">;</span>
+</pre>
+</div>
+
+<p>
+I was so excited about the fact that my equations were producing the
+pitches that I wanted that I created a sample song using this function.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 4: </span>A sample song using the functions created so far - it sort of sounds like music!</label><pre class="src src-octave" id="org874ed42">A3 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 220)<span style="color: #006FE0;">;</span>
+A4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 440)<span style="color: #006FE0;">;</span>
+A5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 880)<span style="color: #006FE0;">;</span>
+B4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 495)<span style="color: #006FE0;">;</span>
+C5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 523.26)<span style="color: #006FE0;">;</span>
+D4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 293.33)<span style="color: #006FE0;">;</span>
+D5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 293.33 <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
+E4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 330)<span style="color: #006FE0;">;</span>
+E5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 660)<span style="color: #006FE0;">;</span>
+F5 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 348.84 <span style="color: #006FE0;">*</span> 2)<span style="color: #006FE0;">;</span>
+GS4 <span style="color: #006FE0;">=</span> createharmonics(0.5<span style="color: #006FE0;">,</span> 415.305)<span style="color: #006FE0;">;</span>
+
+aMinor <span style="color: #006FE0;">=</span> [A4<span style="color: #006FE0;">,</span> (C5 <span style="color: #006FE0;">+</span> E5) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span>
+          E4<span style="color: #006FE0;">,</span> (C5 <span style="color: #006FE0;">+</span> E5) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
+eMajor <span style="color: #006FE0;">=</span> [B4<span style="color: #006FE0;">,</span> (E5 <span style="color: #006FE0;">+</span> GS4) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span>
+          E4<span style="color: #006FE0;">,</span> (D5 <span style="color: #006FE0;">+</span> GS4) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
+dMinor <span style="color: #006FE0;">=</span> [A4<span style="color: #006FE0;">,</span> (D5 <span style="color: #006FE0;">+</span> F5) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span>
+          D4<span style="color: #006FE0;">,</span> (D5 <span style="color: #006FE0;">+</span> F5) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
+
+song <span style="color: #006FE0;">=</span> [aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span> aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span>
+        dMinor<span style="color: #006FE0;">,</span> aMinor<span style="color: #006FE0;">,</span> eMajor<span style="color: #006FE0;">,</span>
+        A4<span style="color: #006FE0;">,</span> E4<span style="color: #006FE0;">,</span> A3]<span style="color: #006FE0;">;</span>
+playSound(song<span style="color: #006FE0;">,</span> bitRate)
+</pre>
+</div>
+
+<p>
+You can hear the result here:
+</p>
+
+<p>
+<audio controls src="audio/string-simulation-0.wav"></audio>
+</p>
+
+<p>
+After listening to the result, I could recognize this as music, but
+it sounded nothing like a guitar. What's missing?
+</p>
+
+<p>
+First off, in a string, the relative amplitudes of the harmonics are
+not all the same.<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>
+Secondly, for a plucked instrument, the amplitudes of all of the
+harmonics change over time, eventually diminishing to
+silence. Lastly, the soundboard of the instrument will act as a
+filter affecting the output of the instrument.<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup> Let's tackle these issues one by one.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0fba2db" class="outline-3">
+<h3 id="org0fba2db"><span class="section-number-3">1.3</span> Relative amplitudes of harmonics</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+First off, the fundamental frequency of a plucked string will
+always be the most prevalent harmonic.<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup> The
+relative amplitudes of harmonics of a plucked string depend on the
+pluck location.
+</p>
+
+<p>
+We model a pluck as a "kink" in the string.<sup><a id="fnr.9" class="footref" href="#fn.9">9</a></sup> The
+prevalence of each harmonic depends on whether the initial kink
+location is at one of that harmonic's nodes or antinodes. Put
+another way, it depends on the <i>similarity</i> of the string shape at
+the moment of the pluck to the shape of the resonant mode.
+</p>
+
+<p>
+Similarity, in linear algebra, is defined as the dot product
+between two vectors. The more "aligned" those two vectors are, the
+higher their dot product.
+</p>
+
+<p>
+If we take the <i>fourier transform</i> of the string shape, we should
+get an idea for which frequencies are represented. Let's first
+define the shape of our string.
+</p>
+
+<p>
+Let's define a kink in terms of a piecewise function.
+</p>
+
+<p>
+Let \(k\) be the kink location whose value is between \(0\) and \(1\),
+and \(L\) be the length of the string.
+</p>
+
+<p>
+\[y_1={\frac x kL}, x \leq kL\]
+</p>
+
+<p>
+\[y_2 = {\frac {1 - {\frac x L}} {1 - k}}, x > kL\]
+</p>
+
+<p>
+The following pairs of graphs show the kink function on the left,
+and its FFT on the right. The only axis worth looking at is the x
+axis of the FFTs - each number corresponds to the harmonic index.
+</p>
+
+<p>
+These images were generated using <i>octave-online</i><sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup> with the following call:
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 5: </span>This line of code generated the graphs below</label><pre class="src src-octave" id="org994d9ca">v <span style="color: #006FE0;">=</span> kink(1000<span style="color: #006FE0;">,</span> 0.1)
+bar(abs(fft(v<span style="color: #006FE0;">-</span>mean(v)))(1<span style="color: #006FE0;">:</span>10)(2<span style="color: #006FE0;">:</span>end))
+</pre>
+</div>
+
+
+<div id="org8da4f82" class="figure">
+<p><img src="./images/kinkfft50.png" alt="kinkfft50.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span><code>kink(0.5)</code> and its FFT</p>
+</div>
+
+<p>
+Notice that the fundamental is always the most prominent, but the
+behavior of the rest of the harmonics varies. Observe <i>Figure
+<a href="#org8da4f82">1</a></i> - the pluck location is in the center of the string,
+which emphasizes odd harmonics, and has no even harmonics because
+all even harmonics have a node in the center.
+</p>
+
+<div id="orge89f285" class="figure">
+<p><img src="./images/kinkfft25.png" alt="kinkfft25.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span><code>kink(0.25)</code> and its FFT</p>
+</div>
+
+<p>
+Moving the pluck location to the quarter point of the string (<i>Figure <a href="#orge89f285">2</a></i>), we
+see more harmonics pop up, but the fourth and eighth (and all multiples
+of four) are still silent, because the kink location is at the node
+of the fourth harmonic.
+</p>
+
+<div id="orgeb66e4c" class="figure">
+<p><img src="./images/kinkfft10.png" alt="kinkfft10.png" />
+</p>
+<p><span class="figure-number">Figure 3: </span><code>kink(0.1)</code> and its FFT</p>
+</div>
+
+<p>
+In <i>Figure <a href="#orgeb66e4c">3</a></i>, all nine of the first harmonics are
+present. The tenth is not pictured, but it would be zero, because
+it has a node at the pluck location.
+</p>
+
+<p>
+This is the result of scaling the harmonics using the weights from the FFT:
+</p>
+
+<p>
+<audio controls src="audio/string-simulation-1.wav"></audio>
+</p>
+
+<p>
+After listening to this result, I found that it sounded a little
+better - the fundamental was more prominent than before. It still
+did not sound like a physical string though.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb918584" class="outline-3">
+<h3 id="orgb918584"><span class="section-number-3">1.4</span> Damping</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+When one plucks a string, it does not sustain the sound for very
+long. Immediately, it starts to lose energy to friction at the
+imperfect boundaries of the string, as well as friction with the
+fluid (air) in which it is
+vibrating.<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup> I hoped that
+adding damping will at least make it sound plausible that the
+strings are being plucked.
+</p>
+
+<p>
+Let's focus on the kinetic energy lost due to the motion of the
+bridge, since that is more significant than the energy lost to the
+air.<sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup> The way we take into
+account the bridge motion is by modeling it as an impedance
+mismatch, similar to how we would model a tube open on one
+end. This results in an exponential decay.
+</p>
+
+<div class="org-src-container">
+<label class="org-src-name"><span class="listing-number">Listing 6: </span>I found that a decay halflife of about 0.3 seconds sounded good to me</label><pre class="src src-octave"><span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">damping</span>(x<span style="color: #006FE0;">,</span> dampingTime<span style="color: #006FE0;">,</span> bitRate)
+  y <span style="color: #006FE0;">=</span> 0.5 <span style="color: #006FE0;">^</span> (x <span style="color: #006FE0;">/</span> (dampingTime <span style="color: #006FE0;">*</span> bitRate))<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+</pre>
+</div>
+
+<p>
+In this model, all of the frequencies decay at the same rate, which
+isn't necessarily accurate, although looking at a the spectrum of
+plucking my guitar string, I think this is a reasonable
+approximation.<sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup>
+</p>
+
+<p>
+<audio controls src="audio/string-simulation-2.wav"></audio>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org60491ab" class="outline-3">
+<h3 id="org60491ab"><span class="section-number-3">1.5</span> Soundboard</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Okay, we've now made a generic plucked string instrument, but what
+makes a guitar a guitar? One of the aspects that has the biggest
+contribution to the timbre of a stringed instrument is its
+<i>soundboard</i>. A soundboard is a resonance chamber that takes the
+input vibration from a string and transforms its frequency
+spectrum, behaving as an acoustic filter. In a guitar, the string
+transfers its vibration through the bridge and into the top of the
+guitar. The top of the guitar is an <i>idiophone</i><sup><a id="fnr.14" class="footref" href="#fn.14">14</a></sup> that creates a pressure wave inside the body as it
+vibrates. It is the modes of this piece of wood plus the sound
+propagation inside of the body that together create this acoustic
+filter.<sup><a id="fnr.15" class="footref" href="#fn.15">15</a></sup>
+</p>
+
+<p>
+To implement a filter in octave, I intended to use the <code>signal</code>
+library. While I did eventually manage to install it, I did not
+have enough time to implement this part before the project
+deadline. However, I read some papers about soundboard
+design. Luthiers install <i>braces</i>, which are strips of wood glued
+to the soundboard to create areas of greater stiffness, which
+encourages modes that have nodes in those locations.<sup><a id="fnr.16" class="footref" href="#fn.16">16</a></sup>
+That same paper included Figure <a href="#org0d868b5">4</a>, which shows the
+frequency responses of "good" versus "bad" quality guitars. They
+both show peaks around 110 and 220 hertz, though the good guitars
+have higher amplitude peaks.
+</p>
+
+
+<div id="org0d868b5" class="figure">
+<p><img src="./images/soundboard-frf.png" alt="soundboard-frf.png" />
+</p>
+<p><span class="figure-number">Figure 4: </span>This diagram was taken from "Frequency Response Function Of A Guitar - A Significant Peak" By Samo Šali</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd070ee4" class="outline-3">
+<h3 id="orgd070ee4"><span class="section-number-3">1.6</span> Subtractive synthesis</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+When I got this far in the project, for the first time I actually
+searched for "synthesizing guitar sound" on the internet.<sup><a id="fnr.17" class="footref" href="#fn.17">17</a></sup> I found that the most commonly used
+algorithm for generating guitar sounds does <i>not</i> use additive
+synthesis! Instead, it uses subtractive synthesis, which means it
+starts with all possible frequencies (i.e. white noise), and
+filters them down to the frequencies of a guitar.
+</p>
+</div>
+
+<div id="outline-container-org4f18787" class="outline-4">
+<h4 id="org4f18787"><span class="section-number-4">1.6.1</span> The Karplus-Strong Algorithm</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+The Karplus-Strong algorithm<sup><a id="fnr.18" class="footref" href="#fn.18">18</a></sup> is a way of
+cheaply synthesizing guitar-like sounds using one or two sine wave
+oscillators. It can be summarized by four steps (see Figure
+<a href="#org0d01a72">5</a>)
+</p>
+
+<ol class="org-ol">
+<li>Generate a short burst of white noise</li>
+<li>Apply delay</li>
+<li>Pass it through a filter</li>
+<li>Loop</li>
+</ol>
+
+
+<div id="org0d01a72" class="figure">
+<p><img src="./images/karplusstrong.png" alt="karplusstrong.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>Karplus Strong</p>
+</div>
+
+<p>
+The most important part of this algorithm is the interaction of the
+delay in step 2 with the filter in step 3. The delay helps select
+the frequency, while the filter creates the timbre. The loop step
+allows the sound to change over time.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org37804e5" class="outline-2">
+<h2 id="org37804e5"><span class="section-number-2">2</span> Woodwinds: Edgetones</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+This section will give a shallow overview of wind instruments, with
+a deep dive in the middle on <i>edgetones</i>.
+</p>
+
+<p>
+A <i>wind instrument</i> is similar to a stringed instrument in that it
+has a <i>sound source</i> and a <i>sound modifier</i>. However, instead of
+having a vibrating soundboard, wind instruments typically have a
+tube that contains a one-dimensional air column through which sound
+propagates as a <i>longitudinal wave</i>.<sup><a id="fnr.19" class="footref" href="#fn.19">19</a></sup>
+</p>
+</div>
+
+<div id="outline-container-orgbfd0ef2" class="outline-3">
+<h3 id="orgbfd0ef2"><span class="section-number-3">2.1</span> Sound source</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The sound source is responsible for generating a stream of
+vibrating air. We can categorize this generation into three
+phenomena: <i>free edge oscillation</i>, <i>reeds</i>, and <i>vibrating
+lips</i>. Here, we will only focus on <i>free edge oscillation</i>, since
+this is most relevant to the concept of edgetones.
+</p>
+</div>
+
+<div id="outline-container-orge1e179e" class="outline-4">
+<h4 id="orge1e179e"><span class="section-number-4">2.1.1</span> Free edge oscillation</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+In <i>free edge oscillation</i>, a steady flow of air needs to hit a
+sharp object head-on (see Figure <a href="#org610a829">6</a>).
+</p>
+
+
+<div id="org610a829" class="figure">
+<p><img src="./images/airwayedge.png" alt="airwayedge.png" />
+</p>
+<p><span class="figure-number">Figure 6: </span>A narrow stream of air passes through an <b>airway</b> and hits a sharp <b>edge</b> head-on</p>
+</div>
+
+<p>
+When we talk about a "steady flow of air," we are talking about
+<i>laminar flow</i>. Laminar flow is when a fluid moves in smooth
+layers (laminae) and each layer is moving in the same direction as
+the whole fluid, meaning there are no cross-currents or
+eddies.<sup><a id="fnr.20" class="footref" href="#fn.20">20</a></sup> This flow
+is laminar inside of the airway, but at some distance from the
+airway it becomes <i>turbulent flow</i>. Turbulent flow is when the
+motion of a fluid is chaotic and changing. The laminar flow gets a
+certain distance into the unconstrained air and loses its
+structure, and becomes turbulent.
+</p>
+
+<p>
+If we place a sharp edge at approximately the distance from the
+airway at which the flow naturally becomes turbulent, we force the
+flow to pick one side of the edge. The eddies will increase in
+intensity on that side and cause the flow to flip to the other
+side (see Figure <a href="#org2b662c2">7</a>). This phenomenon will repeat in a
+periodic fashion.
+</p>
+
+
+<div id="org2b662c2" class="figure">
+<p><img src="./images/edgetone.png" alt="edgetone.png" />
+</p>
+<p><span class="figure-number">Figure 7: </span>Edgetone illustration from textbook</p>
+</div>
+
+<p>
+We can describe the frequency of this periodic fluctuation as a
+ratio between the the velocity of the air flow, \(v\), and the
+distance between the airway and the edge, \(d\). 
+</p>
+
+<p>
+\[f \propto {\frac v d}\]
+</p>
+
+<p>
+This equation, however, is not 100% correct - the frequency is not
+continuous. As velocity increases, at a certain point, frequency
+will have a jump discontinuity (See Figure <a href="#org361132d">8</a>). I
+do not fully understand why this happens, but it is commonly used
+by musicians to acheive higher frequencies.<sup><a id="fnr.21" class="footref" href="#fn.21">21</a></sup> Notice the slope of the lines - this
+is not very convenient for musicians, since it is hard to control
+your air velocity so precisely. We will see a solution to this in
+the <b>edgetones</b> section.
+</p>
+
+
+<div id="org361132d" class="figure">
+<p><img src="./images/stepwisepitch.png" alt="stepwisepitch.png" />
+</p>
+<p><span class="figure-number">Figure 8: </span>Frequency increases stepwise.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd2174a3" class="outline-3">
+<h3 id="orgd2174a3"><span class="section-number-3">2.2</span> Sound modifier</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Many wind instruments have a long tube called the <i>bore</i> that
+houses the air column. The air column vibrates at resonant modes
+that depend on the length<sup><a id="fnr.22" class="footref" href="#fn.22">22</a></sup>, \(L\), of the bore.
+\(c\) is the speed of sound in air.
+</p>
+
+<p>
+\[f_n = {\frac {nc} {2L}}\]
+</p>
+</div>
+
+<div id="outline-container-org9fc5b9c" class="outline-4">
+<h4 id="org9fc5b9c"><span class="section-number-4">2.2.1</span> Edgetones</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+In a <i>woodwind</i> instrument, whose sound source is an airway
+followed by an edge, the gap between the airway and edge is one of
+the two open ends of the tube. We learned that tubes with open ends
+allow resonant modes with antinodes at the ends. This means that
+after the initial "transient" part of the sound, the vibration of
+the air column will <i>induce</i> a vibration at the edge. This is
+called an <b>edgetone</b>.
+</p>
+
+<p>
+An edgetone is a form of coupling, like sympathetic vibrations in
+strings. It forms a feedback loop, and most interestingly, it
+causes the source to vibrate at the resonant mode of the
+bore. This is significant, because if you remember from Figure
+<a href="#org361132d">8</a> and the corresponding equation, the frequency of
+the source depended on air velocity and distance, which are <i>not</i>
+properties of the bore! The vibration of the air column has a high
+enough amplitude to overcome the eddies of the turbulent flow at
+the edge and force the flow to oscillate at a frequency dictated
+by the properties of the bore.
+</p>
+
+<p>
+Does this mean that the air velocity and edge distance have no
+effect on the output frequency of the instrument? Not quite. While
+it is true that for small changes in velocity, the frequency
+remains constant (dictated by the resonant mode of the bore), the
+jump discontinuities will have an effect on the output
+frequency. The steps in frequency at the edge will help <i>select</i>
+which resonant mode of the bore will have the highest
+amplitude. Examine Figure <a href="#orgfa60e4c">9</a>. There are now
+<i>ranges</i> of values of \({\frac v d}\) that result in the same
+frequency.<sup><a id="fnr.23" class="footref" href="#fn.23">23</a></sup>
+</p>
+
+
+<div id="orgfa60e4c" class="figure">
+<p><img src="./images/stepwisepitchedgetone.png" alt="stepwisepitchedgetone.png" />
+</p>
+<p><span class="figure-number">Figure 9: </span>The edgetones flatten pitch change locally, but still react to the jump discontinuities</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org18aa0d3" class="outline-3">
+<h3 id="org18aa0d3"><span class="section-number-3">2.3</span> Modifying the modifier</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Unlike an acoustic guitar, which typically leaves the soundboard
+the same and changes the sound source, woodwinds usually come with
+the ability to dynamically modify the acoustic properties of the
+bore. The way they do this is with <i>holes</i>. Holes in the bore force
+nodes at those locations because they fix the pressure at the hole
+location to be approximately equal to the atmospheric pressure
+outside of the bore.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgae6cce0" class="outline-2">
+<h2 id="orgae6cce0"><span class="section-number-2">3</span> Bibliography</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li><a href="http://mattdailis.github.io/simulating-strings/resources/physics_of_vibrating_strings.pdf">The physics of vibrating strings - Giordano, Gould, Tobochnik</a></li>
+<li><a href="http://mattdailis.github.io/simulating-strings/resources/karplus-strong.pdf">Digital Synthesis of Plucked-String and Drum Timbres, Karplus and Strong</a></li>
+<li><a href="http://mattdailis.github.io/simulating-strings/resources/response-variation.pdf">Response Variation in a Group of Acoustic Guitars - Mark French</a></li>
+<li><a href="http://mattdailis.github.io/simulating-strings/resources/Vitsten.pdf">Simple model for low-frequency guitar function</a></li>
+<li><a href="http://mattdailis.github.io/simulating-strings/resources/significant_peak.pdf">Frequency Response Function Of A Guitar: A Significant Peak - Samo Sali</a></li>
+<li><a href="http://mattdailis.github.io/simulating-strings/resources/soundboard-review.pdf">Mathematical Modelling and Acoustical Analysis of Classical Guitars and Their Soundboards</a></li>
+<li><a href="http://mattdailis.github.io/simulating-strings/resources/loadedstring/StringWave.html">Loaded String simulation source code</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga882c5f" class="outline-2">
+<h2 id="orga882c5f"><span class="section-number-2">4</span> Appendix</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org947f5a1" class="outline-3">
+<h3 id="org947f5a1"><span class="section-number-3">4.1</span> Program listing</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+The following is the source code for the octave program I wrote for
+the simulating strings section.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-octave"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">pkg load signal</span>
+
+<span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">damping</span>(x<span style="color: #006FE0;">,</span> dampingTime<span style="color: #006FE0;">,</span> bitRate)
+  y <span style="color: #006FE0;">=</span> 0.5 <span style="color: #006FE0;">^</span> (x <span style="color: #006FE0;">/</span> (dampingTime <span style="color: #006FE0;">*</span> bitRate))<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">createDamping</span>(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> dampingTime)
+  y <span style="color: #006FE0;">=</span> arrayfun(@(x) damping(x<span style="color: #006FE0;">,</span> bitRate<span style="color: #006FE0;">,</span> dampingTime)<span style="color: #006FE0;">,</span> [1 <span style="color: #006FE0;">:</span> bitRate <span style="color: #006FE0;">*</span> duration])<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">playSound</span>(vector<span style="color: #006FE0;">,</span> bitRate)
+  player <span style="color: #006FE0;">=</span> audioplayer (vector<span style="color: #006FE0;">,</span> bitRate<span style="color: #006FE0;">,</span> 16)<span style="color: #006FE0;">;</span>
+  play (player)<span style="color: #006FE0;">;</span>
+  <span style="color: #0000FF;">while</span>(isplaying(player))
+  <span style="color: #0000FF;">endwhile</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">puretone</span>(bitRate<span style="color: #006FE0;">,</span> seconds<span style="color: #006FE0;">,</span> frequency<span style="color: #006FE0;">,</span> phaseShift<span style="color: #006FE0;">=</span>0)
+  y <span style="color: #006FE0;">=</span> sinewave(bitRate <span style="color: #006FE0;">*</span> seconds<span style="color: #006FE0;">,</span> bitRate<span style="color: #006FE0;">/</span>frequency<span style="color: #006FE0;">,</span> phaseShift)<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">createtone</span>(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> frequency<span style="color: #006FE0;">,</span> dampingFactors)
+  y <span style="color: #006FE0;">=</span> puretone(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> frequency) <span style="color: #006FE0;">.*</span> dampingFactors<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">createharmonics</span>(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> fundamental<span style="color: #006FE0;">,</span> weights)
+
+  dampingFactors <span style="color: #006FE0;">=</span> createDamping(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> 0.3)<span style="color: #006FE0;">;</span>
+
+  M <span style="color: #006FE0;">=</span> []<span style="color: #006FE0;">;</span>
+
+  <span style="color: #8D8D84; font-style: italic;">## Build up matrix where each row is another harmonic</span>
+  <span style="color: #0000FF;">for</span> index <span style="color: #006FE0;">=</span> 1 <span style="color: #006FE0;">:</span> length(weights)
+    M <span style="color: #006FE0;">=</span> [M<span style="color: #006FE0;">;</span> weights(index) <span style="color: #006FE0;">*</span> createtone(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> fundamental <span style="color: #006FE0;">*</span> index<span style="color: #006FE0;">,</span> dampingFactors)]<span style="color: #006FE0;">;</span>
+  <span style="color: #0000FF;">endfor</span>
+
+  <span style="color: #8D8D84; font-style: italic;">## Collapse them at the end</span>
+  S <span style="color: #006FE0;">=</span> sum(M)<span style="color: #006FE0;">;</span>
+
+  y <span style="color: #006FE0;">=</span> S <span style="color: #006FE0;">/</span> max(S)<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> v <span style="color: #006FE0;">=</span> <span style="color: #006699;">ffttest</span>(bitRate<span style="color: #006FE0;">,</span> X<span style="color: #006FE0;">,</span> checkFreq)
+  L <span style="color: #006FE0;">=</span> length(X)<span style="color: #006FE0;">;</span>
+  Y <span style="color: #006FE0;">=</span> fft(X)<span style="color: #006FE0;">;</span>
+  P2 <span style="color: #006FE0;">=</span> abs(Y <span style="color: #006FE0;">/</span> L)<span style="color: #006FE0;">;</span>
+  P1 <span style="color: #006FE0;">=</span> P2(1<span style="color: #006FE0;">:</span>(L <span style="color: #006FE0;">/</span> 2) <span style="color: #006FE0;">+</span> 1)<span style="color: #006FE0;">;</span>
+  checkIndex <span style="color: #006FE0;">=</span> checkFreq <span style="color: #006FE0;">*</span> L <span style="color: #006FE0;">/</span> bitRate<span style="color: #006FE0;">;</span>
+  [checkVal<span style="color: #006FE0;">,</span> checkIndex2] <span style="color: #006FE0;">=</span> max(P1(checkIndex <span style="color: #006FE0;">-</span> 5 <span style="color: #006FE0;">:</span> checkIndex <span style="color: #006FE0;">+</span> 5))<span style="color: #006FE0;">;</span>
+  v <span style="color: #006FE0;">=</span> checkVal<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">location must be between 0.0 and 1.0 </span>
+<span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">kink</span>(L<span style="color: #006FE0;">,</span> location)
+  k <span style="color: #006FE0;">=</span> location<span style="color: #006FE0;">;</span>
+  x <span style="color: #006FE0;">=</span> (0 <span style="color: #006FE0;">:</span> L)<span style="color: #006FE0;">;</span>
+  y1 <span style="color: #006FE0;">=</span> x <span style="color: #006FE0;">/</span> (k <span style="color: #006FE0;">*</span> L)<span style="color: #006FE0;">;</span>
+  y2 <span style="color: #006FE0;">=</span> (1 <span style="color: #006FE0;">-</span> (x <span style="color: #006FE0;">/</span> L)) <span style="color: #006FE0;">/</span> (1 <span style="color: #006FE0;">-</span> k)<span style="color: #006FE0;">;</span>
+  y <span style="color: #006FE0;">=</span> [y1(1<span style="color: #006FE0;">:</span>k<span style="color: #006FE0;">*</span>L)<span style="color: #006FE0;">,</span> y2(k<span style="color: #006FE0;">*</span>L<span style="color: #006FE0;">+</span>1<span style="color: #006FE0;">:</span>L)]<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #8D8D84;">## </span><span style="color: #8D8D84; font-style: italic;">Returns the first 10 harmonic weights for the given pluck location</span>
+<span style="color: #0000FF;">function</span> y <span style="color: #006FE0;">=</span> <span style="color: #006699;">getHarmonicWeights</span>(pluckLocation)
+  v <span style="color: #006FE0;">=</span> kink(1000<span style="color: #006FE0;">,</span> pluckLocation)<span style="color: #006FE0;">;</span>
+  X <span style="color: #006FE0;">=</span> abs(fft(v <span style="color: #006FE0;">-</span> mean(v)))<span style="color: #006FE0;">;</span>
+  y <span style="color: #006FE0;">=</span> (X <span style="color: #006FE0;">/</span> max(X))(2<span style="color: #006FE0;">:</span>10)<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">filtertest</span>()
+  sf <span style="color: #006FE0;">=</span> 800<span style="color: #006FE0;">;</span> sf2 <span style="color: #006FE0;">=</span> sf<span style="color: #006FE0;">/</span>2<span style="color: #006FE0;">;</span>
+  data<span style="color: #006FE0;">=</span>[[1<span style="color: #006FE0;">;</span>zeros(sf<span style="color: #006FE0;">-</span>1<span style="color: #006FE0;">,</span>1)]<span style="color: #006FE0;">,</span>
+        sinetone(25<span style="color: #006FE0;">,</span>sf<span style="color: #006FE0;">,</span>1<span style="color: #006FE0;">,</span>1)<span style="color: #006FE0;">,</span>
+        sinetone(50<span style="color: #006FE0;">,</span>sf<span style="color: #006FE0;">,</span>1<span style="color: #006FE0;">,</span>1)<span style="color: #006FE0;">,</span>
+        sinetone(100<span style="color: #006FE0;">,</span>sf<span style="color: #006FE0;">,</span>1<span style="color: #006FE0;">,</span>1)]<span style="color: #006FE0;">;</span>
+  [b<span style="color: #006FE0;">,</span>a]<span style="color: #006FE0;">=</span>butter ( 1<span style="color: #006FE0;">,</span> 50 <span style="color: #006FE0;">/</span> sf2 )<span style="color: #006FE0;">;</span>
+  filtered <span style="color: #006FE0;">=</span> filter(b<span style="color: #006FE0;">,</span>a<span style="color: #006FE0;">,</span>data)<span style="color: #006FE0;">;</span>
+<span style="color: #0000FF;">endfunction</span>
+
+<span style="color: #0000FF;">function</span> <span style="color: #006699;">main</span>()
+  bitRate <span style="color: #006FE0;">=</span> 44100<span style="color: #006FE0;">;</span>
+
+  weights <span style="color: #006FE0;">=</span> getHarmonicWeights(0.15)<span style="color: #006FE0;">;</span>
+  duration <span style="color: #006FE0;">=</span> 2.0<span style="color: #006FE0;">;</span>
+
+  A3 <span style="color: #006FE0;">=</span> createharmonics(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> 220<span style="color: #006FE0;">,</span> weights)<span style="color: #006FE0;">;</span>
+
+  C3 <span style="color: #006FE0;">=</span> createharmonics(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> 523.26 <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span> weights)<span style="color: #006FE0;">;</span>
+  E3 <span style="color: #006FE0;">=</span> createharmonics(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> 330<span style="color: #006FE0;">,</span> weights)<span style="color: #006FE0;">;</span>
+  E2 <span style="color: #006FE0;">=</span> createharmonics(bitRate<span style="color: #006FE0;">,</span> duration<span style="color: #006FE0;">,</span> 330 <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span> weights)<span style="color: #006FE0;">;</span>
+  aMinor <span style="color: #006FE0;">=</span> [A3<span style="color: #006FE0;">,</span> (C3 <span style="color: #006FE0;">+</span> E3) <span style="color: #006FE0;">/</span> 2<span style="color: #006FE0;">,</span> E2<span style="color: #006FE0;">,</span> (C3 <span style="color: #006FE0;">+</span> E3) <span style="color: #006FE0;">/</span> 2]<span style="color: #006FE0;">;</span>
+
+  song <span style="color: #006FE0;">=</span> [aMinor]<span style="color: #006FE0;">;</span>
+  playSound(song<span style="color: #006FE0;">,</span> bitRate)
+
+  <span style="color: #8D8D84; font-style: italic;">## Uncomment the next line to save the audio to a file</span>
+  <span style="color: #8D8D84; font-style: italic;">## audiowrite("with_damping.wav", song, bitRate);</span>
+<span style="color: #0000FF;">endfunction</span>
+
+main()
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><a href="https://mattdailis.github.io">https://mattdailis.github.io</a></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><a href="https://toomuchidle.com/">https://toomuchidle.com/</a></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara">44100 is a common sampling frequency because of the Sony CD
+standard: <a href="https://en.wikipedia.org/wiki/44,100_Hz">https://en.wikipedia.org/wiki/44,100_Hz</a></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><a href="https://en.wikipedia.org/wiki/Additive_synthesis">https://en.wikipedia.org/wiki/Additive_synthesis</a></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><a href="https://en.wikipedia.org/wiki/Harmonic">https://en.wikipedia.org/wiki/Harmonic</a></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara">I found this out by plucking a string on my
+guitar and looking at the spectrum in the <a href="https://play.google.com/store/apps/details?id=com.ntrack.tuner">n-Track Tuner</a> mobile app</div></div>
+
+<div class="footdef"><sup><a id="fn.7" class="footnum" href="#fnr.7">7</a></sup> <div class="footpara">Mathematical
+Modelling and Acoustical Analysis of Classical Guitars and Their
+Soundboards</div></div>
+
+<div class="footdef"><sup><a id="fn.8" class="footnum" href="#fnr.8">8</a></sup> <div class="footpara">Intuitively, this is
+because a "kink" in a string has nodes at the ends no nodes in
+between, which is similar to the shape of the fundamental</div></div>
+
+<div class="footdef"><sup><a id="fn.9" class="footnum" href="#fnr.9">9</a></sup> <div class="footpara">Slides day 23</div></div>
+
+<div class="footdef"><sup><a id="fn.10" class="footnum" href="#fnr.10">10</a></sup> <div class="footpara">Every time I
+tried to use octave's <code>plot</code> function on my computer, I got a
+segmentation fault&#x2026;</div></div>
+
+<div class="footdef"><sup><a id="fn.11" class="footnum" href="#fnr.11">11</a></sup> <div class="footpara">The physics of vibrating strings - Giordano, Gould, Tobochnik</div></div>
+
+<div class="footdef"><sup><a id="fn.12" class="footnum" href="#fnr.12">12</a></sup> <div class="footpara">The physics of vibrating strings - Giordano, Gould, Tobochnik</div></div>
+
+<div class="footdef"><sup><a id="fn.13" class="footnum" href="#fnr.13">13</a></sup> <div class="footpara">obtained using the <a href="https://play.google.com/store/apps/details?id=com.ntrack.tuner">n-Track Tuner</a> mobile app</div></div>
+
+<div class="footdef"><sup><a id="fn.14" class="footnum" href="#fnr.14">14</a></sup> <div class="footpara">at first I
+thought it was a membranophone, but I suppose there is no tension
+involved</div></div>
+
+<div class="footdef"><sup><a id="fn.15" class="footnum" href="#fnr.15">15</a></sup> <div class="footpara"><a href="https://newt.phys.unsw.edu.au/music/guitar/guitarchladni.html">https://newt.phys.unsw.edu.au/music/guitar/guitarchladni.html</a></div></div>
+
+<div class="footdef"><sup><a id="fn.16" class="footnum" href="#fnr.16">16</a></sup> <div class="footpara">"Frequency
+Response Function Of A Guitar - A Significant Peak" By Samo Šali</div></div>
+
+<div class="footdef"><sup><a id="fn.17" class="footnum" href="#fnr.17">17</a></sup> <div class="footpara">I
+should have started with this! Although the process of discovery
+was also very instructive</div></div>
+
+<div class="footdef"><sup><a id="fn.18" class="footnum" href="#fnr.18">18</a></sup> <div class="footpara">karplus-strong.pdf</div></div>
+
+<div class="footdef"><sup><a id="fn.19" class="footnum" href="#fnr.19">19</a></sup> <div class="footpara">A <i>longitudinal wave</i>
+oscillates in the same axis as it propagates.</div></div>
+
+<div class="footdef"><sup><a id="fn.20" class="footnum" href="#fnr.20">20</a></sup> <div class="footpara"><a href="https://en.wikipedia.org/wiki/Laminar_flow">https://en.wikipedia.org/wiki/Laminar_flow</a></div></div>
+
+<div class="footdef"><sup><a id="fn.21" class="footnum" href="#fnr.21">21</a></sup> <div class="footpara">musicians call
+this technique <i>overblowing</i></div></div>
+
+<div class="footdef"><sup><a id="fn.22" class="footnum" href="#fnr.22">22</a></sup> <div class="footpara">assuming no holes</div></div>
+
+<div class="footdef"><sup><a id="fn.23" class="footnum" href="#fnr.23">23</a></sup> <div class="footpara">This is very convenient for musicians, because it
+reduces a continuum of frequencies to a discrete set. Frets on a
+guitar perform a somewhat analogous function.</div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
