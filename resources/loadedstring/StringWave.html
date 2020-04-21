@@ -1,0 +1,1764 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-04-20 Mon 21:45 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Matt Dailis" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div class="org-src-container">
+<pre class="src src-java"><span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">StringWave.java (C) 2001 by Paul Falstad, www.falstad.com</span>
+
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">InputStream</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">awt</span>.*;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">awt</span>.<span style="color: #D0372D;">image</span>.<span style="color: #6434A3;">ImageProducer</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">applet</span>.<span style="color: #6434A3;">Applet</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">applet</span>.<span style="color: #6434A3;">AudioClip</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Vector</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Hashtable</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Enumeration</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">io</span>.<span style="color: #6434A3;">File</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">net</span>.<span style="color: #6434A3;">URL</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">util</span>.<span style="color: #6434A3;">Random</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">awt</span>.<span style="color: #D0372D;">image</span>.<span style="color: #6434A3;">MemoryImageSource</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.<span style="color: #6434A3;">Math</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">awt</span>.<span style="color: #D0372D;">event</span>.*;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.<span style="color: #D0372D;">reflect</span>.<span style="color: #6434A3;">Constructor</span>;
+<span style="color: #0000FF;">import</span> <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.<span style="color: #D0372D;">reflect</span>.<span style="color: #6434A3;">Method</span>;
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">StringWaveCanvas</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">Canvas</span> {
+    <span style="color: #6434A3;">StringWaveFrame</span> <span style="color: #BA36A5;">pg</span>;
+    <span style="color: #006699;">StringWaveCanvas</span>(<span style="color: #6434A3;">StringWaveFrame</span> <span style="color: #BA36A5;">p</span>) {
+        pg = p;
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Dimension</span> <span style="color: #006699;">getPreferredSize</span>() {
+        <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Dimension</span>(300,400);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">update</span>(<span style="color: #6434A3;">Graphics</span> <span style="color: #BA36A5;">g</span>) {
+        pg.updateStringWave(g);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">paint</span>(<span style="color: #6434A3;">Graphics</span> <span style="color: #BA36A5;">g</span>) {
+        pg.updateStringWave(g);
+    }
+};
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">StringWaveLayout</span> <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">LayoutManager</span> {
+    <span style="color: #0000FF;">public</span> <span style="color: #006699;">StringWaveLayout</span>() {}
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">addLayoutComponent</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">name</span>, <span style="color: #6434A3;">Component</span> <span style="color: #BA36A5;">c</span>) {}
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">removeLayoutComponent</span>(<span style="color: #6434A3;">Component</span> <span style="color: #BA36A5;">c</span>) {}
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Dimension</span> <span style="color: #006699;">preferredLayoutSize</span>(<span style="color: #6434A3;">Container</span> <span style="color: #BA36A5;">target</span>) {
+        <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Dimension</span>(500, 500);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">Dimension</span> <span style="color: #006699;">minimumLayoutSize</span>(<span style="color: #6434A3;">Container</span> <span style="color: #BA36A5;">target</span>) {
+        <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Dimension</span>(100,100);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">layoutContainer</span>(<span style="color: #6434A3;">Container</span> <span style="color: #BA36A5;">target</span>) {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">barwidth</span> = 0;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+        <span style="color: #0000FF;">for</span> (i = 1; i &lt; target.<span style="color: #6434A3;">getComponentCount</span>(); i++) {
+            <span style="color: #6434A3;">Component</span> <span style="color: #BA36A5;">m</span> = target.getComponent(i);
+            <span style="color: #0000FF;">if</span> (m.isVisible()) {
+                <span style="color: #6434A3;">Dimension</span> <span style="color: #BA36A5;">d</span> = m.getPreferredSize();
+                <span style="color: #0000FF;">if</span> (d.width &gt; barwidth)
+                    barwidth = d.width;
+            }
+        }
+        <span style="color: #6434A3;">Insets</span> <span style="color: #BA36A5;">insets</span> = target.insets();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">targetw</span> = target.size().width - insets.left - insets.right;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">cw</span> = targetw-barwidth;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">targeth</span> = target.size().height - (insets.top+insets.bottom);
+        target.getComponent(0).move(insets.left, insets.top);
+        target.getComponent(0).resize(cw, targeth);
+        cw += insets.left;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">h</span> = insets.top;
+        <span style="color: #0000FF;">for</span> (i = 1; i &lt; target.<span style="color: #6434A3;">getComponentCount</span>(); i++) {
+            <span style="color: #6434A3;">Component</span> <span style="color: #BA36A5;">m</span> = target.getComponent(i);
+            <span style="color: #0000FF;">if</span> (m.isVisible()) {
+                <span style="color: #6434A3;">Dimension</span> <span style="color: #BA36A5;">d</span> = m.getPreferredSize();
+                <span style="color: #0000FF;">if</span> (m <span style="color: #0000FF;">instanceof</span> Scrollbar)
+                    d.width = barwidth;
+                <span style="color: #0000FF;">if</span> (m <span style="color: #0000FF;">instanceof</span> Label) {
+                    h += d.height/5;
+                    d.width = barwidth;
+                }
+                m.move(cw, h);
+                m.resize(d.width, d.height);
+                h += d.height;
+            }
+        }
+    }
+};
+
+<span style="color: #0000FF;">public</span> <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">StringWave</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">Applet</span> <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">ComponentListener</span> {
+    <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">StringWaveFrame</span> <span style="color: #BA36A5;">ogf</span>;
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">destroyFrame</span>() {
+        <span style="color: #0000FF;">if</span> (ogf != <span style="color: #D0372D;">null</span>)
+            ogf.dispose();
+        ogf = <span style="color: #D0372D;">null</span>;
+        repaint();
+    }
+    <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">started</span> = <span style="color: #D0372D;">false</span>;
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">init</span>() {
+        addComponentListener(<span style="color: #0000FF;">this</span>);
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">main</span>(<span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">args</span>[]) {
+        ogf = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">StringWaveFrame</span>(<span style="color: #D0372D;">null</span>);
+        ogf.init();
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">showFrame</span>() {
+        <span style="color: #0000FF;">if</span> (ogf == <span style="color: #D0372D;">null</span>) {
+            started = <span style="color: #D0372D;">true</span>;
+            ogf = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">StringWaveFrame</span>(<span style="color: #0000FF;">this</span>);
+            ogf.init();
+            repaint();
+        }
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">paint</span>(<span style="color: #6434A3;">Graphics</span> <span style="color: #BA36A5;">g</span>) {
+        <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">s</span> = <span style="color: #008000;">"Applet is open in a separate window."</span>;
+        <span style="color: #0000FF;">if</span> (!started)
+            s = <span style="color: #008000;">"Applet is starting."</span>;
+        <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (ogf == <span style="color: #D0372D;">null</span>)
+            s = <span style="color: #008000;">"Applet is finished."</span>;
+        <span style="color: #0000FF;">else</span>
+            ogf.show();
+        g.drawString(s, 10, 30);
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentHidden</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>){}
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentMoved</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>){}
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentShown</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>) { showFrame(); }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentResized</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>) {}
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">destroy</span>() {
+        <span style="color: #0000FF;">if</span> (ogf != <span style="color: #D0372D;">null</span>)
+            ogf.dispose();
+        ogf = <span style="color: #D0372D;">null</span>;
+        repaint();
+    }
+};
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">StringWaveFrame</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">Frame</span>
+  <span style="color: #0000FF;">implements</span> <span style="color: #6434A3;">ComponentListener</span>, <span style="color: #6434A3;">ActionListener</span>, <span style="color: #6434A3;">AdjustmentListener</span>,
+             <span style="color: #6434A3;">MouseMotionListener</span>, <span style="color: #6434A3;">MouseListener</span>, <span style="color: #6434A3;">ItemListener</span> {
+
+    <span style="color: #6434A3;">PlayThread</span> <span style="color: #BA36A5;">playThread</span>;
+
+    <span style="color: #6434A3;">Dimension</span> <span style="color: #BA36A5;">winSize</span>;
+    <span style="color: #6434A3;">Image</span> <span style="color: #BA36A5;">dbimage</span>;
+
+    <span style="color: #6434A3;">Random</span> <span style="color: #BA36A5;">random</span>;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">maxTerms</span> = 60;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">maxMaxTerms</span> = 160;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sampleCount</span>;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">sinTable</span>[][];
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">epsilon</span> = .00001;
+    <span style="color: #0000FF;">public</span> <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">epsilon2</span> = .003;
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">String</span> <span style="color: #006699;">getAppletInfo</span>() {
+        <span style="color: #0000FF;">return</span> <span style="color: #008000;">"StringWave Series by Paul Falstad"</span>;
+    }
+
+    <span style="color: #6434A3;">Button</span> <span style="color: #BA36A5;">sineButton</span>;
+    <span style="color: #6434A3;">Button</span> <span style="color: #BA36A5;">triangleButton</span>;
+    <span style="color: #6434A3;">Button</span> <span style="color: #BA36A5;">blankButton</span>;
+    <span style="color: #6434A3;">Button</span> <span style="color: #BA36A5;">resonanceButton</span>;
+    <span style="color: #6434A3;">Checkbox</span> <span style="color: #BA36A5;">stoppedCheck</span>;
+    <span style="color: #6434A3;">Checkbox</span> <span style="color: #BA36A5;">forceCheck</span>;
+    <span style="color: #6434A3;">Checkbox</span> <span style="color: #BA36A5;">soundCheck</span>;
+    <span style="color: #6434A3;">Checkbox</span> <span style="color: #BA36A5;">touchCheck</span>;
+    <span style="color: #6434A3;">Checkbox</span> <span style="color: #BA36A5;">backwardsCheck</span>;
+    <span style="color: #6434A3;">Checkbox</span> <span style="color: #BA36A5;">logCheck</span>;
+    <span style="color: #6434A3;">Choice</span> <span style="color: #BA36A5;">modeChooser</span>;
+    <span style="color: #6434A3;">Choice</span> <span style="color: #BA36A5;">displayChooser</span>;
+    <span style="color: #6434A3;">Scrollbar</span> <span style="color: #BA36A5;">dampingBar</span>;
+    <span style="color: #6434A3;">Scrollbar</span> <span style="color: #BA36A5;">speedBar</span>;
+    <span style="color: #6434A3;">Scrollbar</span> <span style="color: #BA36A5;">forceBar</span>;
+    <span style="color: #6434A3;">Scrollbar</span> <span style="color: #BA36A5;">loadBar</span>;
+    <span style="color: #6434A3;">Scrollbar</span> <span style="color: #BA36A5;">tensionBar</span>;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">magcoef</span>[];
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dampcoef</span>;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">phasecoef</span>[];
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">phasecoefcos</span>[];
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">phasecoefadj</span>[];
+    <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">double magcoefdisp[];</span>
+    <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">double phasecoefdisp[];</span>
+    <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">double phasecoefcosdisp[];</span>
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">forcebasiscoef</span>[];
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">omega</span>[];
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">pi</span> = 3.14159265358979323846;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">step</span>;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">func</span>[];
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">funci</span>[];
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">selectedCoef</span>;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">magnitudesY</span>;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">SEL_NONE</span> = 0;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">SEL_FUNC</span> = 1;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">SEL_MAG</span> = 2;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">MODE_PLUCK</span> = 0;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">MODE_SHAPE</span> = 1;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">MODE_TOUCH</span> = 997;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">MODE_FORCE</span> = 998;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">MODE_BOW</span> = 999;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">DISP_PHASE</span> = 0;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">DISP_LEFTRIGHT</span> = 1;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">DISP_PHASECOS</span> = 2;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">DISP_PHASORS</span> = 3;
+    <span style="color: #0000FF;">static</span> <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">DISP_MODES</span> = 4;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">selection</span>;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">dragX</span>, <span style="color: #BA36A5;">dragY</span>;
+    <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">dragging</span>;
+    <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">bowing</span>;
+    <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">bowCaught</span>;
+    <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">forceApplied</span>;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">t</span>;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">forceMag</span>;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">pause</span>;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">forceBarValue</span>;
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">forceTimeZero</span>;
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">tensionBarValue</span>;
+    <span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">gray1</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Color</span>(76,  76,  76);
+    <span style="color: #6434A3;">Color</span> <span style="color: #BA36A5;">gray2</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Color</span>(127, 127, 127);
+
+
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">getrand</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>) {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">q</span> = random.nextInt();
+        <span style="color: #0000FF;">if</span> (q &lt; 0) q = -q;
+        <span style="color: #0000FF;">return</span> q % x;
+    }
+    <span style="color: #6434A3;">StringWaveCanvas</span> <span style="color: #BA36A5;">cv</span>;
+    <span style="color: #6434A3;">StringWave</span> <span style="color: #BA36A5;">applet</span>;
+    <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">java2</span>;
+
+    StringWaveFrame(<span style="color: #6434A3;">StringWave</span> <span style="color: #BA36A5;">a</span>) {
+        <span style="color: #0000FF;">super</span>(<span style="color: #008000;">"Loaded String Applet v1.5a"</span>);
+        applet = a;
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">init</span>() {
+        <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">jv</span> = System.getProperty(<span style="color: #008000;">"java.class.version"</span>);
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">jvf</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Double</span>(jv).doubleValue();
+        <span style="color: #0000FF;">if</span> (jvf &gt;= 48)
+            java2 = <span style="color: #D0372D;">true</span>;
+
+        selectedCoef = -1;
+        setLayout(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">StringWaveLayout</span>());
+        cv = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">StringWaveCanvas</span>(<span style="color: #0000FF;">this</span>);
+        cv.addComponentListener(<span style="color: #0000FF;">this</span>);
+        cv.addMouseMotionListener(<span style="color: #0000FF;">this</span>);
+        cv.addMouseListener(<span style="color: #0000FF;">this</span>);
+        add(cv);
+        add(sineButton = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Button</span>(<span style="color: #008000;">"Fundamental"</span>));
+        sineButton.addActionListener(<span style="color: #0000FF;">this</span>);
+        add(triangleButton = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Button</span>(<span style="color: #008000;">"Center Pluck"</span>));
+        triangleButton.addActionListener(<span style="color: #0000FF;">this</span>);
+        add(blankButton = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Button</span>(<span style="color: #008000;">"Clear"</span>));
+        blankButton.addActionListener(<span style="color: #0000FF;">this</span>);
+        stoppedCheck = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Checkbox</span>(<span style="color: #008000;">"Stopped"</span>);
+        stoppedCheck.addItemListener(<span style="color: #0000FF;">this</span>);
+        add(stoppedCheck);
+        forceCheck = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Checkbox</span>(<span style="color: #008000;">"Driving Force"</span>, <span style="color: #D0372D;">false</span>);
+        forceCheck.addItemListener(<span style="color: #0000FF;">this</span>);
+        add(forceCheck);
+        soundCheck = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Checkbox</span>(<span style="color: #008000;">"Sound"</span>, <span style="color: #D0372D;">false</span>);
+        soundCheck.addItemListener(<span style="color: #0000FF;">this</span>);
+        <span style="color: #0000FF;">if</span> (java2)
+            add(soundCheck);
+        touchCheck = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Checkbox</span>(<span style="color: #008000;">"Touched in Center"</span>, <span style="color: #D0372D;">false</span>);
+        touchCheck.addItemListener(<span style="color: #0000FF;">this</span>);
+        <span style="color: #8D8D84;">/*</span><span style="color: #8D8D84; font-style: italic;">add(touchCheck);*/</span>
+        backwardsCheck = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Checkbox</span>(<span style="color: #008000;">"Run Backwards"</span>, <span style="color: #D0372D;">false</span>);
+        backwardsCheck.addItemListener(<span style="color: #0000FF;">this</span>);
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">add(backwardsCheck);</span>
+        logCheck = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Checkbox</span>(<span style="color: #008000;">"Log View"</span>, <span style="color: #D0372D;">false</span>);
+        logCheck.addItemListener(<span style="color: #0000FF;">this</span>);
+        add(logCheck);
+
+        modeChooser = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Choice</span>();
+        modeChooser.add(<span style="color: #008000;">"Mouse = Pluck string"</span>);
+        modeChooser.add(<span style="color: #008000;">"Mouse = Shape string"</span>);
+        <span style="color: #8D8D84;">/*</span><span style="color: #8D8D84; font-style: italic;">modeChooser.add("Mouse = Touch string");</span>
+<span style="color: #8D8D84; font-style: italic;">          modeChooser.add("Mouse = Apply force");*/</span>
+        modeChooser.addItemListener(<span style="color: #0000FF;">this</span>);
+        add(modeChooser);
+
+        displayChooser = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Choice</span>();
+        displayChooser.add(<span style="color: #008000;">"Display Phases"</span>);
+        displayChooser.add(<span style="color: #008000;">"Display Left+Right"</span>);
+        displayChooser.add(<span style="color: #008000;">"Display Phase Cosines"</span>);
+        displayChooser.add(<span style="color: #008000;">"Display Phasors"</span>);
+        displayChooser.add(<span style="color: #008000;">"Display Modes"</span>);
+        displayChooser.addItemListener(<span style="color: #0000FF;">this</span>);
+        add(displayChooser);
+
+        add(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Label</span>(<span style="color: #008000;">"Simulation Speed"</span>, <span style="color: #D0372D;">Label</span>.CENTER));
+        add(speedBar = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scrollbar</span>(<span style="color: #D0372D;">Scrollbar</span>.HORIZONTAL, 85, 1, 1, 200));
+        speedBar.addAdjustmentListener(<span style="color: #0000FF;">this</span>);
+
+        add(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Label</span>(<span style="color: #008000;">"Damping"</span>, <span style="color: #D0372D;">Label</span>.CENTER));
+        add(dampingBar = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scrollbar</span>(<span style="color: #D0372D;">Scrollbar</span>.HORIZONTAL, 10, 1, 0, 400));
+        dampingBar.addAdjustmentListener(<span style="color: #0000FF;">this</span>);
+
+        add(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Label</span>(<span style="color: #008000;">"Force Frequency"</span>, <span style="color: #D0372D;">Label</span>.CENTER));
+        forceBarValue = 5;
+        add(forceBar = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scrollbar</span>(<span style="color: #D0372D;">Scrollbar</span>.HORIZONTAL,
+                                     forceBarValue, 1, 1, 30));
+        forceBar.addAdjustmentListener(<span style="color: #0000FF;">this</span>);
+
+        add(resonanceButton = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Button</span>(<span style="color: #008000;">"Resonance Freq"</span>));
+        resonanceButton.addActionListener(<span style="color: #0000FF;">this</span>);
+
+        add(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Label</span>(<span style="color: #008000;">"Number of Loads"</span>, <span style="color: #D0372D;">Label</span>.CENTER));
+        add(loadBar = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scrollbar</span>(<span style="color: #D0372D;">Scrollbar</span>.HORIZONTAL,
+                                    maxTerms, 1, 2, maxMaxTerms));
+        loadBar.addAdjustmentListener(<span style="color: #0000FF;">this</span>);
+        setLoadCount();
+
+        tensionBarValue = 16;
+        add(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Label</span>(<span style="color: #008000;">"Tension"</span>, <span style="color: #D0372D;">Label</span>.CENTER));
+        add(tensionBar = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Scrollbar</span>(<span style="color: #D0372D;">Scrollbar</span>.HORIZONTAL,
+                                       tensionBarValue, 1, 1, 100));
+        tensionBar.addAdjustmentListener(<span style="color: #0000FF;">this</span>);
+
+        <span style="color: #0000FF;">try</span> {
+            <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">param</span> = applet.getParameter(<span style="color: #008000;">"PAUSE"</span>);
+            <span style="color: #0000FF;">if</span> (param != <span style="color: #D0372D;">null</span>)
+                pause = Integer.parseInt(param);
+        } <span style="color: #0000FF;">catch</span> (<span style="color: #6434A3;">Exception</span> <span style="color: #BA36A5;">e</span>) { }
+
+        magcoef = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxMaxTerms];
+        phasecoef = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxMaxTerms];
+        phasecoefcos = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxMaxTerms];
+        phasecoefadj = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxMaxTerms];
+        <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">magcoefdisp = new double[maxMaxTerms];</span>
+        <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">phasecoefdisp = new double[maxMaxTerms];</span>
+        <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">phasecoefcosdisp = new double[maxMaxTerms];</span>
+        forcebasiscoef = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxMaxTerms];
+        func = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxMaxTerms+1];
+        funci = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxMaxTerms+1];
+
+        random = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Random</span>();
+        setDamping();
+        reinit();
+        cv.setBackground(Color.black);
+        cv.setForeground(Color.lightGray);
+        resize(800, 600);
+        handleResize();
+        <span style="color: #6434A3;">Dimension</span> <span style="color: #BA36A5;">x</span> = getSize();
+        <span style="color: #6434A3;">Dimension</span> <span style="color: #BA36A5;">screen</span> = getToolkit().getScreenSize();
+        setLocation((screen.width  - x.width)/2,
+                    (screen.height - x.height)/2);
+        show();
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">reinit</span>() {
+        doSine();
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">handleResize</span>() {
+        <span style="color: #6434A3;">Dimension</span> <span style="color: #BA36A5;">d</span> = winSize = cv.getSize();
+        <span style="color: #0000FF;">if</span> (winSize.width == 0)
+            <span style="color: #0000FF;">return</span>;
+        dbimage = createImage(d.width, d.height);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">doSine</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>;
+        <span style="color: #0000FF;">for</span> (x = 0; x != sampleCount; x++) {
+            func[x] = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(x*step);
+        }
+        func[sampleCount] = func[0];
+        transform(<span style="color: #D0372D;">true</span>);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">doTriangle</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>;
+        <span style="color: #0000FF;">for</span> (x = 0; x &lt;= sampleCount/2; x++)
+            func[sampleCount-x] = func[x] = 2.0*x/sampleCount;
+        func[sampleCount] = func[0];
+        transform(<span style="color: #D0372D;">true</span>);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">doBlank</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>;
+        <span style="color: #0000FF;">for</span> (x = 0; x &lt;= sampleCount; x++)
+            func[x] = 0;
+        transform(<span style="color: #D0372D;">true</span>);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">transform</span>(<span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">novel</span>) {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>, <span style="color: #BA36A5;">y</span>;
+        t = 0;
+        <span style="color: #0000FF;">for</span> (y = 1; y != maxTerms; y++) {
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">a</span> = 0;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">b</span> = 0;
+            <span style="color: #0000FF;">for</span> (x = 1; x != sampleCount; x++) {
+                a += sinTable[x][y]*func[x];
+                b -= sinTable[x][y]*funci[x];
+            }
+            a *= 2.0/sampleCount;
+            b *= 2.0/(sampleCount*omega[y]);
+            <span style="color: #0000FF;">if</span> (a &lt; <span style="color: #6434A3;">epsilon</span> &amp;&amp; a &gt; -epsilon) a = 0;
+            <span style="color: #0000FF;">if</span> (b &lt; <span style="color: #6434A3;">epsilon</span> &amp;&amp; b &gt; -epsilon) b = 0;
+            <span style="color: #0000FF;">if</span> (novel)
+                b = 0;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">r</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt(a*a+b*b);
+            magcoef[y] = r;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph2</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.atan2(b, a);
+            phasecoefadj[y] = ph2;
+            phasecoef[y] = ph2;
+        }
+        updateSound();
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">updateSound</span>() {
+        <span style="color: #0000FF;">if</span> (playThread != <span style="color: #D0372D;">null</span>)
+            playThread.soundChanged();
+    }
+
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">getPanelHeight</span>() { <span style="color: #0000FF;">return</span> winSize.height / 3; }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">centerString</span>(<span style="color: #6434A3;">Graphics</span> <span style="color: #BA36A5;">g</span>, <span style="color: #6434A3;">String</span> <span style="color: #BA36A5;">s</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>) {
+        <span style="color: #6434A3;">FontMetrics</span> <span style="color: #BA36A5;">fm</span> = g.getFontMetrics();
+        g.drawString(s, (winSize.width-fm.stringWidth(s))/2, y);
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">paint</span>(<span style="color: #6434A3;">Graphics</span> <span style="color: #BA36A5;">g</span>) {
+        cv.repaint();
+    }
+
+    <span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">lastTime</span>;
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">updateStringWave</span>(<span style="color: #6434A3;">Graphics</span> <span style="color: #BA36A5;">realg</span>) {
+        <span style="color: #0000FF;">if</span> (winSize == <span style="color: #D0372D;">null</span> || winSize.width == 0)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">Graphics</span> <span style="color: #BA36A5;">g</span> = dbimage.getGraphics();
+        <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">allQuiet</span> = <span style="color: #D0372D;">true</span>;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dampmult</span> = 1;
+        <span style="color: #0000FF;">if</span> (!stoppedCheck.getState()) {
+            <span style="color: #0000FF;">if</span> (bowing) {
+                doBow();
+                allQuiet = <span style="color: #D0372D;">false</span>;
+            }
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">val</span> = speedBar.getValue();
+            <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">if (val &gt; 40)</span>
+            <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">val += getrand(10);</span>
+            <span style="color: #0000FF;">if</span> (forceCheck.getState()) {
+                doForce();
+                allQuiet = <span style="color: #D0372D;">false</span>;
+            } <span style="color: #0000FF;">else</span>
+                forceMag = 0;
+            <span style="color: #6434A3;">long</span> <span style="color: #BA36A5;">sysTime</span> = System.currentTimeMillis();
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">tadd</span> = 0;
+            <span style="color: #0000FF;">if</span> (lastTime != 0)
+                tadd = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.exp(val/20.)*(.1/1500)*(sysTime-lastTime);
+            <span style="color: #0000FF;">if</span> (backwardsCheck.getState())
+                t -= tadd;
+            <span style="color: #0000FF;">else</span>
+                t += tadd;
+            lastTime = sysTime;
+            dampmult = Math.exp(dampcoef*tadd);
+        } <span style="color: #0000FF;">else</span>
+            lastTime = 0;
+        g.setColor(cv.getBackground());
+        g.fillRect(0, 0, winSize.width, winSize.height);
+        g.setColor(cv.getForeground());
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">ox</span> = -1, <span style="color: #BA36A5;">oy</span> = -1;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">midy</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">halfPanel</span> = panelHeight / 2;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ymult</span> = .75 * halfPanel;
+        <span style="color: #0000FF;">for</span> (i = -1; i &lt;= 1; i++) {
+            g.setColor((i == 0) ? gray2 : gray1);
+            g.drawLine(0,             midy+(i*(<span style="color: #6434A3;">int</span>) ymult),
+                       winSize.width, midy+(i*(<span style="color: #6434A3;">int</span>) ymult));
+        }
+        g.setColor(gray2);
+        g.drawLine(winSize.width/2, midy-(<span style="color: #6434A3;">int</span>) ymult,
+                   winSize.width/2, midy+(<span style="color: #6434A3;">int</span>) ymult);
+        <span style="color: #0000FF;">if</span> (dragging &amp;&amp; selection == SEL_FUNC) {
+            g.setColor(Color.cyan);
+            allQuiet = <span style="color: #D0372D;">true</span>;
+            <span style="color: #0000FF;">for</span> (i = 0; i != sampleCount+1; i++) {
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = winSize.width * i / sampleCount;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = midy - (<span style="color: #6434A3;">int</span>) (ymult * func[i]);
+                <span style="color: #0000FF;">if</span> (ox != -1)
+                    g.drawLine(ox, oy, x, y);
+                ox = x;
+                oy = y;
+            }
+        }
+        <span style="color: #0000FF;">if</span> (!stoppedCheck.getState()) {
+            <span style="color: #0000FF;">if</span> (touchCheck.getState())
+                doTouch();
+            <span style="color: #0000FF;">for</span> (i = 1; i != maxTerms; i++)
+                magcoef[i] *= dampmult;
+        }
+
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">magcoefdisp</span>[] = magcoef;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">phasecoefdisp</span>[] = phasecoef;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">phasecoefcosdisp</span>[] = phasecoefcos;
+
+        <span style="color: #0000FF;">if</span> (dragging &amp;&amp; selection == SEL_FUNC) {
+            lastTime = 0;
+        } <span style="color: #0000FF;">else</span> {
+            g.setColor(Color.white);
+            ox = -1;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">j</span>;
+            <span style="color: #0000FF;">for</span> (j = 1; j != maxTerms; j++) {
+                <span style="color: #0000FF;">if</span> (magcoef[j] &lt; epsilon &amp;&amp; magcoef[j] &gt; -epsilon) {
+                    magcoef[j] = phasecoef[j] = phasecoefadj[j] = 0;
+                    <span style="color: #0000FF;">continue</span>;
+                }
+                allQuiet = <span style="color: #D0372D;">false</span>;
+                phasecoef[j] = (omega[j]*t+phasecoefadj[j]) % (2*pi);
+                <span style="color: #0000FF;">if</span> (phasecoef[j] &gt; pi)
+                    phasecoef[j] -= 2*pi;
+                <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (phasecoef[j] &lt; -pi)
+                    phasecoef[j] += 2*pi;
+                phasecoefcos[j] = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.cos(phasecoef[j]);
+            }
+            <span style="color: #0000FF;">if</span> (forceApplied) {
+                allQuiet = <span style="color: #D0372D;">false</span>;
+                magcoefdisp = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxTerms];
+                phasecoefdisp = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxTerms];
+                phasecoefcosdisp = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxTerms];
+                <span style="color: #0000FF;">for</span> (i = 1; i &lt; <span style="color: #6434A3;">maxTerms</span>; i++) {
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph</span> = phasecoef[i];
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">a</span> = magcoef[i] * phasecoefcos[i];
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">b</span> = magcoef[i] * <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(ph);
+                    a += forcebasiscoef[i];
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">r</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt(a*a+b*b);
+                    magcoefdisp[i] = r;
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph2</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.atan2(b, a);
+                    phasecoefdisp[i] += ph2;
+                    phasecoefcosdisp[i] = (r &gt; 0) ? a/r : 0;
+                }
+            }
+
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">dotSize</span> = (sampleCount &lt; 40) ? 5 : 0;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">funcDotSize</span> = dotSize;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">forcePos</span> = (forceMag == 0) ? -1 : sampleCount/2;
+            <span style="color: #0000FF;">for</span> (i = 0; i != sampleCount+1; i++) {
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = winSize.width * i / sampleCount;
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dy</span> = 0;
+                <span style="color: #0000FF;">for</span> (j = 1; j != maxTerms; j++)
+                    dy += magcoefdisp[j] *
+                        sinTable[i][j] * phasecoefcosdisp[j];
+                func[i] = dy;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = midy - (<span style="color: #6434A3;">int</span>) (ymult * dy);
+                <span style="color: #0000FF;">if</span> (ox != -1)
+                    g.drawLine(ox, oy, x, y);
+                <span style="color: #0000FF;">if</span> (dotSize &gt; 0 &amp;&amp; i != 0 &amp;&amp; i != sampleCount)
+                    g.fillOval(x-dotSize/2, y-dotSize/2, dotSize, dotSize);
+                <span style="color: #0000FF;">if</span> (i == forcePos) {
+                    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">yl</span> = (<span style="color: #6434A3;">int</span>) (ymult*forceMag*8);
+                    <span style="color: #0000FF;">if</span> (yl &gt; 7 || yl &lt; -7) {
+                        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y2</span> = y - yl;
+                        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">forcedir</span> = (forceMag &lt; 0) ? -1 : 1;
+                        g.drawLine(x, y, x, y2);
+                        g.drawLine(x, y2, x+5, y2+5*forcedir);
+                        g.drawLine(x, y2, x-5, y2+5*forcedir);
+                    }
+                }
+                ox = x;
+                oy = y;
+            }
+        }
+        <span style="color: #0000FF;">if</span> (selectedCoef != -1 &amp;&amp; !dragging &amp;&amp;
+            (magcoefdisp[selectedCoef] &gt; .04 ||
+             magcoefdisp[selectedCoef] &lt; -.04)) {
+            g.setColor(Color.yellow);
+            ox = -1;
+            ymult *= magcoefdisp[selectedCoef];
+            <span style="color: #0000FF;">for</span> (i = 0; i != sampleCount+1; i++) {
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = winSize.width * i / sampleCount;
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dy</span> = sinTable[i][selectedCoef] *
+                    phasecoefcosdisp[selectedCoef];
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = midy - (<span style="color: #6434A3;">int</span>) (ymult * dy);
+                <span style="color: #0000FF;">if</span> (ox != -1)
+                    g.drawLine(ox, oy, x, y);
+                ox = x;
+                oy = y;
+            }
+        }
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">termWidth</span> = getTermWidth();
+        ymult = .6 * halfPanel;
+        g.setColor(Color.white);
+        <span style="color: #0000FF;">if</span> (displayChooser.getSelectedIndex() == DISP_PHASE ||
+            displayChooser.getSelectedIndex() == DISP_PHASECOS)
+            magnitudesY = panelHeight;
+        <span style="color: #0000FF;">else</span>
+            magnitudesY = panelHeight*2;
+        midy = magnitudesY + (panelHeight / 2) + (<span style="color: #6434A3;">int</span>) ymult/2;
+        centerString(g, <span style="color: #008000;">"Harmonics: Magnitudes"</span>, magnitudesY+(<span style="color: #6434A3;">int</span>) (panelHeight*.16));
+        g.setColor(gray2);
+        g.drawLine(0, midy, winSize.width, midy);
+        g.setColor(gray1);
+        g.drawLine(0, midy-(<span style="color: #6434A3;">int</span>)ymult, winSize.width, midy-(<span style="color: #6434A3;">int</span>) ymult);
+        g.drawLine(0, midy+(<span style="color: #6434A3;">int</span>)ymult, winSize.width, midy+(<span style="color: #6434A3;">int</span>) ymult);
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">dotSize</span> = termWidth-3;
+        <span style="color: #0000FF;">if</span> (dotSize &lt; 3)
+            dotSize = 3;
+        <span style="color: #0000FF;">if</span> (dotSize &gt; 9)
+            dotSize = 9;
+        <span style="color: #0000FF;">for</span> (i = 1; i != maxTerms; i++) {
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">t</span> = termWidth * (i-1) + termWidth/2;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = midy - (<span style="color: #6434A3;">int</span>) (logcoef(magcoefdisp[i])*ymult);
+            g.setColor(i == selectedCoef ? Color.yellow : Color.white);
+            g.drawLine(t, midy, t, y);
+            g.fillOval(t-dotSize/2, y-dotSize/2, dotSize, dotSize);
+        }
+
+        <span style="color: #0000FF;">if</span> (displayChooser.getSelectedIndex() == DISP_PHASE ||
+            displayChooser.getSelectedIndex() == DISP_PHASECOS) {
+            g.setColor(Color.white);
+            <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">cosines</span> =
+                displayChooser.getSelectedIndex() == DISP_PHASECOS;
+            centerString(g, cosines ? <span style="color: #008000;">"Harmonics: Phase Cosines"</span> : <span style="color: #008000;">"Harmonics: Phases"</span>,
+                         (<span style="color: #6434A3;">int</span>) (panelHeight*2.10));
+            ymult = .75 * halfPanel;
+            midy = ((panelHeight * 5) / 2);
+            <span style="color: #0000FF;">for</span> (i = -2; i &lt;= 2; i++) {
+                <span style="color: #0000FF;">if</span> (cosines &amp;&amp; (i == 1 || i == -1))
+                    <span style="color: #0000FF;">continue</span>;
+                g.setColor((i == 0) ? gray2 : gray1);
+                g.drawLine(0,             midy+(i*(<span style="color: #6434A3;">int</span>) ymult)/2,
+                           winSize.width, midy+(i*(<span style="color: #6434A3;">int</span>) ymult)/2);
+            }
+            <span style="color: #0000FF;">if</span> (!cosines)
+                ymult /= pi;
+            <span style="color: #0000FF;">for</span> (i = 1; i != maxTerms; i++) {
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">t</span> = termWidth * (i-1) + termWidth/2;
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph</span> = (cosines) ? phasecoefcosdisp[i] : phasecoefdisp[i];
+                <span style="color: #0000FF;">if</span> (magcoef[i] &gt; -epsilon2/4 &amp;&amp; magcoefdisp[i] &lt; epsilon2/4)
+                    ph = 0;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = midy - (<span style="color: #6434A3;">int</span>) (ph*ymult);
+                g.setColor(i == selectedCoef ? Color.yellow : Color.white);
+                g.drawLine(t, midy, t, y);
+                g.fillOval(t-dotSize/2, y-dotSize/2, dotSize, dotSize);
+            }
+        } <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (displayChooser.getSelectedIndex() == DISP_LEFTRIGHT) {
+            midy = panelHeight + panelHeight/2;
+            halfPanel = panelHeight/2;
+            ymult = .75 * halfPanel;
+            <span style="color: #0000FF;">for</span> (i = -1; i &lt;= 1; i++) {
+                g.setColor((i == 0) ? gray2 : gray1);
+                g.drawLine(0,             midy+(i*(<span style="color: #6434A3;">int</span>) ymult),
+                           winSize.width, midy+(i*(<span style="color: #6434A3;">int</span>) ymult));
+            }
+            g.setColor(gray2);
+            g.drawLine(winSize.width/2, midy-(<span style="color: #6434A3;">int</span>) ymult,
+                       winSize.width/2, midy+(<span style="color: #6434A3;">int</span>) ymult);
+            ox = -1;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">oy2</span> = -1;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">subsamples</span> = 4;
+            <span style="color: #0000FF;">for</span> (i = 0; i != sampleCount*subsamples+1; i++) {
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = winSize.width * i / (subsamples*sampleCount);
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dy1</span> = 0;
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dy2</span> = 0;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">j</span>;
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">stepi</span> = step*i/subsamples;
+                <span style="color: #0000FF;">for</span> (j = 1; j != maxTerms; j++) {
+                    <span style="color: #0000FF;">if</span> (magcoefdisp[j] == 0)
+                        <span style="color: #0000FF;">continue</span>;
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">stepij</span> = stepi*j;
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dp</span> = magcoefdisp[j]*.5;
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">phase</span> = phasecoefdisp[j];
+                    dy1 += dp*<span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(stepij+phase);
+                    dy2 += dp*<span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(stepij-phase);
+                }
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y1</span> = midy - (<span style="color: #6434A3;">int</span>) (ymult * dy1);
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y2</span> = midy - (<span style="color: #6434A3;">int</span>) (ymult * dy2);
+                <span style="color: #0000FF;">if</span> (ox != -1) {
+                    g.setColor(Color.cyan);
+                    g.drawLine(ox, oy,  x, y1);
+                    g.setColor(Color.green);
+                    g.drawLine(ox, oy2, x, y2);
+                }
+                ox = x;
+                oy  = y1;
+                oy2 = y2;
+            }
+        } <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (displayChooser.getSelectedIndex() == DISP_PHASORS) {
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sqw</span> = (winSize.width-25)/3;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sqh</span> = sqw;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = panelHeight+(panelHeight-sqh)/2;
+            dotSize = 5;
+            <span style="color: #0000FF;">for</span> (i = 1; i &lt;= 3; i++) {
+                g.setColor(gray2);
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">leftX</span> = (sqw+10)*(i-1);
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">centerX</span> = leftX+sqw/2;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">centerY</span> = y+sqh/2;
+                g.drawLine(leftX, centerY, leftX+sqw, centerY);
+                g.drawLine(centerX, y, centerX, y+sqh);
+                g.setColor(gray1);
+                g.drawOval(centerX-sqw/2, centerY-sqh/2, sqw, sqh);
+                g.setColor(i == selectedCoef ? Color.yellow : Color.white);
+                g.drawRect(leftX, y, sqw, sqh);
+                <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">getFx</span> = (forceApplied || forceCheck.getState());
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">ax</span> = (<span style="color: #6434A3;">int</span>) (phasecoefcosdisp[i]*magcoefdisp[i]*sqw*.5);
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">ay</span> = (<span style="color: #6434A3;">int</span>) (<span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(phasecoefdisp[i])*
+                                magcoefdisp[i]*sqh*.5);
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">fx</span> = (getFx) ? ((<span style="color: #6434A3;">int</span>) (forcebasiscoef[i]*sqw*.5)) : 0;
+                g.drawLine(centerX+fx, centerY, centerX+ax, centerY-ay);
+                g.fillOval(centerX+ax-dotSize/2, centerY-ay-dotSize/2,
+                           dotSize, dotSize);
+            }
+        } <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (displayChooser.getSelectedIndex() == DISP_MODES) {
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sqw</span> = (winSize.width-25)/3;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sqh</span> = (<span style="color: #6434A3;">int</span>) (sqw/pi);
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">topY</span> = panelHeight;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">leftX</span> = 0;
+            <span style="color: #0000FF;">for</span> (i = 1; i &lt; <span style="color: #6434A3;">sampleCount</span>; i++) {
+                <span style="color: #0000FF;">if</span> (!(magcoefdisp[i] &gt; .06 ||
+                      magcoefdisp[i] &lt; -.06))
+                    <span style="color: #0000FF;">continue</span>;
+                g.setColor(gray2);
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">centerX</span> = leftX+sqw/2;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">centerY</span> = topY+sqh/2;
+                g.drawLine(leftX, centerY, leftX+sqw, centerY);
+                g.drawLine(centerX, topY, centerX, topY+sqh);
+                g.setColor(i == selectedCoef ? Color.yellow : Color.white);
+                g.drawRect(leftX, topY, sqw, sqh);
+                ox = -1;
+                ymult = sqh*.5*magcoefdisp[i];
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">j</span>;
+                <span style="color: #0000FF;">for</span> (j = 0; j != sampleCount+1; j++) {
+                    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = leftX + sqw * j / sampleCount;
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dy</span> = sinTable[j][i] * phasecoefcosdisp[i];
+                    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = centerY - (<span style="color: #6434A3;">int</span>) (ymult * dy);
+                    <span style="color: #0000FF;">if</span> (ox != -1)
+                        g.drawLine(ox, oy, x, y);
+                    ox = x;
+                    oy = y;
+                }
+                leftX += sqw+10;
+                <span style="color: #0000FF;">if</span> (leftX + sqw &gt; winSize.width) {
+                    leftX = 0;
+                    topY += sqh + 10;
+                    <span style="color: #0000FF;">if</span> (topY+sqh &gt; panelHeight*2)
+                        <span style="color: #0000FF;">break</span>;
+                }
+            }
+        }
+        realg.drawImage(dbimage, 0, 0, <span style="color: #0000FF;">this</span>);
+        <span style="color: #0000FF;">if</span> (!stoppedCheck.getState() &amp;&amp; !allQuiet)
+            cv.repaint(pause);
+    }
+
+    <span style="color: #6434A3;">int</span> <span style="color: #006699;">getTermWidth</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">termWidth</span> = winSize.width / maxTerms;
+        <span style="color: #0000FF;">if</span> (termWidth &lt; 2)
+            termWidth = 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">maxTermWidth</span> = winSize.width/30;
+        <span style="color: #0000FF;">if</span> (termWidth &gt; maxTermWidth)
+            termWidth = maxTermWidth;
+        termWidth &amp;= ~1;
+        <span style="color: #0000FF;">return</span> termWidth;
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">getVelocities</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">k</span>, <span style="color: #BA36A5;">j</span>;
+        <span style="color: #0000FF;">for</span> (j = 0; j != sampleCount; j++) {
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dy</span> = 0;
+            <span style="color: #0000FF;">for</span> (k = 0; k != sampleCount; k++)
+                dy += magcoef[k] * sinTable[j][k] *
+                    <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(phasecoef[k]) * omega[k];
+            funci[j] = -dy;
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">setForce</span>() {
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">adjust time zero to maintain continuity in the force func</span>
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">even though the frequency has changed.</span>
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">oldfreq</span> = forceBarValue * omega[1] / 20.0;
+        forceBarValue = forceBar.getValue();
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">newfreq</span> = forceBarValue * omega[1] / 20.0;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">adj</span> = newfreq-oldfreq;
+        forceTimeZero = t-oldfreq*(t-forceTimeZero)/newfreq;
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">doForce</span>() {
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">freq</span> = forceBar.getValue() * omega[1] / 20.0;
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">was .01</span>
+        forceMag = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.cos((t-forceTimeZero)*freq)*.06;
+        <span style="color: #0000FF;">if</span> (forceBar.getValue() == 1)
+            forceMag *= 2;
+        applyForce(maxTerms/2, forceMag);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">doTouch</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = sampleCount/2;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">lim</span> = .1;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">val</span> = func[x];
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">force</span> = 0;
+        <span style="color: #0000FF;">if</span> (val &gt; lim)
+            force = -(val-lim);
+        <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (val &lt; -lim)
+            force = -(val+lim);
+        <span style="color: #0000FF;">else</span>
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>;
+        <span style="color: #0000FF;">for</span> (y = 1; y != maxTerms; y++) {
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">coef</span> = 0;
+            <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">j</span> = 1; j != sampleCount; j++) {
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">f</span> = (j &lt;= x) ? force*j/x :
+                    force*(sampleCount-j)/(sampleCount-x);
+                coef += sinTable[j][y]*f;
+            }
+            coef *= 2.0/sampleCount;
+
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph</span> = phasecoefadj[y]+omega[y]*t; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">XXX change elsewhere</span>
+            <span style="color: #8D8D84;">/// </span><span style="color: #8D8D84; font-style: italic;">XXX outside loop, elsewhere too</span>
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">a</span> = magcoef[y] * <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.cos(ph);
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">b</span> = magcoef[y] * <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(ph);
+            a += coef;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">r</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt(a*a+b*b);
+            magcoef[y] = r;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph2</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.atan2(b, a);
+            phasecoefadj[y] += ph2-ph;
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">edit</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> (selection == SEL_NONE)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = e.getX();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = e.getY();
+        <span style="color: #0000FF;">switch</span> (selection) {
+        <span style="color: #0000FF;">case</span> SEL_MAG:   editMag(x, y);   <span style="color: #0000FF;">break</span>;
+        <span style="color: #0000FF;">case</span> SEL_FUNC:  editFunc(x, y);  <span style="color: #0000FF;">break</span>;
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">editMag</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>) {
+        <span style="color: #0000FF;">if</span> (selectedCoef == -1)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ymult</span> = .6 * panelHeight/2;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">midy</span> = magnitudesY + (panelHeight / 2) + (<span style="color: #6434A3;">int</span>) ymult/2;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">coef</span> = -(y-midy) / ymult;
+        coef = unlogcoef(coef);
+        <span style="color: #0000FF;">if</span> (coef &lt; -1)
+            coef = -1;
+        <span style="color: #0000FF;">if</span> (coef &gt; 1)
+            coef = 1;
+        <span style="color: #0000FF;">if</span> (magcoef[selectedCoef] == coef)
+            <span style="color: #0000FF;">return</span>;
+        magcoef[selectedCoef] = coef;
+        updateSound();
+        cv.repaint(pause);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">editFunc</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>) {
+        <span style="color: #0000FF;">if</span> (modeChooser.getSelectedIndex() == MODE_PLUCK) {
+            editFuncPluck(x, y);
+            <span style="color: #0000FF;">return</span>;
+        }
+        <span style="color: #0000FF;">if</span> (modeChooser.getSelectedIndex() == MODE_TOUCH) {
+            editFuncTouch(x, y);
+            <span style="color: #0000FF;">return</span>;
+        }
+        <span style="color: #0000FF;">if</span> (modeChooser.getSelectedIndex() == MODE_BOW) {
+            editFuncBow(x, y);
+            <span style="color: #0000FF;">return</span>;
+        }
+        <span style="color: #0000FF;">if</span> (modeChooser.getSelectedIndex() == MODE_FORCE) {
+            forceCheck.setState(<span style="color: #D0372D;">false</span>);
+            editFuncForce(x, y);
+            <span style="color: #0000FF;">return</span>;
+        }
+        <span style="color: #0000FF;">if</span> (dragX == x) {
+            editFuncPoint(x, y);
+            dragY = y;
+        } <span style="color: #0000FF;">else</span> {
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">need to draw a line from old x,y to new x,y and</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">call editFuncPoint for each point on that line.  yuck.</span>
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x1</span> = (x &lt; <span style="color: #6434A3;">dragX</span>) ? x : dragX;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y1</span> = (x &lt; <span style="color: #6434A3;">dragX</span>) ? y : dragY;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x2</span> = (x &gt; dragX) ? x : dragX;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y2</span> = (x &gt; dragX) ? y : dragY;
+            dragX = x;
+            dragY = y;
+            <span style="color: #0000FF;">for</span> (x = x1; x &lt;= x2; x++) {
+                y = y1+(y2-y1)*(x-x1)/(x2-x1);
+                editFuncPoint(x, y);
+            }
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">editFuncTouch</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">xx</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">yy</span>) {
+        dragging = <span style="color: #D0372D;">false</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">midy</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">halfPanel</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">periodWidth</span> = winSize.width;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ymult</span> = .75 * halfPanel;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = xx * sampleCount / periodWidth;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">val</span> = (midy - yy) / ymult;
+        <span style="color: #0000FF;">if</span> (val &gt; 1)
+            val = 1;
+        <span style="color: #0000FF;">if</span> (val &lt; -1)
+            val = -1;
+        <span style="color: #0000FF;">if</span> (x &lt; 1 || x &gt;= sampleCount)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">if (val &gt; 0 &amp;&amp; func[x] &lt; val)</span>
+        <span style="color: #8D8D84;">//  </span><span style="color: #8D8D84; font-style: italic;">return;</span>
+        <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">if (val &lt; 0 &amp;&amp; func[x] &gt; val)</span>
+        <span style="color: #8D8D84;">//  </span><span style="color: #8D8D84; font-style: italic;">return;</span>
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>;
+        <span style="color: #0000FF;">for</span> (y = 1; y != maxTerms; y++) {
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">coef1</span> = sinTable[x][y];
+            <span style="color: #0000FF;">if</span> (coef1 &lt; 0)
+                coef1 = -coef1;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">coef</span> = magcoef[y]*coef1;
+            <span style="color: #0000FF;">if</span> (coef &lt; 0)
+                coef = -coef;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">f</span> = .02;
+            <span style="color: #0000FF;">if</span> (coef &lt; <span style="color: #6434A3;">f</span>)
+                <span style="color: #0000FF;">continue</span>;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sign</span> = (magcoef[y] &lt; 0) ? -1 : 1;
+            magcoef[y] = sign*f/coef1;
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">editFuncForce</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">xx</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">yy</span>) {
+        dragging = <span style="color: #D0372D;">false</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">midy</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">halfPanel</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">periodWidth</span> = winSize.width;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ymult</span> = .75 * halfPanel;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = xx * sampleCount / periodWidth;
+        <span style="color: #0000FF;">if</span> (x &lt; 1 || x &gt;= sampleCount)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">val</span> = (midy - yy) / ymult;
+        <span style="color: #0000FF;">if</span> (val &gt; 1)
+            val = 1;
+        <span style="color: #0000FF;">if</span> (val &lt; -1)
+            val = -1;
+        soundCheck.setState(<span style="color: #D0372D;">false</span>);
+        applyForce(x, val);
+        cv.repaint(pause);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">applyForce</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>, <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">val</span>) {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>;
+        <span style="color: #0000FF;">for</span> (y = 1; y != maxTerms; y++) {
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">coef</span> = 0;
+            <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">j</span> = 1; j != sampleCount; j++) {
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">f</span> = (j &lt;= x) ? val*j/x :
+                    val*(sampleCount-j)/(sampleCount-x);
+                coef += sinTable[j][y]*f;
+            }
+            coef *= 2.0/sampleCount;
+
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph</span> = phasecoefadj[y]+omega[y]*t; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">XXX change elsewhere</span>
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">a</span> = magcoef[y] * phasecoefcos[y];
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">b</span> = magcoef[y] * <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(ph);
+            <span style="color: #0000FF;">if</span> (forceApplied)
+                a += forcebasiscoef[y];
+            a -= coef;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">r</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt(a*a+b*b);
+            <span style="color: #0000FF;">if</span> (r &gt; 2) r = 2;
+            magcoef[y] = r;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph2</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.atan2(b, a);
+            phasecoefadj[y] += ph2-ph;
+            forcebasiscoef[y] = coef;
+        }
+        forceApplied = <span style="color: #D0372D;">true</span>;
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">forceAppliedOff</span>() {
+        <span style="color: #0000FF;">if</span> (!forceApplied)
+            <span style="color: #0000FF;">return</span>;
+        forceApplied = <span style="color: #D0372D;">false</span>;
+        <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 1; i &lt; <span style="color: #6434A3;">maxTerms</span>; i++) {
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph</span> = phasecoefadj[i]+omega[i]*t; <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">XXX change elsewhere</span>
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">a</span> = magcoef[i] * <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.cos(ph);
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">b</span> = magcoef[i] * <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(ph);
+            a += forcebasiscoef[i];
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">r</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt(a*a+b*b);
+            magcoef[i] = r;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ph2</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.atan2(b, a);
+            phasecoefadj[i] += ph2-ph;
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">editFuncBow</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">xx</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">yy</span>) {
+        dragging = <span style="color: #D0372D;">false</span>;
+        bowing = <span style="color: #D0372D;">true</span>;
+        dragX = xx;
+        dragY = yy;
+        bowCaught = <span style="color: #D0372D;">true</span>;
+        cv.repaint(pause);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">doBow</span>() {
+        <span style="color: #0000FF;">if</span> (!bowCaught)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">midy</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">halfPanel</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">periodWidth</span> = winSize.width;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ymult</span> = .75 * halfPanel;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = dragX * sampleCount / periodWidth;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">val</span> = (midy - dragY) / ymult;
+        <span style="color: #0000FF;">if</span> (val &lt; 0)
+            val = -val;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">bowvel</span> = .4;
+        <span style="color: #0000FF;">if</span> (bowCaught &amp;&amp; func[x] &gt; val) {
+            bowCaught = <span style="color: #D0372D;">false</span>;
+            forceAppliedOff();
+            <span style="color: #0000FF;">return</span>;
+        }
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">p</span> = func[x]+bowvel;
+        applyForce(x, p);
+    }
+
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">logep2</span> = 0;
+    <span style="color: #6434A3;">double</span> <span style="color: #006699;">logcoef</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">x</span>) {
+        <span style="color: #0000FF;">if</span> (!logCheck.getState())
+            <span style="color: #0000FF;">return</span> x;
+        <span style="color: #0000FF;">if</span> (x == 0)
+            <span style="color: #0000FF;">return</span> x;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sign</span> = (x &lt; 0) ? -1 : 1;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">lg</span> = Math.log(x*sign);
+        lg = 1+lg*.1;
+        <span style="color: #0000FF;">if</span> (lg &lt; 0)
+            <span style="color: #0000FF;">return</span> 0;
+        <span style="color: #0000FF;">return</span> sign*lg;
+    }
+
+    <span style="color: #6434A3;">double</span> <span style="color: #006699;">unlogcoef</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">x</span>) {
+        <span style="color: #0000FF;">if</span> (!logCheck.getState())
+            <span style="color: #0000FF;">return</span> x;
+        <span style="color: #0000FF;">if</span> (x == 0)
+            <span style="color: #0000FF;">return</span> x;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sign</span> = (x &lt; 0) ? -1 : 1;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ex</span> = Math.exp((x*sign-1)*10);
+        <span style="color: #0000FF;">return</span> ex*sign;
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">editFuncPoint</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>) {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">midy</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">halfPanel</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">periodWidth</span> = winSize.width;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ymult</span> = .75 * halfPanel;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">lox</span> = x * sampleCount / periodWidth;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">hix</span> = ((x+1) * sampleCount-1) / periodWidth;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">val</span> = (midy - y) / ymult;
+        <span style="color: #0000FF;">if</span> (val &gt; 1)
+            val = 1;
+        <span style="color: #0000FF;">if</span> (val &lt; -1)
+            val = -1;
+        <span style="color: #0000FF;">if</span> (lox &lt; 1)
+            lox = 1;
+        <span style="color: #0000FF;">if</span> (hix &gt;= sampleCount)
+            hix = sampleCount-1;
+        <span style="color: #0000FF;">for</span> (; lox &lt;= hix; lox++) {
+            func[lox] = val;
+            funci[lox] = 0;
+        }
+        func[sampleCount] = func[0];
+        cv.repaint(pause);
+        <span style="color: #0000FF;">if</span> (soundCheck.getState() == <span style="color: #D0372D;">false</span>)
+            transform(<span style="color: #D0372D;">false</span>);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">editFuncPluck</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>, <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span>) {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">midy</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">halfPanel</span> = panelHeight / 2;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">periodWidth</span> = winSize.width;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">ymult</span> = .75 * halfPanel;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">ax</span> = x * sampleCount / periodWidth;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">val</span> = (midy - y) / ymult;
+        <span style="color: #0000FF;">if</span> (val &gt; 1)
+            val = 1;
+        <span style="color: #0000FF;">if</span> (val &lt; -1)
+            val = -1;
+        <span style="color: #0000FF;">if</span> (ax &lt; 1 || ax &gt;= sampleCount)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+        <span style="color: #0000FF;">for</span> (i = 0; i &lt;= ax; i++)
+            func[i] = val*i/ax;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">bx</span> = sampleCount-ax;
+        <span style="color: #0000FF;">for</span> (i = ax+1; i &lt; <span style="color: #6434A3;">sampleCount</span>; i++)
+            func[i] = val*(sampleCount-i)/bx;
+        <span style="color: #0000FF;">for</span> (i = 0; i &lt;= sampleCount; i++)
+            funci[i] = 0;
+        func[sampleCount] = func[0];
+        cv.repaint(pause);
+        <span style="color: #0000FF;">if</span> (soundCheck.getState() == <span style="color: #D0372D;">false</span>)
+            transform(<span style="color: #D0372D;">false</span>);
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentHidden</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>){}
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentMoved</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>){}
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentShown</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>) {
+        cv.repaint(pause);
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">componentResized</span>(<span style="color: #6434A3;">ComponentEvent</span> <span style="color: #BA36A5;">e</span>) {
+        handleResize();
+        cv.repaint(pause);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">actionPerformed</span>(<span style="color: #6434A3;">ActionEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> (e.getSource() == triangleButton) {
+            doTriangle();
+            cv.repaint();
+        }
+        <span style="color: #0000FF;">if</span> (e.getSource() == sineButton) {
+            doSine();
+            cv.repaint();
+        }
+        <span style="color: #0000FF;">if</span> (e.getSource() == blankButton) {
+            doBlank();
+            cv.repaint();
+        }
+        <span style="color: #0000FF;">if</span> (e.getSource() == resonanceButton) {
+            forceBar.setValue(20);
+            setForce();
+        }
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">adjustmentValueChanged</span>(<span style="color: #6434A3;">AdjustmentEvent</span> <span style="color: #BA36A5;">e</span>) {
+        System.out.print(((<span style="color: #6434A3;">Scrollbar</span>) e.getSource()).getValue() + <span style="color: #008000;">"\n"</span>);
+        <span style="color: #0000FF;">if</span> (e.getSource() == dampingBar || e.getSource() == speedBar)
+            setDamping();
+        <span style="color: #0000FF;">if</span> (e.getSource() == loadBar) {
+            setLoadCount();
+            updateSound();
+        }
+        <span style="color: #0000FF;">if</span> (e.getSource() == forceBar)
+            setForce();
+        <span style="color: #0000FF;">if</span> (e.getSource() == tensionBar) {
+            setTension();
+            updateSound();
+        }
+        cv.repaint(pause);
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">boolean</span> <span style="color: #006699;">handleEvent</span>(<span style="color: #6434A3;">Event</span> <span style="color: #BA36A5;">ev</span>) {
+        <span style="color: #0000FF;">if</span> (ev.id == <span style="color: #D0372D;">Event</span>.WINDOW_DESTROY) {
+            applet.destroyFrame();
+            <span style="color: #0000FF;">return</span> <span style="color: #D0372D;">true</span>;
+        }
+        <span style="color: #0000FF;">return</span> <span style="color: #0000FF;">super</span>.handleEvent(ev);
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">setTension</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">oldTension</span> = tensionBarValue;
+        tensionBarValue = tensionBar.getValue();
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">mult</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt(oldTension/(<span style="color: #6434A3;">double</span>) tensionBarValue);
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">roottens</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt((<span style="color: #6434A3;">double</span>) tensionBarValue);
+        <span style="color: #0000FF;">for</span> (<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span> = 1; i != maxTerms; i++) {
+            magcoef[i] *= mult;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">oldomegat</span> = omega[i] * t;
+            omega[i] = 5*roottens*
+                <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(i*(3.14159265/(2*(maxTerms+1))));
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">newomegat</span> = omega[i] * t;
+            phasecoefadj[i] = (phasecoefadj[i] + oldomegat-newomegat) % (2*pi);
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">setLoadCount</span>() {
+        sampleCount = maxTerms = loadBar.getValue();
+        step = pi/sampleCount;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span>, <span style="color: #BA36A5;">y</span>;
+        sinTable = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[sampleCount+1][maxTerms];
+        <span style="color: #0000FF;">for</span> (y = 1; y != maxTerms; y++)
+            <span style="color: #0000FF;">for</span> (x = 0; x != sampleCount+1; x++)
+                sinTable[x][y] = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(step*x*y);
+        omega = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[maxTerms];
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+        <span style="color: #0000FF;">for</span> (i = 1; i != maxTerms; i++)
+            omega[i] = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sin(i*(3.14159265/(2*(maxTerms+1))));
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">mult</span> = 1/omega[1];
+        <span style="color: #0000FF;">for</span> (i = 1; i != maxTerms; i++)
+            omega[i] *= mult;
+        setDamping();
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">setDamping</span>() {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">damper</span> = <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.exp(dampingBar.getValue()/40-8);
+        <span style="color: #0000FF;">if</span> (dampingBar.getValue() &lt;= 2)
+            damper = 0;
+        dampcoef = -damper;
+    }
+
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">mouseDragged</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+        dragging = <span style="color: #D0372D;">true</span>;
+        edit(e);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">mouseMoved</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> ((e.getModifiers() &amp; <span style="color: #D0372D;">MouseEvent</span>.BUTTON1_MASK) != 0)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">x</span> = e.getX();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">y</span> = e.getY();
+        dragX = x; dragY = y;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">panelHeight</span> = getPanelHeight();
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">oldCoef</span> = selectedCoef;
+        selectedCoef = -1;
+        selection = 0;
+        <span style="color: #0000FF;">if</span> (y &lt; <span style="color: #6434A3;">panelHeight</span>)
+            selection = SEL_FUNC;
+        <span style="color: #0000FF;">if</span> (y &gt;= magnitudesY &amp;&amp; y &lt; <span style="color: #6434A3;">magnitudesY</span>+panelHeight) {
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">termWidth</span> = getTermWidth();
+            selectedCoef = x/termWidth+1;
+            <span style="color: #0000FF;">if</span> (selectedCoef &gt;= maxTerms)
+                selectedCoef = -1;
+            <span style="color: #0000FF;">if</span> (selectedCoef != -1)
+                selection = SEL_MAG;
+        }
+        <span style="color: #0000FF;">if</span> (selectedCoef != oldCoef)
+            cv.repaint(pause);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">mouseClicked</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> (e.getClickCount() == 2 &amp;&amp; selectedCoef != -1) {
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+            <span style="color: #0000FF;">for</span> (i = 1; i != maxTerms; i++)
+                <span style="color: #0000FF;">if</span> (selectedCoef != i)
+                    magcoef[i] = 0;
+            magcoef[selectedCoef] = 1;
+            updateSound();
+            cv.repaint(pause);
+        }
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">mouseEntered</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">mouseExited</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> (!dragging &amp;&amp; selectedCoef != -1) {
+            selectedCoef = -1;
+            cv.repaint(pause);
+        }
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">mousePressed</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> ((e.getModifiers() &amp; <span style="color: #D0372D;">MouseEvent</span>.BUTTON1_MASK) == 0)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #0000FF;">if</span> (selection == SEL_FUNC)
+            getVelocities();
+        dragging = <span style="color: #D0372D;">true</span>;
+        edit(e);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">mouseReleased</span>(<span style="color: #6434A3;">MouseEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> ((e.getModifiers() &amp; <span style="color: #D0372D;">MouseEvent</span>.BUTTON1_MASK) == 0)
+            <span style="color: #0000FF;">return</span>;
+        <span style="color: #0000FF;">if</span> (forceApplied || bowing) {
+            bowing = bowCaught = <span style="color: #D0372D;">false</span>;
+            forceAppliedOff();
+        } <span style="color: #0000FF;">else</span> <span style="color: #0000FF;">if</span> (dragging &amp;&amp; selection == SEL_FUNC)
+            transform(<span style="color: #D0372D;">false</span>);
+        dragging = <span style="color: #D0372D;">false</span>;
+        cv.repaint(pause);
+    }
+    <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">itemStateChanged</span>(<span style="color: #6434A3;">ItemEvent</span> <span style="color: #BA36A5;">e</span>) {
+        <span style="color: #0000FF;">if</span> (e.getItemSelectable() == stoppedCheck) {
+            cv.repaint(pause);
+            <span style="color: #0000FF;">return</span>;
+        }
+        <span style="color: #0000FF;">if</span> (e.getItemSelectable() == forceCheck) {
+            forceTimeZero = t;
+            cv.repaint(pause);
+            forceAppliedOff();
+            soundCheck.setState(<span style="color: #D0372D;">false</span>);
+            <span style="color: #0000FF;">return</span>;
+        }
+        <span style="color: #0000FF;">if</span> (e.getItemSelectable() == soundCheck &amp;&amp; soundCheck.getState() &amp;&amp;
+            playThread == <span style="color: #D0372D;">null</span>) {
+            playThread = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">PlayThread</span>();
+            speedBar.setValue(150);
+            dampingBar.setValue(100);
+            setDamping();
+            playThread.start();
+        }
+        <span style="color: #0000FF;">if</span> (e.getItemSelectable() == displayChooser)
+            cv.repaint(pause);
+    }
+
+    <span style="color: #0000FF;">class</span> <span style="color: #6434A3;">PlayThread</span> <span style="color: #0000FF;">extends</span> <span style="color: #6434A3;">Thread</span> {
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">soundChanged</span>() { changed = <span style="color: #D0372D;">true</span>; }
+        <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">changed</span>;
+        <span style="color: #0000FF;">final</span> <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">rate</span> = 22050;
+        <span style="color: #0000FF;">public</span> <span style="color: #6434A3;">void</span> <span style="color: #006699;">run</span>() {
+            <span style="color: #0000FF;">try</span> {
+                doRun();
+            } <span style="color: #0000FF;">catch</span> (<span style="color: #6434A3;">Exception</span> <span style="color: #BA36A5;">e</span>) {
+                e.printStackTrace();
+            }
+            playThread = <span style="color: #D0372D;">null</span>;
+            soundCheck.setState(<span style="color: #D0372D;">false</span>);
+        }
+        <span style="color: #6434A3;">void</span> <span style="color: #006699;">doRun</span>() {
+
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">this lovely code is a translation of the following, using</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">reflection, so we can run on JDK 1.1:</span>
+
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">AudioFormat format = new AudioFormat(rate, 8, 1, true, true);</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">DataLine.Info info =</span>
+            <span style="color: #8D8D84;">//           </span><span style="color: #8D8D84; font-style: italic;">new DataLine.Info(SourceDataLine.class, format);</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">SourceDataLine line = null;</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">line = (SourceDataLine) AudioSystem.getLine(info);</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">line.open(format, playSampleCount);</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">line.start();</span>
+
+            <span style="color: #6434A3;">Object</span> <span style="color: #BA36A5;">line</span>;
+            <span style="color: #6434A3;">Method</span> <span style="color: #BA36A5;">wrmeth</span> = <span style="color: #D0372D;">null</span>;
+            <span style="color: #0000FF;">try</span> {
+                <span style="color: #6434A3;">Class</span> <span style="color: #BA36A5;">afclass</span> = Class.forName(<span style="color: #008000;">"javax.sound.sampled.AudioFormat"</span>);
+                <span style="color: #6434A3;">Constructor</span> <span style="color: #BA36A5;">cstr</span> = afclass.getConstructor(
+                    <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Class</span>[] { <span style="color: #6434A3;">float</span>.<span style="color: #0000FF;">class</span>, <span style="color: #6434A3;">int</span>.<span style="color: #0000FF;">class</span>, <span style="color: #6434A3;">int</span>.<span style="color: #0000FF;">class</span>,
+                                  <span style="color: #6434A3;">boolean</span>.<span style="color: #0000FF;">class</span>, <span style="color: #6434A3;">boolean</span>.<span style="color: #0000FF;">class</span> });
+                <span style="color: #6434A3;">Object</span> <span style="color: #BA36A5;">format</span> = cstr.newInstance(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Object</span>[]
+                    { <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Float</span>(rate), <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Integer</span>(16), <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Integer</span>(1),
+                      <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Boolean</span>(<span style="color: #D0372D;">true</span>), <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Boolean</span>(<span style="color: #D0372D;">true</span>) });
+                <span style="color: #6434A3;">Class</span> <span style="color: #BA36A5;">ifclass</span> = Class.forName(<span style="color: #008000;">"javax.sound.sampled.DataLine$Info"</span>);
+                <span style="color: #6434A3;">Class</span> <span style="color: #BA36A5;">sdlclass</span> =
+                    Class.forName(<span style="color: #008000;">"javax.sound.sampled.SourceDataLine"</span>);
+                cstr = ifclass.getConstructor(
+                    <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Class</span>[] { Class.<span style="color: #0000FF;">class</span>, afclass });
+                <span style="color: #6434A3;">Object</span> <span style="color: #BA36A5;">info</span> = cstr.newInstance(<span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Object</span>[]
+                    { sdlclass, format });
+                <span style="color: #6434A3;">Class</span> <span style="color: #BA36A5;">asclass</span> = Class.forName(<span style="color: #008000;">"javax.sound.sampled.AudioSystem"</span>);
+                <span style="color: #6434A3;">Class</span> <span style="color: #BA36A5;">liclass</span> = Class.forName(<span style="color: #008000;">"javax.sound.sampled.Line$Info"</span>);
+                <span style="color: #6434A3;">Method</span> <span style="color: #BA36A5;">glmeth</span> = asclass.getMethod(<span style="color: #008000;">"getLine"</span>,
+                                                  <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Class</span>[] { liclass });
+                line = glmeth.invoke(<span style="color: #D0372D;">null</span>, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Object</span>[] {info} );
+                <span style="color: #6434A3;">Method</span> <span style="color: #BA36A5;">opmeth</span> = sdlclass.getMethod(<span style="color: #008000;">"open"</span>,
+                          <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Class</span>[] { afclass, <span style="color: #6434A3;">int</span>.<span style="color: #0000FF;">class</span> });
+                opmeth.invoke(line, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Object</span>[] { format,
+                          <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Integer</span>(4096) });
+                <span style="color: #6434A3;">Method</span> <span style="color: #BA36A5;">stmeth</span> = sdlclass.getMethod(<span style="color: #008000;">"start"</span>, <span style="color: #D0372D;">null</span>);
+                stmeth.invoke(line, <span style="color: #D0372D;">null</span>);
+                <span style="color: #6434A3;">byte</span> <span style="color: #BA36A5;">b</span>[] = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">byte</span>[1];
+                wrmeth = sdlclass.getMethod(<span style="color: #008000;">"write"</span>,
+                          <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Class</span>[] { b.getClass(), <span style="color: #6434A3;">int</span>.<span style="color: #0000FF;">class</span>, <span style="color: #6434A3;">int</span>.<span style="color: #0000FF;">class</span> });
+            } <span style="color: #0000FF;">catch</span> (<span style="color: #6434A3;">Exception</span> <span style="color: #BA36A5;">e</span>) {
+                e.printStackTrace();
+                <span style="color: #0000FF;">return</span>;
+            }
+
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">playSampleCount</span> = 16384;
+            <span style="color: #6434A3;">FFT</span> <span style="color: #BA36A5;">playFFT</span> = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">FFT</span>(playSampleCount);
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">playfunc</span>[] = <span style="color: #D0372D;">null</span>;
+            <span style="color: #6434A3;">byte</span> <span style="color: #BA36A5;">b</span>[] = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">byte</span>[4096];
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">offset</span> = 0;
+            <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">dampCount</span> = 0;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">mx</span> = .2;
+
+            <span style="color: #0000FF;">while</span> (soundCheck.getState() &amp;&amp; applet.ogf != <span style="color: #D0372D;">null</span>) {
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">damper</span> = dampcoef*1e-2;
+
+                <span style="color: #0000FF;">if</span> (playfunc == <span style="color: #D0372D;">null</span> || changed) {
+                    playfunc = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[playSampleCount*2];
+                    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+                    <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">double bstep = 2*pi*440./rate;</span>
+                    <span style="color: #8D8D84;">//</span><span style="color: #8D8D84; font-style: italic;">int dfreq0 = 440; // XXX</span>
+                    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">n</span> = 2*pi*20.0*
+                        <span style="color: #D0372D;">java</span>.<span style="color: #D0372D;">lang</span>.Math.sqrt((<span style="color: #6434A3;">double</span>)tensionBarValue);
+                    n /= omega[1];
+                    changed = <span style="color: #D0372D;">false</span>;
+                    mx = .2;
+                    <span style="color: #0000FF;">for</span> (i = 1; i != maxTerms; i++) {
+                        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">dfreq</span> = (<span style="color: #6434A3;">int</span>) (n*omega[i]);
+                        <span style="color: #0000FF;">if</span> (dfreq &gt;= playSampleCount)
+                            <span style="color: #0000FF;">break</span>;
+                        playfunc[dfreq] = magcoef[i];
+                    }
+                    playFFT.transform(playfunc, <span style="color: #D0372D;">true</span>);
+                    <span style="color: #0000FF;">for</span> (i = 0; i != playSampleCount; i++) {
+                        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">dy</span> = playfunc[i*2]*Math.exp(damper*i);
+                        <span style="color: #0000FF;">if</span> (dy &gt; mx)  mx = dy;
+                        <span style="color: #0000FF;">if</span> (dy &lt; -mx) mx = -dy;
+                    }
+                    dampCount = offset = 0;
+                }
+
+                <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">mult</span> = 32767/mx;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">bl</span> = b.length/2;
+                <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+                <span style="color: #0000FF;">for</span> (i = 0; i != bl; i++) {
+                    <span style="color: #6434A3;">short</span> <span style="color: #BA36A5;">x</span> = (<span style="color: #6434A3;">short</span>) (playfunc[(i+offset)*2]*mult*
+                                       Math.exp(damper*dampCount++));
+                    b[i*2] = (<span style="color: #6434A3;">byte</span>) (x/256);
+                    b[i*2+1] = (<span style="color: #6434A3;">byte</span>) (x &amp; 255);
+                }
+                offset += bl;
+                <span style="color: #0000FF;">if</span> (offset == playfunc.length/2)
+                    offset = 0;
+
+                <span style="color: #0000FF;">try</span> {
+                    wrmeth.invoke(line, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Object</span>[] { b, <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Integer</span>(0),
+                                                       <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">Integer</span>(b.length) });
+                } <span style="color: #0000FF;">catch</span> (<span style="color: #6434A3;">Exception</span> <span style="color: #BA36A5;">e</span>) {
+                    e.printStackTrace();
+                    <span style="color: #0000FF;">break</span>;
+                }
+            }
+        }
+    }
+}
+
+<span style="color: #0000FF;">class</span> <span style="color: #6434A3;">FFT</span> {
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">wtabf</span>[];
+    <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">wtabi</span>[];
+    <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">size</span>;
+    <span style="color: #006699;">FFT</span>(<span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">sz</span>) {
+        size = sz;
+        <span style="color: #0000FF;">if</span> ((size &amp; (size-1)) != 0)
+            System.out.println(<span style="color: #008000;">"size must be power of two!"</span>);
+        calcWTable();
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">calcWTable</span>() {
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">calculate table of powers of w</span>
+        wtabf = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[size];
+        wtabi = <span style="color: #0000FF;">new</span> <span style="color: #6434A3;">double</span>[size];
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+        <span style="color: #0000FF;">for</span> (i = 0; i != size; i += 2) {
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">pi</span> = 3.1415926535;
+            <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">th</span> = pi*i/size;
+            wtabf[i  ] = (<span style="color: #6434A3;">double</span>)Math.cos(th);
+            wtabf[i+1] = (<span style="color: #6434A3;">double</span>)Math.sin(th);
+            wtabi[i  ] = wtabf[i];
+            wtabi[i+1] = -wtabf[i+1];
+        }
+    }
+
+    <span style="color: #6434A3;">void</span> <span style="color: #006699;">transform</span>(<span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">data</span>[], <span style="color: #6434A3;">boolean</span> <span style="color: #BA36A5;">inv</span>) {
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">i</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">j</span> = 0;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">size2</span> = size*2;
+
+        <span style="color: #0000FF;">if</span> ((size &amp; (size-1)) != 0)
+            System.out.println(<span style="color: #008000;">"size must be power of two!"</span>);
+
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">bit-reversal</span>
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">q</span>;
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">bit</span>;
+        <span style="color: #0000FF;">for</span> (i = 0; i != size2; i += 2) {
+            <span style="color: #0000FF;">if</span> (i &gt; j) {
+                q = data[i]; data[i] = data[j]; data[j] = q;
+                q = data[i+1]; data[i+1] = data[j+1]; data[j+1] = q;
+            }
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">increment j by one, from the left side (bit-reversed)</span>
+            bit = size;
+            <span style="color: #0000FF;">while</span> ((bit &amp; j) != 0) {
+                j &amp;= ~bit;
+                bit &gt;&gt;= 1;
+            }
+            j |= bit;
+        }
+
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">amount to skip through w table</span>
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">tabskip</span> = size &lt;&lt; 1;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">wtab</span>[] = (inv) ? wtabi : wtabf;
+
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">skip1</span>, <span style="color: #BA36A5;">skip2</span>, <span style="color: #BA36A5;">ix</span>, <span style="color: #BA36A5;">j2</span>;
+        <span style="color: #6434A3;">double</span> <span style="color: #BA36A5;">wr</span>, <span style="color: #BA36A5;">wi</span>, <span style="color: #BA36A5;">d1r</span>, <span style="color: #BA36A5;">d1i</span>, <span style="color: #BA36A5;">d2r</span>, <span style="color: #BA36A5;">d2i</span>, <span style="color: #BA36A5;">d2wr</span>, <span style="color: #BA36A5;">d2wi</span>;
+
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">unroll the first iteration of the main loop</span>
+        <span style="color: #0000FF;">for</span> (i = 0; i != size2; i += 4) {
+            d1r = data[i];
+            d1i = data[i+1];
+            d2r = data[i+2];
+            d2i = data[i+3];
+            data[i  ] = d1r+d2r;
+            data[i+1] = d1i+d2i;
+            data[i+2] = d1r-d2r;
+            data[i+3] = d1i-d2i;
+        }
+        tabskip &gt;&gt;= 1;
+
+        <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">unroll the second iteration of the main loop</span>
+        <span style="color: #6434A3;">int</span> <span style="color: #BA36A5;">imult</span> = (inv) ? -1 : 1;
+        <span style="color: #0000FF;">for</span> (i = 0; i != size2; i += 8) {
+            d1r = data[i];
+            d1i = data[i+1];
+            d2r = data[i+4];
+            d2i = data[i+5];
+            data[i  ] = d1r+d2r;
+            data[i+1] = d1i+d2i;
+            data[i+4] = d1r-d2r;
+            data[i+5] = d1i-d2i;
+            d1r = data[i+2];
+            d1i = data[i+3];
+            d2r = data[i+6]*imult;
+            d2i = data[i+7]*imult;
+            data[i+2] = d1r-d2i;
+            data[i+3] = d1i+d2r;
+            data[i+6] = d1r+d2i;
+            data[i+7] = d1i-d2r;
+        }
+        tabskip &gt;&gt;= 1;
+
+        <span style="color: #0000FF;">for</span> (skip1 = 16; skip1 &lt;= size2; skip1 &lt;&lt;= 1) {
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">skip2 = length of subarrays we are combining</span>
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">skip1 = length of subarray after combination</span>
+            skip2 = skip1 &gt;&gt; 1;
+            tabskip &gt;&gt;= 1;
+            <span style="color: #0000FF;">for</span> (i = 0; i != 1000; i++);
+            <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">for each subarray</span>
+            <span style="color: #0000FF;">for</span> (i = 0; i &lt; <span style="color: #6434A3;">size2</span>; i += skip1) {
+                ix = 0;
+                <span style="color: #8D8D84;">// </span><span style="color: #8D8D84; font-style: italic;">for each pair of complex numbers (one in each subarray)</span>
+                <span style="color: #0000FF;">for</span> (j = i; j != i+skip2; j += 2, ix += tabskip) {
+                    wr = wtab[ix];
+                    wi = wtab[ix+1];
+                    d1r = data[j];
+                    d1i = data[j+1];
+                    j2 = j+skip2;
+                    d2r = data[j2];
+                    d2i = data[j2+1];
+                    d2wr = d2r*wr - d2i*wi;
+                    d2wi = d2r*wi + d2i*wr;
+                    data[j]    = d1r+d2wr;
+                    data[j+1]  = d1i+d2wi;
+                    data[j2  ] = d1r-d2wr;
+                    data[j2+1] = d1i-d2wi;
+                }
+            }
+        }
+    }
+
+}
+</pre>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Matt Dailis</p>
+<p class="date">Created: 2020-04-20 Mon 21:45</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -473,11 +473,11 @@ pitches that I wanted that I created a sample song using this function.
 * Bibliography
   - [[http://mattdailis.github.io/simulating-strings/resources/physics_of_vibrating_strings.pdf][The physics of vibrating strings - Giordano, Gould, Tobochnik]]
   - [[http://mattdailis.github.io/simulating-strings/resources/karplus-strong.pdf][Digital Synthesis of Plucked-String and Drum Timbres, Karplus and Strong]]
-  - [[http://mattdailis.github.io/simulating-strings/resources/karplus-strong][Response Variation in a Group of Acoustic Guitars Mark French]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/response-variation.pdf][Response Variation in a Group of Acoustic Guitars - Mark French]]
   - [[http://mattdailis.github.io/simulating-strings/resources/Vitsten.pdf][Simple model for low-frequency guitar function]]
   - [[http://mattdailis.github.io/simulating-strings/resources/significant_peak.pdf][Frequency Response Function Of A Guitar: A Significant Peak - Samo Sali]]
   - [[http://mattdailis.github.io/simulating-strings/resources/soundboard-review.pdf][Mathematical Modelling and Acoustical Analysis of Classical Guitars and Their Soundboards]]
-  - [[http://mattdailis.github.io/simulating-strings/resources/loadedstring/StringWave.java][Loaded String simulation source code]]
+  - [[http://mattdailis.github.io/simulating-strings/resources/loadedstring/StringWave.html][Loaded String simulation source code]]
 * Appendix
 ** Further reading
    More stuff on
