@@ -1,6 +1,4 @@
-disp("Started abc.m");
-
-pkg load signal
+#pkg load signal
 
 function y = damping(x, dampingTime, bitRate)
   y = 0.5 ^ (x / (dampingTime * bitRate));
@@ -70,7 +68,10 @@ endfunction
 
 function filtertest()
   sf = 800; sf2 = sf/2;
-  data=[[1;zeros(sf-1,1)],sinetone(25,sf,1,1),sinetone(50,sf,1,1),sinetone(100,sf,1,1)];
+  data=[[1;zeros(sf-1,1)],
+	sinetone(25,sf,1,1),
+	sinetone(50,sf,1,1),
+	sinetone(100,sf,1,1)];
   [b,a]=butter ( 1, 50 / sf2 );
   filtered = filter(b,a,data);
 endfunction
@@ -95,6 +96,4 @@ function main()
   ## audiowrite("with_damping.wav", song, bitRate);
 endfunction
 
-##main()
-filtertest()
-disp("Finished abc.m");
+main()

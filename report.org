@@ -9,9 +9,12 @@
 #+OPTIONS: ^:nil
 #+OPTIONS: toc:2
 
+#+SUBTITLE: Northeastern University MUSC2350, Spring 2020
+#+TITLE: Acoustics Final Report
 
-#+SUBTITLE: Matt Dailis, Northeastern University MUSC2350, Spring 2020
-#+TITLE: Acoustics Report
+# You can find the pdf version of this report [[./matt-dailis-acoustics-report.pdf][here]].
+#+LATEX: \vspace{5mm}
+Web version: [[https://mattdailis.github.io/simulating-strings/]].
 
 * Preface
   :PROPERTIES:
@@ -274,8 +277,8 @@ pitches that I wanted that I created a sample song using this function.
 
    In this model, all of the frequencies decay at the same rate, which
    isn't necessarily accurate, although looking at a the spectrum of
-   plucking my guitar string[fn::obtained using the [[https://play.google.com/store/apps/details?id=com.ntrack.tuner][n-Track Tuner]]
-   mobile app] I think this is close enough to the truth.
+   plucking my guitar string, I think this is a reasonable
+   approximation.[fn::obtained using the [[https://play.google.com/store/apps/details?id=com.ntrack.tuner][n-Track Tuner]] mobile app]
 
    [[audio:audio/string-simulation-2.wav]]
    
@@ -302,42 +305,46 @@ pitches that I wanted that I created a sample song using this function.
    to the soundboard to create areas of greater stiffness, which
    encourages modes that have nodes in those locations.[fn::"Frequency
    Response Function Of A Guitar - A Significant Peak" By Samo Šali]
+   That same paper included Figure [[fig:soundboardfrf]], which shows the
+   frequency responses of "good" versus "bad" quality guitars. They
+   both show peaks around 110 and 220 hertz, though the good guitars
+   have higher amplitude peaks.
 
     #+CAPTION: This diagram was taken from "Frequency Response Function Of A Guitar - A Significant Peak" By Samo Šali
+    #+LABEL: fig:soundboardfrf
     [[./images/soundboard-frf.png]]
 
+** Subtractive synthesis
     When I got this far in the project, for the first time I actually
     searched for "synthesizing guitar sound" on the internet.[fn::I
     should have started with this! Although the process of discovery
     was also very instructive] I found that the most commonly used
     algorithm for generating guitar sounds does /not/ use additive
-    synthesis! Instead, it uses subtractive synthesis.
+    synthesis! Instead, it uses subtractive synthesis, which means it
+    starts with all possible frequencies (i.e. white noise), and
+    filters them down to the frequencies of a guitar.
 
-** The Karplus-Strong Algorithm
-   The Karplus-Strong algorithm[fn::karplus-strong.pdf] is a way of
-   cheaply synthesizing guitar-like sounds using one or two sine wave
-   oscillators.
+*** The Karplus-Strong Algorithm
+    The Karplus-Strong algorithm[fn::karplus-strong.pdf] is a way of
+    cheaply synthesizing guitar-like sounds using one or two sine wave
+    oscillators. It can be summarized by four steps (see Figure
+    [[fig:karplusstrong]])
 
+    1. Generate a short burst of white noise
+    2. Apply delay
+    3. Pass it through a filter
+    4. Loop
 
-*** COMMENT Quotes
+    #+CAPTION: Karplus Strong
+    #+LABEL: fig:karplusstrong
+    [[./images/karplusstrong.png]]
 
-    "Richardson et al. [4] and Siminoff [5] have shown that the
-    soundboard is the single most important component affect- ing the
-    sound pressure level of the classical
-    guitar."[fn::soundboard-review]
-
-    "The energy contained in a vibrating string is limited and the
-    amplitudes of vibrations of relatively light guitar soundboards are
-    relatively high in general, which is a desired
-    feature"[fn::significant peak]
+    The most important part of this algorithm is the interaction of the
+    delay in step 2 with the filter in step 3. The delay helps select
+    the frequency, while the filter creates the timbre. The loop step
+    allows the sound to change over time.
 
    
-
-   
-** Excitation
-
-#+LATEX: \pagebreak   
-
 * Woodwinds: Edgetones
 
   This section will give a shallow overview of wind instruments, with
@@ -479,14 +486,10 @@ pitches that I wanted that I created a sample song using this function.
   - [[http://mattdailis.github.io/simulating-strings/resources/soundboard-review.pdf][Mathematical Modelling and Acoustical Analysis of Classical Guitars and Their Soundboards]]
   - [[http://mattdailis.github.io/simulating-strings/resources/loadedstring/StringWave.html][Loaded String simulation source code]]
 * Appendix
-** Further reading
-   More stuff on
-   soundboards[fn::https://newt.phys.unsw.edu.au/music/guitar/guitarchladni.html]
-    
-   Guitar modes[fn::https://newt.phys.unsw.edu.au/music/guitar/patterns.html]
 ** Program listing
 
-   The following is the source code for the octave program I wrote:
+   The following is the source code for the octave program I wrote for
+   the simulating strings section.
 
    #+INCLUDE: "./src/simulatingstrings.m" src octave
 
